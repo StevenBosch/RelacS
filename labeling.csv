@@ -1,220 +1,348 @@
-sorteren op datum. Eerste datum eerst,,,Categories:,Traffic,Humans,Nature,Noise,Music,Other
-http://mosart.soundappraisal.eu/dataset/570d495919df475e061057f8,,,,,,,,,
-Fragment #,Filename,Labelaar,Start time,End time,Stressful?,Relaxing?,Sudden?,Category,Interpretation
-Example,F.(...).wav,Xeryus,00:00:01.250,00:00:11.000,Yes,,No,Traffic,
-,,,,,,,,,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:00.000,00:00:00.809,No,No,No,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:00.809,00:00:01.332,Yes,No,Yes,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:01.332,00:00:06.800,No,No,No,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:06.800,00:00:07.308,Yes,No,Yes,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:07.308,00:00:07.852,Yes,No,Yes,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:07.852,00:00:15.682,No,No,No,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:15.682,00:00:19.000,No,No,No,Human,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:19.000,00:00:24.000,No,No,No,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:24.000,00:00:27.000,No,No,No,Human,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:27.000,00:00:28.600,No,No,No,Other,
-23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:28.600,00:00:30.000,No,No,No,Human,
-4,Ik zit op  mijn pc thuis dus ik heb de wavnamen niet bij de hand,Luuk,00:00:00.000,00:00:02.214,No,,No,Other,
-4,,Luuk,00:00:02.214,00:00:02.429,Yes,,Yes,Other,
-4,,Luuk,00:00:02.429,00:00:30.000,No,,No,Other,
-8,,Luuk,00:00:00.000,00:00:30.000,No,,No,Human,
-18,,Luuk,00:00:00.000,00:00:30.000,Yes,,No,Traffic,
-21,,Luuk,00:00:00.000,00:00:16.606,No,,No,Nature,
-21,,Luuk,00:00:16.606,00:00:17.462,No,,No,Nature/Other,
-21,,Luuk,00:00:17.462,00:00:30.000,No,,No,Nature,
-22,,Luuk,00:00:10.106,00:00:10.346,Yes,,Yes,Other,
-22,,Luuk,00:00:11.200,00:00:11.400,Yes,,Yes,Other,
-22,,Luuk,00:00:12.521,00:00:13.038,Yes,,Yes,Other,
-22,,Luuk,00:00:13.234,00:00:13.440,Yes,,Yes,Other,
-22,,Luuk,00:00:13.786,00:00:14.223,Yes,,Yes,Other,
-22,,Luuk,00:00:17.000,00:00:17.105,Yes,,Yes,Other,
-22,,Luuk,00:00:18.117,00:00:20.000,Yes,,Yes,Other,
-22,,Luuk,00:00:20.800,00:00:21.000,Yes,,Yes,Other,
-22,,Luuk,00:00:21.900,00:00:22.100,Yes,,Yes,Other,
-22,,Luuk,00:00:00.125,00:00:01.000,Yes,,Yes,Other,
-22,,Luuk,00:00:01.300,00:00:01.650,Yes,,Yes,Other,
-24,m.wirthlin_2016-04-15T15:06:21.000Z,Steven,00:00:00.000,00:00:30.000,No,No,No,Other,
-29,m.wirthlin_2016-04-15T16:29:20.000Z,Steven,00:00:00.00,00:00:00.526,No,No,No,Other,
-29,m.wirthlin_2016-04-15T16:29:20.000Z,Steven,00:00:00.526,00:00:30.000,Yes,No,No,Music,
-42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Traffic,
-42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Machine,
-42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:04.266,00:00:05.171,Yes,No,No,Human,
-52,L.H.Boulogne_2016-04-16T19:08:22.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Music,
-52,L.H.Boulogne_2016-04-16T19:08:22.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Human,
-60,S.M.Romer_2016-04-17T08:44:17.000Z,Steven,00:00:00.000,00:00:00.509,No,No,No,Other,
-60,S.M.Romer_2016-04-17T08:44:17.000Z,Steven,00:00:00.509,00:00:30.000,Yes,No,No,Other,
-10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:00.000,00:00:03.782,No,No,No,Traffic,passing vehicle
-10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:00.000,00:00:30.000,No,Yes,No,Nature,birds background
-10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:18.602,00:00:27.000,No,No,No,Traffic,passing vehicle
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:00.000,00:00:02.275,Yes,No,Yes,Noise,mic movement
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:03.000,00:00:04.544,Yes,No,No,Other,opening drawer
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:04.544,00:00:06.614,Yes,No,Yes,Other,cutlery movement
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:06.614,00:00:07.264,Yes,No,Yes,Other,drawer closing
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:07.500,00:00:08.300,Yes,No,Yes,Other,scraping
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:08.950,00:00:18.982,Yes,No,No,Other,stirring noise
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:18.982,00:00:20.151,Yes,No,Yes,Other,wood drumming
-13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:20.151,00:00:30.000,Yes,No,No,Other,stirring noise
-51,P.van.der.Meulen.4_2016-04-16T17:58:30.000Z,Tom,00:00:17.277,00:00:19.304,No,No,Yes,Traffic,distant claxon
-58,P.van.der.Meulen.4_2016-04-17T07:04:03.000Z,Tom,NA,NA,NA,NA,NA,NA,geen significante geluiden
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:00.530,00:00:01.698,No,No,Yes,Human,speech
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:02.908,00:00:03.061,No,No,Yes,Human,speech
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:04.600,00:00:05.600,No,No,Yes,Noise,wind
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:11.533,00:00:14.224,Yes,No,No,Traffic,passing vehicle
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:05.600,00:00:14.600,Yes,No,Yes,Noise/Human/Traffic,
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:14.600,00:00:21.938,No,No,No,Noise/Human/Other,
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:21.938,00:00:22.837,No,No,Yes,Other,Bicycle parking
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:22.837,00:00:26.882,No,No,No,Footsteps,
-76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:27.400,00:00:32.624,Yes,No,No,Noise/Human/Traffic,
-99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:00.115,00:00:02.327,No,No,No,Footsteps,Gravel
-99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:05.822,00:00:07.231,No,No,Yes,Nature,Bird
-99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:00.115,00:00:32.763,Yes,No,No,Traffic,Sirens
-137,P.van.der.Meulen.4_2016-04-19T06:31:51.000Z,Tom,00:00:04.782,00:00:04.939,No,No,Yes,Other,Tick
-137,P.van.der.Meulen.4_2016-04-19T06:31:51.000Z,Tom,00:00:15.681,00:00:16.956,No,No,No,Human,Sniff
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:02.804,00:00:04.495,No,No,Yes,Human,Speech
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:04.403,00:00:04.938,No,No,No,Human,Tsss
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:13.877,00:00:14.720,No,No,Yes,Human,Speech
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:20.456,00:00:21.344,Yes,No,Yes,Human,Speech
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:24.968,00:00:29.884,No,No,No,Human,Laughter/Speech
-153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:14.728,00:00:19.295,No,No,No,Human/Radio,
-53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:08.059,00:00:09.036,No,,No,Other,
-57,H.R.Beishuizen_2016-04-17T06-12-38.000Z,Pim,NA,NA,NA,,NA,NA,geen significante geluiden
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.815,00:00:06.362,No,,No,Other,
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:21.025,00:00:21.720,No,,No,Other,
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:10.589,00:00:11.218,No,,No,Other,
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:17.891,00:00:25.869,Yes,,Yes,Other,
-97,F.de.Vries.11_2016-04-18T05-32-24.000Z,Pim,00:00:13.132,00:00:29.884,Yes,,Yes,Mechanical,
-114,L.H.Boulogne_2016-04-18T08-59-58.000Z,Pim,NA,NA,NA,,NA,NA,geen significante geluiden
-115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:00.000,00:00:01.842,Yes,,No,Traffic,
-115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:02.423,00:00:04.313,Yes,,No,Traffic,
-115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:08.094,00:00:11.632,Yes,,No,Traffic,
-115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:23.845,00:00:30.000,Yes,,No,Traffic,
-119,T.R.Janssen_2016-04-18T12-45-50.000Z,Pim,00:00:00.000,00:00:30.000,Yes,,No,Other,
-126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:01.738,00:00:03.524,No,,No,Human,
-126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:03.959,00:00:09.849,No,,No,Human/Music,
-126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:15.014,00:00:15.739,No,,No,Human,
-126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:19.166,00:00:20.808,No,,No,Human,
-126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:24.863,00:00:26.167,No,,Yes,Human,
-143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:17.490,00:00:21.742,No,,No,Human,
-143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:23.820,00:00:24.399,Yes,,No,Other,
-143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:25.414,00:00:27.878,No,,No,Human/Radio/Television,
-26,,Xeryus,00:00:28.994,00:00:29.317,No,,Yes,Other,
-30,,Xeryus,NA,NA,NA,,NA,Guitar playing/Music,
-31,,Xeryus,00:00:25.282,00:00:25.811,No,,Yes,Human/Laughter,
-43,,Xeryus,00:00:00.200,00:00:01.837,No,,No,Other,
-43,,Xeryus,00:00:05.417,00:00:10.071,Yes,,Yes,Other,
-43,,Xeryus,00:00:10.670,00:00:13.438,Yes,,Yes,Other,
-43,,Xeryus,00:00:18.991,00:00:21.919,Yes,,Yes,Other,
-43,,Xeryus,00:00:26.462,00:00:30.000,No,,Yes,Other,
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:00.435,00.00.01.111,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:01.449,00:00:02.126,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:02.319,00:00:03.044,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:03.237,00:00:04.010,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:04.300,00:00:04.977,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:05.266,00:00:05.943,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:06.088,00:00:06.957,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:07.199,00:00:07.827,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:08.117,00:00:08.890,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:09.035,00:00:09.856,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:09.953,00:00:10.774,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:10.823,00:00:11.692,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:11.886,00:00:12.659,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:12.804,00:00:13.577,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:13.818,00:00:14.640,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:14.833,00:00:15.606,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:15.847,00:00:16.572,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:16.621,00:00:17.539,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:17.683,00:00:18.457,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:18.650,00:00:19.326,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:19.519,00:00:20.293,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:20.486,00:00:21.259,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:21.597,00:00:22.273,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:22.418,00:00:23.288,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:23.433,00:00:24.206,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:24.303,00:00:25.076,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:25.221,00:00:26.090,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:26.284,00:00:27.008,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:27.202,00:00:28.071,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:28.216,00:00:28.989,No,No,No,Other,clock ticking
-1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:29.134,00:00:29.907,No,No,No,Other,clock ticking
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:00.534,00:00:02.087,Yes,No,Yes,Noise,
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:02.621,00:00:03.689,No,Yes,No,Other,moving something wet
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:07.184,00:00:08.203,No,No,Yes,Noise,
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:11.261,00:00:13.640,No,Yes,No,Other,moving something wet
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:16.164,00:00:17.911,No,Yes,No,Other,moving something wet
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:21.795,00:00:22.911,No,Yes,No,Other,Scratching
-5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:25.969,00:00:27.425,No,Yes,No,Other,moving something wet
-27,m.wirthlin_2016-04-15T16-25-47.000Z,Pim,00:00:00.000,00:00:30.000,No,No,No,Music,Electric guitar
-27,m.wirthlin_2016-04-15T16-25-47.000Z,Pim,00:00:01.814,00:00:02.059,Yes,No,Yes,Music,Drum beat
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:00.556,00:00:01.162,Yes,No,Yes,Noise,
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:02.577,00:00:04.396,No,No,No,Other,Opening drawer
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:04.345,00:00:05.154,Yes,No,Yes,Other,Dropping something on the table
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:05.204,00:00:06.013,Yes,No,Yes,Other,Dropping something on the table
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:06.619,00:00:07.074,No,No,Yes,Other,Bumbing into kitchencounter
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:07.226,00:00:10.763,Yes,No,No,Other,Plastic packaging
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:11.015,00:00:17.584,Yes,No,Yes,Other,Pouring cereal in bowl
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:17.988,00:00:19.555,No,No,No,Other,Opening drawer
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:19.555,00:00:20.211,No,No,Yes,Other,Clap
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:20.464,00:00:21.121,No,No,No,Other,Closing drawer
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:21.020,00:00:21.778,Yes,No,Yes,Other,Closing cabinet door
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:21.879,00:00:22.334,No,No,No,Other,Closing drawer
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:22.485,00:00:23.395,No,No,No,Other,Rattling
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:23.850,00:00:24.658,No,No,No,Other,Pop/rattle/slam
-37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:24.709,00:00:25.466,No,No,No,Other,Canister plop
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Music,
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:06.511,00:00:07.157,No,No,Yes,Other,Mouse clicking
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:07.257,00:00:07.605,No,No,Yes,Other,Mouse clicking
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:09.593,00:00:10.040,No,No,Yes,Other,Mouse clicking
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:10.885,00:00:11.183,No,No,Yes,Other,Mouse clicking
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:11.879,00:00:12.525,Yes,No,Yes,Human,Sniffing
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:14.215,00:00:14.812,Yes,No,Yes,Human,Sniffing
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:20.180,00:00:20.528,Yes,No,Yes,Human,Sniffing
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:27.039,00:00:27.436,No,No,Yes,Other,Mouse clicking
-48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:30.369,00:00:30.766,No,No,Yes,Other,Mouse clicking
-53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:08.059,00:00:09.036,No,No,No,Other,Door opening
-53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:19.732,00:00:21.392,No,No,No,Other,Door closing
-57,H.R.Beishuizen_2016-04-17T06-12-38.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Silence,geen significante geluiden
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:01.193,00:00:01.839,Yes,No,Yes,Other,Dropping something
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:03.032,00:00:04.175,No,No,No,Other,Footsteps
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.070,00:00:05.368,Yes,No,Yes,Other,Tick
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.716,00:00:06.561,Yes,No,Yes,Other,Tick
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:07.356,00:00:08.350,No,No,No,Other,Footsteps
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:08.300,00:00:08.947,Yes,No,No,Other,slam
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:09.444,00:00:13.470,No,No,No,Other,Footsteps
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:16.651,00:00:17.297,No,No,No,Other,Thud
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:18.341,00:00:23.858,No,No,No,Other,Footsteps
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:24.653,00:00:27.486,No,No,No,Other,Footsteps
-68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:29.971,00:00:30.766,No,No,No,Other,Thud
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:04.303,00:00:04.835,No,No,No,Other,Tap
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:05.367,00:00:05.754,No,No,No,Other,Tap
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:10.590,00:00:11.219,No,No,No,Other,Putting something on the table
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:11.750,00:00:12.814,No,No,No,Other,Sweeping something
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:17.891,00:00:26.169,Yes,No,Yes,Other,Crinkly bag
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:21.807,00:00:22.339,Yes,No,Yes,Other,Putting something on the table
-95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:26.836,00:00:29.931,Yes,No,Yes,Other,Crinkly bag
-97,F.de.Vries.11_2016-04-18T05-32-24.000Z,Pim,00:00:13.132,00:00:29.884,Yes,No,Yes,Mechanical,Coffeemachine
-168,S.Looije.2_2016-04-20T06:58:32.000Z,Tom,NA,NA,NA,NA,NA,NA,geen significante geluiden
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:24.539,00:00:26.083,Yes,No,Yes,Mechanical,phone vibration
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:19.795,00:00:24.441,No,No,No,Human,speech
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:13.618,00:00:19.538,No,No,No,Human,speech
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:07.428,00:00:12.760,No,No,No,Human,speech
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:12.165,00:00:12.680,Yes,No,Yes,Other,Notification
-174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:01.912,00:00:07.299,No,No,No,Human,speech
-177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:08.417,00:00:08.875,Yes,No,Yes,Other,knock
-177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:02.169,00:00:07.651,No,No,No,Human,speech
-177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:10.366,00:00:31.695,No,No,No,Human,speech
-178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:02.991,00:00:13.728,No,No,No,Human,indistinct chatter
-178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:21.818,00:00:28.412,No,No,No,Human,speech
-178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:28.326,00:00:28.700,No,No,Yes,Mechanical,penclick
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:04.088,00:00:06.214,No,No,No,Other,sweeping something
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:04.082,00:00:06.980,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:09.003,00:00:11.387,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:11.448,00:00:17.111,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:19.231,00:00:20.108,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:20.261,00:00:21.150,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:21.438,00:00:22.510,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:22.596,00:00:23.111,No,No,No,Human,sigh
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:23.111,00:00:26.757,No,No,No,Human,speech
-196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:28.535,00:00:28.945,No,No,No,Human,speech
-202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:00.294,00:00:03.873,No,No,No,Traffic,stationary engine
-202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:03.873,00:00:18.435,Yes,No,No,Traffic,accelerating engine
-202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:23.092,00:00:27.897,Yes,No,No,Traffic,passing vehicle
+sorteren op datum. Eerste datum eerst,,,Categories:,Traffic,Humans,Nature,Noise,Music,Other,
+http://mosart.soundappraisal.eu/dataset/570d495919df475e061057f8,,,,,,,,,,
+Fragment #,Filename,Labelaar,Start time,End time,Stressful?,Relaxing?,Sudden?,Category,Interpretation,
+Example,F.(...).wav,Xeryus,00:00:01.250,00:00:11.000,Yes,,No,Traffic,,
+,,,,,,,,,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:00.000,00:00:00.809,No,No,No,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:00.809,00:00:01.332,Yes,No,Yes,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:01.332,00:00:06.800,No,No,No,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:06.800,00:00:07.308,Yes,No,Yes,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:07.308,00:00:07.852,Yes,No,Yes,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:07.852,00:00:15.682,No,No,No,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:15.682,00:00:19.000,No,No,No,Human,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:19.000,00:00:24.000,No,No,No,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:24.000,00:00:27.000,No,No,No,Human,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:27.000,00:00:28.600,No,No,No,Other,,
+23,F.de.Vries.11_2016-04-15T13:46:53.000Z,Steven,00:00:28.600,00:00:30.000,No,No,No,Human,,
+4,S.Looije.2_2016-04-14T17:19:52.000Z,Luuk,00:00:00.000,00:00:02.214,No,No,No,Other,Silence,
+4,S.Looije.2_2016-04-14T17:19:52.000Z,Luuk,00:00:02.214,00:00:02.429,Yes,No,Yes,Other,Noise,
+4,S.Looije.2_2016-04-14T17:19:52.000Z,Luuk,00:00:02.429,00:00:30.000,No,No,No,Other,Silence,
+8,S.Looije.2_2016-04-15T13:01:55.000Z,Luuk,00:00:00.000,00:00:02.250,No,No,No,Other,Silence,
+8,S.Looije.2_2016-04-15T13:01:55.000Z,Luuk,00:00:02.250,00:00:03.100,No,No,No,Other,mic movement,
+8,S.Looije.2_2016-04-15T13:01:55.000Z,Luuk,00:00:03.100,00:00:30.000,No,No,No,Other,Silence,
+18,P.van.der.Meulen.4_2016-04-15T12:08:45.000Z,Luuk,00:00:00.000,00:00:30.000,Yes,No,No,Traffic,,Pim knows what this is
+21,T.R.Janssen_2016-04-15T13:06:59.000Z,Luuk,00:00:00.000,00:00:16.606,No,Yes,No,Nature,Birds,
+21,T.R.Janssen_2016-04-15T13:06:59.000Z,Luuk,00:00:16.606,00:00:17.462,No,No,No,Other/Traffic,Bike?,
+21,T.R.Janssen_2016-04-15T13:06:59.000Z,Luuk,00:00:17.462,00:00:30.000,No,Yes,No,Nature,Birds,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:00.000,00:00:00.000,Yes,No,No,Other,Noise,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:10.106,00:00:10.346,Yes,No,Yes,Other,beep,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:11.200,00:00:11.400,Yes,No,Yes,Other,beep,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:12.521,00:00:13.038,Yes,No,Yes,Other,Paper?,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:13.234,00:00:13.440,Yes,No,Yes,Other,,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:13.786,00:00:14.223,Yes,No,Yes,Other,,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:17.000,00:00:17.105,Yes,No,Yes,Other,beep,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:17.000,00:00:17.105,No,No,No,Human,speach,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:18.117,00:00:20.000,Yes,No,Yes,Other,stick breaking,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:20.800,00:00:21.000,Yes,No,Yes,Other,beep,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:21.900,00:00:22.100,Yes,No,Yes,Other,beep,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:00.125,00:00:01.000,Yes,No,Yes,Other,movement,
+22,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:01.300,00:00:01.650,Yes,No,Yes,Other,movement,
+,T.R.Janssen_2016-04-15T13:11:30.000Z,Luuk,00:00:03.800,00:00:06.000,No,No,Yes,Human,speach,
+24,m.wirthlin_2016-04-15T15:06:21.000Z,Steven,00:00:00.000,00:00:30.000,No,No,No,Other,,
+29,m.wirthlin_2016-04-15T16:29:20.000Z,Steven,00:00:00.000,00:00:00.526,No,No,No,Other,,
+29,m.wirthlin_2016-04-15T16:29:20.000Z,Steven,00:00:00.526,00:00:30.000,Yes,No,No,Music,,
+42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Traffic,,
+42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Machine,,
+42,T.R.Janssen_2016-04-16T14:52:59.000Z,Steven,00:00:04.266,00:00:05.171,Yes,No,No,Human,,
+52,L.H.Boulogne_2016-04-16T19:08:22.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Music,,
+52,L.H.Boulogne_2016-04-16T19:08:22.000Z,Steven,00:00:00.000,00:00:30.000,Yes,No,No,Human,,
+60,S.M.Romer_2016-04-17T08:44:17.000Z,Steven,00:00:00.000,00:00:00.509,No,No,No,Other,,
+60,S.M.Romer_2016-04-17T08:44:17.000Z,Steven,00:00:00.509,00:00:30.000,Yes,No,No,Other,,
+10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:00.000,00:00:03.782,No,No,No,Traffic,passing vehicle,
+10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:00.000,00:00:30.000,No,Yes,No,Nature,birds background,
+10,H.R.Beishuizen_2016-04-15T08:26:47.000Z,Tom,00:00:18.602,00:00:27.000,No,No,No,Traffic,passing vehicle,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:00.000,00:00:02.275,Yes,No,Yes,Noise,mic movement,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:03.000,00:00:04.544,Yes,No,No,Other,opening drawer,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:04.544,00:00:06.614,Yes,No,Yes,Other,cutlery movement,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:06.614,00:00:07.264,Yes,No,Yes,Other,drawer closing,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:07.500,00:00:08.300,Yes,No,Yes,Other,scraping,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:08.950,00:00:18.982,Yes,No,No,Other,stirring noise,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:18.982,00:00:20.151,Yes,No,Yes,Other,wood drumming,
+13,H.R.Beishuizen_2016-04-15T08:43:21.000Z,Tom,00:00:20.151,00:00:30.000,Yes,No,No,Other,stirring noise,
+51,P.van.der.Meulen.4_2016-04-16T17:58:30.000Z,Tom,00:00:17.277,00:00:19.304,No,No,Yes,Traffic,distant claxon,
+58,P.van.der.Meulen.4_2016-04-17T07:04:03.000Z,Tom,NA,NA,NA,NA,NA,NA,geen significante geluiden,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:00.530,00:00:01.698,No,No,Yes,Human,speech,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:02.908,00:00:03.061,No,No,Yes,Human,speech,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:04.600,00:00:05.600,No,No,Yes,Noise,wind,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:11.533,00:00:14.224,Yes,No,No,Traffic,passing vehicle,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:05.600,00:00:14.600,Yes,No,Yes,Noise/Human/Traffic,,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:14.600,00:00:21.938,No,No,No,Noise/Human/Other,,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:21.938,00:00:22.837,No,No,Yes,Other,Bicycle parking,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:22.837,00:00:26.882,No,No,No,Footsteps,,
+76,m.wirthlin_2016-04-17T15:21:45.000Z,Tom,00:00:27.400,00:00:32.624,Yes,No,No,Noise/Human/Traffic,,
+99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:00.115,00:00:02.327,No,No,No,Footsteps,Gravel,
+99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:05.822,00:00:07.231,No,No,Yes,Nature,Bird,
+99,H.R.Beishuizen_2016-04-18T05:51:11.000Z,Tom,00:00:00.115,00:00:32.763,Yes,No,No,Traffic,Sirens,
+137,P.van.der.Meulen.4_2016-04-19T06:31:51.000Z,Tom,00:00:04.782,00:00:04.939,No,No,Yes,Other,Tick,
+137,P.van.der.Meulen.4_2016-04-19T06:31:51.000Z,Tom,00:00:15.681,00:00:16.956,No,No,No,Human,Sniff,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:02.804,00:00:04.495,No,No,Yes,Human,Speech,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:04.403,00:00:04.938,No,No,No,Human,Tsss,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:13.877,00:00:14.720,No,No,Yes,Human,Speech,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:20.456,00:00:21.344,Yes,No,Yes,Human,Speech,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:24.968,00:00:29.884,No,No,No,Human,Laughter/Speech,
+153,F.de.Vries.11_2016-04-19T17:15:28.000Z,Tom,00:00:14.728,00:00:19.295,No,No,No,Human/Radio,,
+53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:08.059,00:00:09.036,No,,No,Other,,
+57,H.R.Beishuizen_2016-04-17T06-12-38.000Z,Pim,NA,NA,NA,,NA,NA,geen significante geluiden,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.815,00:00:06.362,No,,No,Other,,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:21.025,00:00:21.720,No,,No,Other,,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:10.589,00:00:11.218,No,,No,Other,,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:17.891,00:00:25.869,Yes,,Yes,Other,,
+97,F.de.Vries.11_2016-04-18T05-32-24.000Z,Pim,00:00:13.132,00:00:29.884,Yes,,Yes,Mechanical,,
+114,L.H.Boulogne_2016-04-18T08-59-58.000Z,Pim,NA,NA,NA,,NA,NA,geen significante geluiden,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:00.000,00:00:01.842,Yes,,No,Traffic,,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:02.423,00:00:04.313,Yes,,No,Traffic,,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:08.094,00:00:11.632,Yes,,No,Traffic,,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:23.845,00:00:30.000,Yes,,No,Traffic,,
+119,T.R.Janssen_2016-04-18T12-45-50.000Z,Pim,00:00:00.000,00:00:30.000,Yes,,No,Other,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:01.738,00:00:03.524,No,,No,Human,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:03.959,00:00:09.849,No,,No,Human/Music,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:15.014,00:00:15.739,No,,No,Human,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:19.166,00:00:20.808,No,,No,Human,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:24.863,00:00:26.167,No,,Yes,Human,,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:17.490,00:00:21.742,No,,No,Human,,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:23.820,00:00:24.399,Yes,,No,Other,,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:25.414,00:00:27.878,No,,No,Human/Radio/Television,,
+26,,Xeryus,00:00:28.994,00:00:29.317,No,,Yes,Other,,
+30,,Xeryus,NA,NA,NA,,NA,Guitar playing/Music,,
+31,,Xeryus,00:00:25.282,00:00:25.811,No,,Yes,Human/Laughter,,
+43,,Xeryus,00:00:00.200,00:00:01.837,No,,No,Other,,
+43,,Xeryus,00:00:05.417,00:00:10.071,Yes,,Yes,Other,,
+43,,Xeryus,00:00:10.670,00:00:13.438,Yes,,Yes,Other,,
+43,,Xeryus,00:00:18.991,00:00:21.919,Yes,,Yes,Other,,
+43,,Xeryus,00:00:26.462,00:00:30.000,No,,Yes,Other,,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:00.435,00.00.01.111,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:01.449,00:00:02.126,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:02.319,00:00:03.044,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:03.237,00:00:04.010,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:04.300,00:00:04.977,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:05.266,00:00:05.943,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:06.088,00:00:06.957,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:07.199,00:00:07.827,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:08.117,00:00:08.890,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:09.035,00:00:09.856,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:09.953,00:00:10.774,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:10.823,00:00:11.692,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:11.886,00:00:12.659,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:12.804,00:00:13.577,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:13.818,00:00:14.640,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:14.833,00:00:15.606,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:15.847,00:00:16.572,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:16.621,00:00:17.539,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:17.683,00:00:18.457,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:18.650,00:00:19.326,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:19.519,00:00:20.293,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:20.486,00:00:21.259,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:21.597,00:00:22.273,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:22.418,00:00:23.288,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:23.433,00:00:24.206,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:24.303,00:00:25.076,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:25.221,00:00:26.090,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:26.284,00:00:27.008,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:27.202,00:00:28.071,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:28.216,00:00:28.989,No,No,No,Other,clock ticking,
+1,T.R.Janssen_2016-04-14T13-54-01.000Z,Pim,00:00:29.134,00:00:29.907,No,No,No,Other,clock ticking,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:00.534,00:00:02.087,Yes,No,Yes,Noise,,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:02.621,00:00:03.689,No,Yes,No,Other,moving something wet,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:07.184,00:00:08.203,No,No,Yes,Noise,,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:11.261,00:00:13.640,No,Yes,No,Other,moving something wet,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:16.164,00:00:17.911,No,Yes,No,Other,moving something wet,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:21.795,00:00:22.911,No,Yes,No,Other,Scratching,
+5,m.wirthlin_2016-04-14T20-58-43.000Z,Pim,00:00:25.969,00:00:27.425,No,Yes,No,Other,moving something wet,
+27,m.wirthlin_2016-04-15T16-25-47.000Z,Pim,00:00:00.000,00:00:30.000,No,No,No,Music,Electric guitar,
+27,m.wirthlin_2016-04-15T16-25-47.000Z,Pim,00:00:01.814,00:00:02.059,Yes,No,Yes,Music,Drum beat,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:00.556,00:00:01.162,Yes,No,Yes,Noise,,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:02.577,00:00:04.396,No,No,No,Other,Opening drawer,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:04.345,00:00:05.154,Yes,No,Yes,Other,Dropping something on the table,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:05.204,00:00:06.013,Yes,No,Yes,Other,Dropping something on the table,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:06.619,00:00:07.074,No,No,Yes,Other,Bumbing into kitchencounter,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:07.226,00:00:10.763,Yes,No,No,Other,Plastic packaging,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:11.015,00:00:17.584,Yes,No,Yes,Other,Pouring cereal in bowl,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:17.988,00:00:19.555,No,No,No,Other,Opening drawer,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:19.555,00:00:20.211,No,No,Yes,Other,Clap,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:20.464,00:00:21.121,No,No,No,Other,Closing drawer,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:21.020,00:00:21.778,Yes,No,Yes,Other,Closing cabinet door,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:21.879,00:00:22.334,No,No,No,Other,Closing drawer,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:22.485,00:00:23.395,No,No,No,Other,Rattling,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:23.850,00:00:24.658,No,No,No,Other,Pop/rattle/slam,
+37,H.R.Beishuizen_2016-04-16T07-32-06.000Z,Pim,00:00:24.709,00:00:25.466,No,No,No,Other,Canister plop,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Music,,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:06.511,00:00:07.157,No,No,Yes,Other,Mouse clicking,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:07.257,00:00:07.605,No,No,Yes,Other,Mouse clicking,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:09.593,00:00:10.040,No,No,Yes,Other,Mouse clicking,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:10.885,00:00:11.183,No,No,Yes,Other,Mouse clicking,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:11.879,00:00:12.525,Yes,No,Yes,Human,Sniffing,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:14.215,00:00:14.812,Yes,No,Yes,Human,Sniffing,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:20.180,00:00:20.528,Yes,No,Yes,Human,Sniffing,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:27.039,00:00:27.436,No,No,Yes,Other,Mouse clicking,
+48,S.Bosch.8_2016-04-16T15-28-44.000Z,Pim,00:00:30.369,00:00:30.766,No,No,Yes,Other,Mouse clicking,
+53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:08.059,00:00:09.036,No,No,No,Other,Door opening,
+53,P.van.der.Meulen.4_2016-04-16T20-45-29.000Z,Pim,00:00:19.732,00:00:21.392,No,No,No,Other,Door closing,
+57,H.R.Beishuizen_2016-04-17T06-12-38.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Silence,geen significante geluiden,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:01.193,00:00:01.839,Yes,No,Yes,Other,Dropping something,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:03.032,00:00:04.175,No,No,No,Other,Footsteps,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.070,00:00:05.368,Yes,No,Yes,Other,Tick,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:05.716,00:00:06.561,Yes,No,Yes,Other,Tick,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:07.356,00:00:08.350,No,No,No,Other,Footsteps,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:08.300,00:00:08.947,Yes,No,No,Other,slam,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:09.444,00:00:13.470,No,No,No,Other,Footsteps,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:16.651,00:00:17.297,No,No,No,Other,Thud,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:18.341,00:00:23.858,No,No,No,Other,Footsteps,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:24.653,00:00:27.486,No,No,No,Other,Footsteps,
+68,m.wirthlin_2016-04-17T13-36-59.000Z,Pim,00:00:29.971,00:00:30.766,No,No,No,Other,Thud,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:04.303,00:00:04.835,No,No,No,Other,Tap,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:05.367,00:00:05.754,No,No,No,Other,Tap,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:10.590,00:00:11.219,No,No,No,Other,Putting something on the table,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:11.750,00:00:12.814,No,No,No,Other,Sweeping something,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:17.891,00:00:26.169,Yes,No,Yes,Other,Crinkly bag,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:21.807,00:00:22.339,Yes,No,Yes,Other,Putting something on the table,
+95,P.van.der.Meulen.4_2016-04-18T05-13-34.000Z,Pim,00:00:26.836,00:00:29.931,Yes,No,Yes,Other,Crinkly bag,
+97,F.de.Vries.11_2016-04-18T05-32-24.000Z,Pim,00:00:13.132,00:00:29.884,Yes,No,Yes,Mechanical,Coffeemachine,
+168,S.Looije.2_2016-04-20T06:58:32.000Z,Tom,NA,NA,NA,NA,NA,NA,geen significante geluiden,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:24.539,00:00:26.083,Yes,No,Yes,Mechanical,phone vibration,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:19.795,00:00:24.441,No,No,No,Human,speech,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:13.618,00:00:19.538,No,No,No,Human,speech,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:07.428,00:00:12.760,No,No,No,Human,speech,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:12.165,00:00:12.680,Yes,No,Yes,Other,Notification,
+174,P.R.de.Weert_2016-04-20T07:20:10.000Z,Tom,00:00:01.912,00:00:07.299,No,No,No,Human,speech,
+177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:08.417,00:00:08.875,Yes,No,Yes,Other,knock,
+177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:02.169,00:00:07.651,No,No,No,Human,speech,
+177,m.wirthlin_2016-04-20T07:26:42.000Z,Tom,00:00:10.366,00:00:31.695,No,No,No,Human,speech,
+178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:02.991,00:00:13.728,No,No,No,Human,indistinct chatter,
+178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:21.818,00:00:28.412,No,No,No,Human,speech,
+178,L.H.Boulogne_2016-04-20T07:32:48.000Z,Tom,00:00:28.326,00:00:28.700,No,No,Yes,Mechanical,penclick,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:04.088,00:00:06.214,No,No,No,Other,sweeping something,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:04.082,00:00:06.980,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:09.003,00:00:11.387,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:11.448,00:00:17.111,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:19.231,00:00:20.108,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:20.261,00:00:21.150,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:21.438,00:00:22.510,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:22.596,00:00:23.111,No,No,No,Human,sigh,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:23.111,00:00:26.757,No,No,No,Human,speech,
+196,P.R.de.Weert_2016-04-20T11:16:51.000Z,Tom,00:00:28.535,00:00:28.945,No,No,No,Human,speech,
+202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:00.294,00:00:03.873,No,No,No,Traffic,stationary engine,
+202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:03.873,00:00:18.435,Yes,No,No,Traffic,accelerating engine,
+202,J.Welink_2016-04-20T13:55:34.000Z,Tom,00:00:23.092,00:00:27.897,Yes,No,No,Traffic,passing vehicle,
+114,L.H.Boulogne_2016-04-18T08-59-58.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Silence,geen significante geluiden,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:00.000,00:00:01.842,Yes,No,No,Traffic,passing car,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:00.921,00:00:30.000,Yes,No,No,Traffic,light motorcycle,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:02.423,00:00:04.313,Yes,No,No,Traffic,passing car,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:08.094,00:00:11.632,Yes,No,No,Traffic,passing motorcycle,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:13.570,00:00:16.963,Yes,No,No,Traffic,passing motorcycle,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:17.399,00:00:18.611,Yes,No,No,Traffic,passing car,
+115,T.R.Janssen_2016-04-18T09-01-38.000Z,Pim,00:00:21.906,00:00:23.312,Yes,No,No,Traffic,passing car,
+119,T.R.Janssen_2016-04-18T12-45-50.000Z,Pim,00:00:00.000,00:00:30.000,No,Yes,No,Other,soft ticking,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:00.435,00:00:11.200,No,Yes,No,Music,,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:01.835,00:00:03.573,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:03.621,00:00:07.918,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:07.773,00:00:11.200,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:11.345,00:00:14.290,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:19.263,00:00:20.760,No,No,No,Human,laughing,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:21.146,00:00:22.546,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:22.980,00:00:24.622,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:24.960,00:00:26.022,No,No,Yes,Human,laughing,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:26.649,00:00:28.001,No,No,No,Human,speech,
+126,F.de.Vries.11_2016-04-18T18-21-49.000Z,Pim,00:00:28.629,00:00:29.884,No,No,No,Human,speech,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:17.489,00:00:21.741,No,Yes,No,Silence,,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:17.490,00:00:21.742,No,No,No,Human,sigh,
+143,L.H.Boulogne_2016-04-19T09-50-30.000Z,Pim,00:00:23.820,00:00:24.399,No,No,No,Other,tap,
+157,m.wirthlin_2016-04-19T21-38-14.000Z,Pim,00:00:00.594,00:00:02.276,Yes,No,Yes,Noise,,
+157,m.wirthlin_2016-04-19T21-38-14.000Z,Pim,00:00:02.325,00:00:30.627,Yes,No,Yes,Other,shower,
+157,m.wirthlin_2016-04-19T21-38-14.000Z,Pim,00:00:03.958,00:00:30.627,Yes,No,Yes,Other,water draining,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:00.194,00:00:30.023,Yes,No,Yes,Traffic,highway,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:00.340,00:00:00.922,Yes,No,Yes,Noise,,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:00.873,00:00:02.765,Yes,No,Yes,Noise,,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:02.716,00:00:05.238,Yes,No,Yes,Traffic/Noise,,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:05.384,00:00:09.361,Yes,No,Yes,Traffic/Noise,highway,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:15.375,00:00:15.763,Yes,No,Yes,Other,Bang,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:17.801,00:00:25.658,Yes,No,No,Mechanical,Truck engine,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:18.189,00:00:20.177,Yes,No,No,Mechanical,Brakes,
+182,H.R.Beishuizen_2016-04-20T08-49-26.000Z,Pim,00:00:28.617,00:00:30.023,No,No,No,Human,speech,
+9,,Rogier,,,,,,Silence,,
+12,,Rogier,"1,34","1,79",1,0,1,clap/tick,,
+12,,Rogier,"2,36","2,81",1,0,1,clap/tick,,
+12,,Rogier,"2,71","9,01",0,0,0,noise,water from crane,
+12,,Rogier,"9,5","9,85",1,0,1,clap/tick,,
+12,,Rogier,"12,27","12,81",1,0,1,clap/tick,,
+12,,Rogier,"13,07","13,5",1,0,1,clap/tick,,
+12,,Rogier,"19,61",30,1,0,0,mechanical,waterboiler,
+14,,Rogier,,,,,,Silence,,
+15,,Rogier,"0,8","1,26",0,1,1,Nature,Chirping bird,
+15,,Rogier,"4,13","4,48",0,1,1,Nature,Chirping bird,
+15,,Rogier,"7,24","7,6",0,1,1,Nature,Chirping bird,
+15,,Rogier,"14,97","15,46",0,1,1,Nature,Chirping bird,
+19,,Rogier,"1,52","3,5",0,0,0,Human,Foreground talk,
+19,,Rogier,"4,46",6,0,0,0,Human,Foreground talk,
+19,,Rogier,"6,97","7,74",0,0,0,Human,Foreground talk,
+19,,Rogier,"8,04","9,14",1,0,1,Human,Laugh foreground,
+19,,Rogier,"11,82","12,72",0,0,0,Human,Foreground talk,
+19,,Rogier,"12,86","15,48",0,0,0,Human,Foreground talk,
+19,,Rogier,"15,94","18,14",0,0,0,Human,Foreground talk,
+19,,Rogier,"21,52","21,34",1,0,1,Human,Laugh foreground,
+19,,Rogier,"27,86","29,07",0,0,0,Human,Foreground talk,
+19,,Rogier,"00:00:00,00",30,1,0,0,Human,Background chatter,
+54,,Rogier,"0,79","1,37",0,0,0,Other,?,
+79,,Rogier,"0,55","1,11",1,0,1,Human,,
+79,,Rogier,"1,37","3,78",0,0,0,Human,,
+79,,Rogier,"5,51","6,41",1,0,1,Noise,,
+79,,Rogier,"6,88","9,08",1,0,0,Noise,,
+79,,Rogier,"9,81","10,45",1,0,1,Noise,,
+79,,Rogier,"11,32","11,64",1,0,1,Noise,,
+79,,Rogier,"12,96","13,31",1,0,1,Noise,,
+79,,Rogier,"14,2","14,5",1,0,1,Noise,,
+,,Rogier,"22,58","24,41",1,0,1,Nature,Animal,
+86,,Rogier,,,,,,Silence,,
+89,,Rogier,,,,,,Silence,,
+96,,Rogier,"00:00:00,00",30,0,1,0,Natural,Birds Chirping,
+96,,Rogier,"17,5",30,1,0,0,Traffic,Cars background,
+102,,Rogier,"2,32","2,72",0,0,0,Noise,,
+128,,Rogier,"0,06","6,73",0,0,0,Human,Background chatter,
+128,,Rogier,"6,7","7,6",0,0,0,Human,Laughter,
+128,,Rogier,"7,6","12,51",0,0,0,Human,Background chatter,
+128,,Rogier,"12,53","13,37",0,0,0,Human,Laugh foreground,
+128,,Rogier,"13,4",30,0,0,0,Human,Background chatter,
+130,,Rogier,,,,,,Silence,,
+133,,Rogier,,,,,,Silence,,
+142,,Rogier,,,,,,Silence,,
+152,,Rogier,,,,,,Silence,,
+156,,Rogier,"27,07","28,35",1,0,1,Noise,Beeping,
+156,,Rogier,"0,55","2,19",1,0,0,Noise,,
+156,,Rogier,"2,2",30,1,0,0,Noise,,
+170,,Rogier,"0,55",30,0,0,0,Human,Background chatter,
+172,,Rogier,"0,55","7,07",0,0,0,Human,,
+172,,Rogier,"8,64",30,0,0,0,Human,,
+181,,Rogier,"3,21","4,56",0,0,0,Human,,
+181,,Rogier,"5,3","6,92",0,0,0,Human,,
+181,,Rogier,"8,5","9,4",0,0,0,Human,,
+181,,Rogier,"10,22","10,86",0,0,0,Human,,
+181,,Rogier,"11,07","13,38",0,0,0,Human,,
+181,,Rogier,"14,21","14,61",1,0,1,Noise,,
+181,,Rogier,"14,75","15,12",0,0,0,Human,,
+181,,Rogier,"15,12","16,61",1,0,1,Noise,,
+181,,Rogier,"17,2","20,33",0,0,0,Human,,
+181,,Rogier,"20,33","23,21",0,0,0,Human,,
+181,,Rogier,"23,21","23,88",0,0,0,Laughter,,
+181,,Rogier,"23,9",25,0,0,0,Human,,
+181,,Rogier,"25,11","26,94",0,0,0,Human,,
+181,,Rogier,"27,43","28,09",0,0,0,Human,,
+181,,Rogier,"28,13","29,58",0,0,0,Human,,
+181,,Rogier,"29,64",30,0,0,0,Human,,
+184,,Rogier,"8,97","9,3",1,0,1,Noise,,
+184,,Rogier,"14,25","17,22",0,0,0,Human,,
+184,,Rogier,"15,89","16,25",1,0,1,Noise,,
+184,,Rogier,"29,41","30,92",1,0,1,Noise,,
+184,,Rogier,"0,55","30,92",1,0,0,Traffic,,
+197,,Rogier,"0,55","4,21",0,0,0,Human,,
+197,,Rogier,"4,18","6,55",0,0,0,Noise,,
+197,,Rogier,"6,61","15,09",0,0,0,Noise,,
+197,,Rogier,"15,22","23,04",0,0,0,Human,,
+197,,Rogier,"23,22","29,7",0,0,0,Human,,
+205,,Rogier,,,,,,Silence/wind,,
+207,,Rogier,"0,5","12,68",0,0,0,Noise,,
+207,,Rogier,"12,69","14,23",0,0,0,Human,,
+207,,Rogier,"15,13","15,89",0,0,0,Human,,
+207,,Rogier,"17,18","18,93",0,0,0,Human,,
+207,,Rogier,"23,31","23,58",0,0,0,Human,,
+207,,Rogier,"23,95","25,28",0,0,0,Human,,
+207,,Rogier,"26,79","28,8",0,0,0,Human,,
+207,,Rogier,"29,02","29,39",0,0,0,Human,,
