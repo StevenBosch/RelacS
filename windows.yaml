@@ -1,5 +1,5 @@
 windows:
-    - size: 0.1
-      stride: 0.05
-    - size: 1.0
-      stride: 0.5
+    - size: 200
+      stride: 100
+    - size: 150
+      stride: 75
