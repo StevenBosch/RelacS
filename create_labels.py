@@ -8,7 +8,7 @@ import numpy as np
 import os
 import math
 import pickle
-
+import os.path
 ID         = 0
 FILENAME   = 1
 LABELER    = 2
@@ -19,6 +19,12 @@ RELAXING   = 6
 SUDDEN     = 7
 CATEGORY   = 8
 OTHER      = 9
+
+def replace_last_two(source_string, replace_what, replace_with):
+    first_part, sep, tail = source_string.rpartition(replace_what)
+    head, sep, middle = first_part.rpartition(replace_what)
+
+    return head + replace_with + middle + replace_with + tail
 
 def print_windows(data):
     for f in data:
@@ -70,19 +76,23 @@ if __name__ == '__main__':
         samples[s]['ranges'].sort(key=lambda k: k[0])
 
     filedir = os.path.join(os.getcwd(), 'hdf5')
+
     print(filedir)
+
     positive_windows = {}
     for sample in samples:
         positive_windows[sample] = []
         # Read HDF5 file
         filename = os.path.join(filedir, sample + '.wav.2.hdf5')
-        try:
-            filepointer = h5py.File(filename, 'r')
-        except OSError as e:
-            print("Couldn't open a file:", e)
-            continue
-        print('Processing', sample)
 
+        if not os.path.isfile(filename) :
+            filename = replace_last_two(filename, '-', ':')
+            if not os.path.isfile(filename) :
+                print("Couldn't open a file: ", filename)
+                continue
+
+        filepointer = h5py.File(filename, 'r')
+        
         # Calculate sample rate
         attrs = filepointer.attrs
         fs = filepointer['energy'].shape[1] / attrs['duration']
@@ -95,7 +105,7 @@ if __name__ == '__main__':
                 if end_time - start_time < window['size']:
                     continue # Skip ranges where we can extract no windows
                 # add windows
-                for w in range(start_time, end_time-window['size'],
+                for w in range(int(start_time), int(end_time-window['size']),
                         window['stride']):
                     positive_windows[sample].append({'start': w,
                         'end': w+window['size'], 'stressful': r[2],
@@ -107,6 +117,11 @@ if __name__ == '__main__':
 
     #print_windows(positive_windows)
 
+
     # Save the windows
     with open('labels.pickle', 'wb') as f:
         pickle.dump(positive_windows, f)
+
+
+
+
