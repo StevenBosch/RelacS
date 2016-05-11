@@ -81,17 +81,21 @@ if __name__ == '__main__':
 
     positive_windows = {}
     for sample in samples:
-        positive_windows[sample] = []
         # Read HDF5 file
-        filename = os.path.join(filedir, sample + '.wav.2.hdf5')
+        fname = sample + '.wav.2.hdf5'
+        filename = os.path.join(filedir, fname)
 
         if not os.path.isfile(filename) :
-            filename = replace_last_two(filename, '-', ':')
+            fname = replace_last_two(fname, '-', ':')
+            filename = os.path.join(filedir, fname)
+
             if not os.path.isfile(filename) :
                 print("Couldn't open a file: ", filename)
                 continue
 
         filepointer = h5py.File(filename, 'r')
+        
+        positive_windows[fname] = []
         
         # Calculate sample rate
         attrs = filepointer.attrs
@@ -107,11 +111,11 @@ if __name__ == '__main__':
                 # add windows
                 for w in range(int(start_time), int(end_time-window['size']),
                         window['stride']):
-                    positive_windows[sample].append({'start': w,
+                    positive_windows[fname].append({'start': w,
                         'end': w+window['size'], 'stressful': r[2],
                         'relaxing': r[3], 'sudden': r[4]})
                 # Add a last window that ends on the last sample
-                positive_windows[sample].append({
+                positive_windows[fname].append({
                     'start': end_time-window['size'], 'end': end_time,
                     'stressful': r[2], 'relaxing': r[3], 'sudden': r[4]})
 
@@ -121,7 +125,3 @@ if __name__ == '__main__':
     # Save the windows
     with open('labels.pickle', 'wb') as f:
         pickle.dump(positive_windows, f)
-
-
-
-
