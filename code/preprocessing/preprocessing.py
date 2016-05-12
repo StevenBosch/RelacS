@@ -3,10 +3,8 @@ import h5py
 import numpy as np
 import os
 import os.path
-import math
-import pickle
-
-
+import matplotlib.pyplot as plt
+import cv2
 
 if __name__ == '__main__':
     if len(sys.argv) < 1:
@@ -15,4 +13,7 @@ if __name__ == '__main__':
 
     filename = sys.argv[1]
     filepointer = h5py.File(filename, 'r')
+
+    energy = filepointer['energy']
+    coch = energy.value
     
