@@ -1,5 +1,3 @@
 windows:
-    - size: 200
-      stride: 100
-    - size: 150
-      stride: 75
+    - size: 128
+      stride: 64
