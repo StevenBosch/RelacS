@@ -69,7 +69,7 @@ if __name__ == '__main__':
     for s in samples:
         samples[s]['ranges'].sort(key=lambda k: k[0])
 
-    filedir = os.path.join(os.getcwd(), 'hdf5')
+    filedir = '../../sound_files/hdf5'
     print(filedir)
     positive_windows = {}
     for sample in samples:
