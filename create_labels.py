@@ -56,9 +56,9 @@ if __name__ == '__main__':
                     continue # Skip files without a filename
                 row[START_TIME] = float(row[START_TIME].split(':')[-1])
                 row[END_TIME] = float(row[END_TIME].split(':')[-1])
-                row[STRESSFUL] = False if row[STRESSFUL].lower() == 'no' else True
-                row[RELAXING]  = False if row[RELAXING].lower() == 'no' else True
-                row[SUDDEN]    = False if row[SUDDEN].lower() == 'no' else True
+                row[STRESSFUL] = False if row[STRESSFUL].lower() in ('no', 0) else True
+                row[RELAXING]  = False if row[RELAXING].lower() in ('no', 0) else True
+                row[SUDDEN]    = False if row[SUDDEN].lower() in ('no', 0) else True
                 data.append(row)
             except (ValueError, IndexError) as e:
                 # Ignore lines that are not proper entries
@@ -81,11 +81,13 @@ if __name__ == '__main__':
     print(filedir)
 
     positive_windows = {}
+    max_fs = 0
     for sample in samples:
         # Read HDF5 file
         fname = sample + '.wav.2.hdf5'
         filename = os.path.join(filedir, fname)
 
+        # Correct for windows being fubar
         if not os.path.isfile(filename) :
             fname = replace_last_two(fname, '-', ':')
             filename = os.path.join(filedir, fname)
@@ -101,27 +103,36 @@ if __name__ == '__main__':
         # Calculate sample rate
         attrs = filepointer.attrs
         fs = filepointer['energy'].shape[1] / attrs['duration']
+        if fs > max_fs:
+            max_fs = fs
 
         # Create the actual (positive) windows
         for window in windows['windows']:
             for r in samples[sample]['ranges']:
+                # Calculate window parameters in terms of samples
                 start_time = math.floor(r[0] * fs)
                 end_time = math.ceil(r[1] * fs)
+                window_size = math.floor(window['size'] * fs)
+                window_stride = math.floor(window['stride'] * fs)
+
                 if end_time - start_time < window['size']:
                     continue # Skip ranges where we can extract no windows
                 # add windows
-                for w in range(int(start_time), int(end_time-window['size']),
-                        window['stride']):
+                for w in range(start_time, end_time-window_size, window_stride):
                     positive_windows[fname].append({'start': w,
-                        'end': w+window['size'], 'stressful': r[2],
-                        'relaxing': r[3], 'sudden': r[4]})
+                        'end': w+window_size, 'stressful': r[2],
+                        'relaxing': r[3], 'sudden': r[4], 'fs': fs})
                 # Add a last window that ends on the last sample
                 positive_windows[fname].append({
                     'start': end_time-window['size'], 'end': end_time,
-                    'stressful': r[2], 'relaxing': r[3], 'sudden': r[4]})
+                    'stressful': r[2], 'relaxing': r[3], 'sudden': r[4], 'fs': fs})
 
     #print_windows(positive_windows)
+    print('\nRESULTS:')
+    print('Max Fs =', max_fs)
+    print('Positive windows = ', len(positive_windows))
+    out = {'max_fs': max_fs, 'positive': positive_windows, 'negative': None}
 
     # Save the windows
     with open('labels.pickle', 'wb') as f:
-        pickle.dump(positive_windows, f)
+        pickle.dump(out, f)
