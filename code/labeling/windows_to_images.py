@@ -5,7 +5,7 @@ import numpy as np
 
 #wins:          windows that will be used to generate images
 #percentage:    percentage of files used to generate training data vs validation data
-def toImageData(wins, percentage):
+def toImageData(wins, percentage, filedir):
     if percentage > 1 or percentage < 0:
         RuntimeError('Percentage should be between 0 and 1')
 
@@ -24,8 +24,6 @@ def toImageData(wins, percentage):
 
     valid_frags = np.empty([validlen, 109, winlen])
     valid_flags = np.empty([trainlen, 3])
-
-    filedir = os.path.join(os.getcwd(), 'hdf5')
 
     counter = 0
     train_skipcount = 0
