@@ -71,7 +71,7 @@ if __name__ == '__main__':
         if d[FILENAME] not in samples.keys():
             samples[d[FILENAME]] = {'ranges': [], 'id': d[ID]}
         samples[d[FILENAME]]['ranges'].append((d[START_TIME], d[END_TIME],
-            d[STRESSFUL], d[RELAXING], d[SUDDEN]))
+            d[STRESSFUL], d[RELAXING], d[SUDDEN], d[CATEGORY]))
     # Sort the windows for each file by start time
     for s in samples:
         samples[s]['ranges'].sort(key=lambda k: k[0])
@@ -121,11 +121,13 @@ if __name__ == '__main__':
                 for w in range(start_time, end_time-window_size, window_stride):
                     positive_windows[fname].append({'start': w,
                         'end': w+window_size, 'stressful': r[2],
-                        'relaxing': r[3], 'sudden': r[4], 'fs': fs})
+                        'relaxing': r[3], 'sudden': r[4], 'fs': fs,
+                        'category': r[5]})
                 # Add a last window that ends on the last sample
                 positive_windows[fname].append({
                     'start': end_time-window['size'], 'end': end_time,
-                    'stressful': r[2], 'relaxing': r[3], 'sudden': r[4], 'fs': fs})
+                    'stressful': r[2], 'relaxing': r[3], 'sudden': r[4],
+                    'fs': fs, 'category': r[5]})
 
     #print_windows(positive_windows)
     print('\nRESULTS:')
