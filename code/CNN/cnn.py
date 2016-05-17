@@ -30,7 +30,7 @@ windows = pickle.load(open(os.path.join(label_dir, 'labels.pickle'), 'rb'))
 codedir, dummy= os.path.split(os.getcwd())
 relacsdir, dummy = os.path.split(codedir)
 hdf5_path = os.path.join(relacsdir, 'sound_files/hdf5')
-X_train, Y_train, X_test, Y_test = windows_to_images.toImageData(windows, 0.75, hdf5_path)
+X_train, Y_train, X_test, Y_test = windows_to_images.to_image_data_file_split(windows, 0.75, hdf5_path)
 
 print X_train.shape
 print X_test.shape
@@ -67,7 +67,7 @@ model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
 model.add(Dense(Y_train.shape[1]))
-model.add(Activation('softmax'))
+model.add(Activation('sigmoid'))
 
 sgd = SGD(lr=0.01, momentum=0.0, decay=0.0, nesterov=False)
 model.compile(optimizer= sgd,
