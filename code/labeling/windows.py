@@ -29,8 +29,8 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     with open(sys.argv[1], 'r') as f:
-        windows = yaml.load(f)
-        print(windows)
+        window_defs = yaml.load(f)
+        print(window_defs)
 
     data = []
     with open("labeling.csv", 'r') as f:
@@ -83,7 +83,27 @@ if __name__ == '__main__':
 
         # Calculate sample rate
         attrs = filepointer.attrs
-        fs = filepointer['energy'].shape[1] / attrs['duration']
+        length = filepointer['energy'].shape[1]
+        fs = length / attrs['duration']
+        scale = int(fs/190 + 0.1)
 
         # Find how much to skip at the start
+        energy = filepointer['energy']
+        start = 0
+        while max(energy[:,start].flatten()) == 0:
+            start += 1
+
         # Create the labels for each window
+        for wdef in window_defs['windows']:
+            for w in range(start, length-int(wdef['size'])*scale,
+                    int(wdef['stride'])*scale):
+                windows[fname].append({'start': w,
+                    'end': w + int(wdef['size']) * scale,
+                    'stressful': None,
+                    'relaxing': None,
+                    'sudden': None,
+                    'category': None,})
+
+        # Save the windows
+        with open('labels.pickle', 'wb') as f:
+            pickle.dump(windows, f)
