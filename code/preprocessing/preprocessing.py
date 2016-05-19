@@ -4,7 +4,7 @@ import os, matplotlib.pyplot as plt
 
 # Change search directory for modules to include pycpsp in parent
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-import pycpsp.plot as plot
+# import pycpsp.plot as plot
 import pycpsp.files as files
 import pycpsp.bgmodel.config as bgconfig
 import pycpsp.bgmodel.bgmodel as bgmodel
@@ -19,6 +19,7 @@ def dilate(image):
 
 def savePlot(image, title, filename, metadata, run = False):
     plot.plot2D(title, image, metadata=metadata)
+    # plt.plot(image)
     if run is True:
         plt.savefig('../../sound_files/preprocessed/' + filename + '/'+ title + '.png')
     else:
@@ -49,14 +50,13 @@ if __name__ == '__main__':
     metadata = files.metadataFromHDF5(filename)
 
     # Original image
-    original = signals['energy'][:, metadata.get('starttime 0'):]
-    refsignal = plot.imgmask(plot.imscale(signals['energy'],[0,60]), [20,80])
+    original = signals['energy'][:,:]
 
     # preprocess images
-    eroded = erode(refsignal)
-    dilated = dilate(refsignal)
-    combined = dilate(erode(refsignal))
-    foregroundBackground(refsignal, f)
+    eroded = erode(original)
+    dilated = dilate(original)
+    combined = dilate(erode(orignal))
+    foregroundBackground(original, f)
 
     # Save the plots
     savePlot(refsignal, 'refsignal', metadata)
