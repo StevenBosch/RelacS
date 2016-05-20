@@ -63,6 +63,6 @@ target/
 
 *.pickle
 #All those hdf5 wav files
-hdf5/
+hdf5
 *.hdf5
 *.wav.2.hdf5
