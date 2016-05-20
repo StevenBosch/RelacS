@@ -23,6 +23,12 @@ CATEGORY   = 8
 OTHER      = 9
 NO = ('no', '0')
 
+def print_windows(windows):
+    for f in windows:
+        print(f)
+        for w in windows[f]:
+            print(w['start'], w['end'], w['stressful'], w['relaxing'], w['sudden'], w['category'])
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Usage:", sys.argv[0], "<window definitions.yaml>")
@@ -95,15 +101,41 @@ if __name__ == '__main__':
 
         # Create the labels for each window
         for wdef in window_defs['windows']:
-            for w in range(start, length-int(wdef['size'])*scale,
-                    int(wdef['stride'])*scale):
+            size   = int(wdef['size'])
+            stride = int(wdef['stride'])
+            for w in range(start, length-size*scale, stride*scale):
+                stressful = False
+                relaxing = False
+                sudden = False
+                categories = set()
+                for r in files[f]['ranges']:
+                    start = math.floor(r[START_TIME] * fs)
+                    end = math.floor(r[END_TIME] * fs)
+                    # Check if the marked range fits exactly in the window
+                    # If it does than we want to copy its label
+                    if start > w and end < w+stride*scale:
+                        stressful = r[STRESSFUL]
+                        relaxing  = r[RELAXING]
+                        sudden    = r[SUDDEN]
+                        categories = [r[CATEGORY]]
+                        break
+                    # Check if the marked range overlaps with the window
+                    if (start < w and end > w) or \
+                            (start < w+stride*scale and end > w+stride*scale):
+                        stressful = stressful or r[STRESSFUL]
+                        relaxing  = relaxing  or r[RELAXING]
+                        sudden    = relaxing  or r[SUDDEN]
+                        categories.add(r[CATEGORY])
+
                 windows[fname].append({'start': w,
                     'end': w + int(wdef['size']) * scale,
-                    'stressful': None,
-                    'relaxing': None,
-                    'sudden': None,
-                    'category': None,})
+                    'stressful': stressful,
+                    'relaxing': (relaxing and not stressful),
+                    'sudden': sudden,
+                    'category': list(categories),})
 
         # Save the windows
         with open('labels.pickle', 'wb') as f:
             pickle.dump(windows, f)
+
+        print_windows(windows)
