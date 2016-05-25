@@ -4,7 +4,7 @@ import os, matplotlib.pyplot as plt
 
 # Change search directory for modules to include pycpsp in parent
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-# import pycpsp.plot as plot
+import pycpsp.plot as plot
 import pycpsp.files as files
 import pycpsp.bgmodel.config as bgconfig
 import pycpsp.bgmodel.bgmodel as bgmodel
@@ -17,30 +17,20 @@ def dilate(image):
     kernel = np.ones((3, 3), np.uint8)
     return cv2.dilate(image, kernel, iterations = 3)
 
-def savePlot(image, title, filename, metadata, run = False):
+def savePlot(image, title, filename, metadata):
     plot.plot2D(title, image, metadata=metadata)
-    # plt.plot(image)
-    if run is True:
-        plt.savefig('../../sound_files/preprocessed/' + filename + '/'+ title + '.png')
-    else:
-        plt.savefig('tmp/' + title + '.png')
+    plt.savefig(filename + '.png')
     plt.close()
 
-def foregroundBackground(refsignal, filename, metadata, run = False):
+def foregroundBackground(refsignal, prepDir):
     definitions = [bgconfig.getDefaults(tau) for tau in bgconfig.tau(0.5, 4)]
     bgmodels = [bgmodel.BGModel(d['tau'], d,) for d in definitions]
-    # calculate a very fast responding background model to smooth away residual noise
-    refbg = bgmodel.BGModel('tau 0.1', bgconfig.getDefaults(0.1),).calculate(refsignal)
     for model in bgmodels:
         response = model.calculate(refsignal)
-
-        savePlot(response, 'tau {}'.format(model.name), filename, metadata, run)
-        # plot.plot1D('frequency-averaged energy', np.sum(refsignal, axis=0) / refsignal.shape[0], ylim=[0,60])
-        # plot.plot1D('frequency-averaged bg model tau:{}'.format(model.name), np.sum(response, axis=0) / refsignal.shape[0], ylim=[0,60])
-        savePlot(refbg - response, 'tau 0.1 minus tau {}'.format(model.name), filename, metadata, run)#, mask=[0,20], scale=None)
+        np.save(prepDir + 'tau {}'.format(model.name), response)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         print("usage:", sys.argv[0], "<name.hdf5>")
         sys.exit(0)
 
@@ -50,17 +40,25 @@ if __name__ == '__main__':
     metadata = files.metadataFromHDF5(filename)
 
     # Original image
-    original = signals['energy'][:,:]
+    original = signals['energy'][:,44:]
 
+'''
     # preprocess images
     eroded = erode(original)
     dilated = dilate(original)
-    combined = dilate(erode(orignal))
-    foregroundBackground(original, f)
+    combined = dilate(erode(original))
+    foregroundBackground(original)
+
+    cv2.imwrite('tmp/original.png', original)
+    cv2.imwrite('tmp/eroded.png', eroded)
+    cv2.imwrite('tmp/dilated.png', dilated)
+    cv2.imwrite('tmp/combined.png', eroded)
+
 
     # Save the plots
-    savePlot(refsignal, 'refsignal', metadata)
-    savePlot(original, 'original', metadata)
-    savePlot(eroded, 'eroded', metadata)
-    savePlot(dilated, 'dilated', metadata)
-    savePlot(combined, 'combined', metadata)
+    savePlot(original, 'original', 'tmp/original.png', metadata)
+    savePlot(eroded, 'eroded', 'tmp/eroded.png', metadata)
+    savePlot(dilated, 'dilated', 'tmp/dilated.png', metadata)
+    savePlot(combined, 'combined', 'tmp/combined.png', metadata)
+
+'''

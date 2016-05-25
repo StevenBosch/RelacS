@@ -1,5 +1,5 @@
 import preprocessing as p
-import sys, glob
+import sys, glob, shutil
 import cv2, h5py, numpy as np
 import os, matplotlib.pyplot as plt
 
@@ -12,34 +12,30 @@ import pycpsp.bgmodel.bgmodel as bgmodel
 
 filelist = glob.glob('../../sound_files/hdf5/*')
 
-if not os.path.exists('../../sound_files/preprocessed'):
-    os.makedirs('../../sound_files/preprocessed')
+if os.path.exists('../../sound_files/preprocessed'):
+    shutil.rmtree('../../sound_files/preprocessed')
+os.makedirs('../../sound_files/preprocessed')
 
 for f in filelist:
     print "file: " + f
     if os.path.isfile(f):
         # Read information from the hdf5
-        filepointer = h5py.File(f, 'r')
         filename = os.path.basename(f)
         signals = files.signalsFromHDF5(f)
-        metadata = files.metadataFromHDF5(f)
+        prepDir = '../../sound_files/preprocessed/' + filename + '/'
+        os.makedirs(prepDir)
 
-        if not os.path.exists('../../sound_files/preprocessed/' + filename):
-            os.makedirs('../../sound_files/preprocessed/' + filename)
+        # Original signal (44 because of the infinities in the first part)
+        original = signals['energy'][:,44:]
 
-        # Original image
-        original = signals['energy'][:, metadata.get('starttime 0'):]
-        refsignal = plot.imgmask(plot.imscale(signals['energy'],[0,60]), [20,80])
+        # preprocess signals
+        eroded = p.erode(original)
+        dilated = p.dilate(original)
+        combined = p.dilate(p.erode(original))
+        p.foregroundBackground(original, prepDir)
 
-        # preprocess images
-        eroded = p.erode(refsignal)
-        dilated = p.dilate(refsignal)
-        combined = p.dilate(p.erode(refsignal))
-        p.foregroundBackground(refsignal, filename, metadata, True)
-
-        # Save the plots
-        p.savePlot(refsignal, 'refsignal', filename, metadata, run = True)
-        p.savePlot(original, 'original', filename, metadata, run = True)
-        p.savePlot(eroded, 'eroded', filename, metadata, run = True)
-        p.savePlot(dilated, 'dilated', filename, metadata, run = True)
-        p.savePlot(combined, 'combined', filename, metadata, run = True)
+        # Save the signals
+        np.save(prepDir + 'original', original)
+        np.save(prepDir + 'eroded', eroded)
+        np.save(prepDir + 'dilated', dilated)
+        np.save(prepDir + 'combined', combined)

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys, os, cv2, glob, csv, shutil
 import numpy as np
-from scipy.cluster.vq import whiten, kmeans2
-from scipy.spatial.distance import cdist, pdist
+import logging
+# from scipy.cluster.vq import whiten, kmeans2
+# from scipy.spatial.distance import cdist, pdist
 from unipath import Path, DIRS_NO_LINKS
-from sklearn import svm
 
 ### Old main function with kmeans also
 '''
@@ -84,33 +84,30 @@ def hog_alternative(img):
     hist = np.hstack(hists)
     return hist
 
-def doHog(imgDir, hogDir, hog = "Xeryus"):
-    if not imdDir.exists():
-        print "You must first run create_labels.py"
+def doHog(imgDir, hogDir, hog = "xeryus"):
+    if not os.path.exists(imgDir):
+        print("You must first create segmented images")
         sys.exit(1)
-       
+
     if os.path.exists(hogDir):
         shutil.rmtree(hogDir)
     os.makedirs(hogDir)
-    os.makedirs(hogDir + 'test/')
-    os.makedirs(hogDir + 'train/')
-    
-    print "Hogging stuff..."
+
+    features = []
+    labels = []
+
     for subdir, dirs, files in os.walk(imgDir):
-        print os.path.basename(os.path.normpath(subdir))
-        train = 0
+        # print os.path.basename(os.path.normpath(subdir))
         for f in files:
-            img = cv2.imread(os.path.join(subdir, f))
-            if hog = "Xeryus":
+            img = np.load(os.path.join(subdir, f))
+            if hog == "xeryus":
                 hist = hog_xeryus(img)
+                features.append(hist[:,0])
             else:
                 hist = hog_alternative(img)
+                features.append(hist)
 
-            if train < 15:
-                histfile = open(hogDir + 'test/' + os.path.basename(os.path.normpath(subdir)) + '.csv', 'a')
-            else:
-                histfile = open(hogDir + 'train/' + os.path.basename(os.path.normpath(subdir)) + '.csv', 'a')
-            np.savetxt(histfile, np.reshape(hist, (1, len(hist))), delimiter=',', header=f)
-            histfile.close()
+            labels.append(os.path.basename(os.path.normpath(subdir)))
 
-            train += 1
+    np.save(hogDir + 'hog', features)
+    np.save(hogDir + 'labels', labels)
