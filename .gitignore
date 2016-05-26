@@ -4,6 +4,8 @@ code/preprocessing/tmp/*
 sound_files/
 sound_files/*
 
+db.sqlite3
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
