@@ -138,4 +138,4 @@ if __name__ == '__main__':
         with open('labels.pickle', 'wb') as f:
             pickle.dump(windows, f)
 
-        print_windows(windows)
+        #print_windows(windows)
