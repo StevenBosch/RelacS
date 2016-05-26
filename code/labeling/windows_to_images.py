@@ -8,7 +8,7 @@ import numpy as np
 
 #wins:          windows that will be used to generate images
 #percentage:    percentage of files used to generate training data vs validation data
-def to_image_data_file_split(wins, percentage, filedir):
+def to_image_data_file_split(wins, percentage, filedir, imageType = 'energy'):
     if percentage > 1 or percentage < 0:
         RuntimeError('Percentage should be between 0 and 1')
     split_index = int(len(wins) * percentage)
@@ -19,13 +19,13 @@ def to_image_data_file_split(wins, percentage, filedir):
     valid_wins = dict(wins.items()[split_index:])
 
     print 'Constructing train data...'
-    train_r, train_l = to_image_data(train_wins, filedir)
+    train_r, train_l = to_image_data(train_wins, filedir, imageType)
     print 'Constructing validation/test data...'
-    valid_r, valid_l = to_image_data(valid_wins, filedir)
+    valid_r, valid_l = to_image_data(valid_wins, filedir, imageType)
     return train_r, train_l, valid_r, valid_l
 
 
-def to_image_data(wins, filedir):
+def to_image_data(wins, filedir, imageType):
     totallen = 0
     for f in wins:
         totallen  = totallen  + len(wins[f])
@@ -51,7 +51,7 @@ def to_image_data(wins, filedir):
 
             scale = filepointer.attrs.get('scale', [0, 60])
 
-            fragment = filepointer['energy'][:, beg:end]
+            fragment = filepointer[imageType][:, beg:end]
             if frags[0,:,:].shape != fragment.shape :
                 skipcount += 1
                 #Skip fragments with unexpected shape ( not frags[0,:,:].shape )
@@ -84,7 +84,7 @@ def to_image_data(wins, filedir):
     return r, l
 
 
-def to_image_data_window_split(wins, percentage, filedir, imageType = 'original'):
+def to_image_data_window_split(wins, percentage, filedir, imageType = 'energy'):
     if percentage > 1 or percentage < 0:
         RuntimeError('Percentage should be between 0 and 1')
 
@@ -121,16 +121,7 @@ def to_image_data_window_split(wins, percentage, filedir, imageType = 'original'
             scale = filepointer.attrs.get('scale', [0, 60])
 
             # Take the fragment of the right image
-            if imageType = 'morphology':
-                fragment = filepointer['morphology'][:, beg:end]
-            elif imageType = 'tau 1.0':
-                fragment = filepointer['tau 1.0'][:, beg:end]
-            elif imageType = 'tau 2.0':
-                fragment = filepointer['tau 2.0'][:, beg:end]
-            elif imageType = 'tau 4.0':
-                fragment = filepointer['tau 4.0'][:, beg:end]
-            else:
-                fragment = filepointer['energy'][:, beg:end]
+            fragment = filepointer[imageType][:, beg:end]
 
             if train_frags[0,:,:].shape != fragment.shape :
                 if counter <= trainlen:
@@ -176,7 +167,7 @@ def to_image_data_window_split(wins, percentage, filedir, imageType = 'original'
 
 
 
-def toImageDataWindowSplit(wins, percentage, filedir):
+def toImageDataWindowSplit(wins, percentage, filedir, imageType = 'energy'):
     if percentage > 1 or percentage < 0:
         RuntimeError('Percentage should be between 0 and 1')
 

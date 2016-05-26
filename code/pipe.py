@@ -16,6 +16,11 @@ def build_data(hdf5Dir, labelDir, imageType) :
     return X_train, Y_train, X_test, Y_test
 
 if __name__ == '__main__':
+    if len(sys.argv) != 2 or sys.arg[1] not in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
+        print "Usage: python pipe.py imageType"
+        print "imagetype should be in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']"
+        sys.exit(1)
+    
     hdf5Dir = '../sound_files/hdf5/'
     labelDir = 'labeling/'
     imageType = 'original'
