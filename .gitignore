@@ -1,6 +1,8 @@
 # Directories
 code/preprocessing/tmp/
+code/preprocessing/tmp/*
 sound_files/
+sound_files/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

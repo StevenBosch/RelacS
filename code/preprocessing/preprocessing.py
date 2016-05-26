@@ -35,7 +35,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     filename = sys.argv[1]
-    filepointer = h5py.File(filename, 'r')
+    filepointer = h5py.File(filename, 'r+')
     signals = files.signalsFromHDF5(filename)
     metadata = files.metadataFromHDF5(filename)
 
