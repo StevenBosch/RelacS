@@ -42,6 +42,14 @@ img.waveform {
 	margin: auto;
 }
 
+.clickable {
+	cursor: pointer;
+}
+
+.sound-desc {
+	display: none;
+}
+
 /* STRESS METERS */
 .meter {
 	height: 1em;
