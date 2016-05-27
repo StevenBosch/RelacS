@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}RelacS - Results{% endblock %}
+
+{% block content %}
+<div class="mui-container">
+	<div class="mui-row">
+		<div class="mui-col-md-12 mui--text-headline">
+			Results for {{ recording.filename }}
+		</div>
+	</div>
+	<div class="mui-row">
+		<div class="mui-col-md-8">
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-title">
+					Sound
+				</div>
+			</div>
+			{% comment %}Waveform{% endcomment %}
+			<div class="mui-row">
+				<div class="mui-col-md-11 mui-col-md-offset-1">
+					<img class="waveform" src="{% static representation %}" />
+				</div>
+			</div>
+			{% comment %}Recognized sounds{% endcomment %}
+			{% for sound in sounds %}
+			<div class="mui-row">
+				<div class="mui-col-md-1 mui--text-right">
+					<b>{{ forloop.counter }}</b>
+				</div>
+				<div class="mui-col-md-11 clickable"
+					data-toggle="sound-{{ forloop.counter }}">
+					<div class="meter meter-large">
+						<span style="margin-left:{{sound.left }}%;
+							width:{{sound.width}}%;
+							background-color:{{sound.color}};"></span>
+					</div>
+				</div>
+				{% comment %}Sound details{% endcomment %}
+				<div class="mui-col-md-11 mui-col-md-offset-1 sound-desc"
+					id="sound-{{ forloop.counter }}">
+					<div class="mui-row">
+						<div class="mui-col-md-6">
+							Stressful
+							<div class="meter stress">
+								<span style="width:{{ sound.stressful }}%;">
+								</span>
+							</div>
+						</div>
+						<div class="mui-col-md-6">
+							Relaxing
+							<div class="meter relaxing">
+								<span style="width:{{ sound.relaxing}}%;">
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br />
+			{% endfor %}
+		</div>
+		<div class="mui-col-md-4">
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-title">
+					Results
+				</div>
+			</div>
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-subhead">
+					Stressful
+					<div class="meter stress">
+						<span style="width:{{ recording.stressful }}%;"></span>
+					</div>
+				</div>
+				<div class="mui-col-md-12 mui--text-subhead">
+					Relaxing<br />
+					<div class="meter relaxing">
+						<span style="width:{{ recording.relaxing }}%;"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
