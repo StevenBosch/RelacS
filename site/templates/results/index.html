@@ -4,6 +4,27 @@
 
 {% block content %}
 <div class="mui-container">
-	There should be stuff here
+<table class="mui-table">
+	<thead>
+		<tr>
+			<th>File</th>
+			<th>Stressful</th>
+			<th>Relaxing</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for recording in recordings %}
+			<tr>
+				<td>
+					<a href="{% url 'result' recording.pk %}">
+						{{ recording.filename }}
+					</a>
+				</td>
+				<td>{{ recording.stressful }}%</td>
+				<td>{{ recording.relaxing }}%</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
 </div>
 {% endblock content %}
