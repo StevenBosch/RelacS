@@ -48,6 +48,10 @@ img.waveform {
 	background-color: #f5f5f5;
 }
 
+.meter-large {
+	height: 2em;
+}
+
 .meter > span {
 	display: block;
 	height: 100%;

@@ -17,4 +17,17 @@ class ResultsView(DetailView):
         context = super(ResultsView, self).get_context_data(**kwargs)
         print self.object
         context['representation'] = self.object.filename + '.png'
+        sounds = []
+        for s in self.object.sound_set.all():
+            left = s.start / float(self.object.length) * 100
+            width = s.end / float(self.object.length) * 100 - left
+            sound = {'left': left,
+                'width': width,
+                'stressful': s.stressful,
+                'relaxing': s.relaxing,
+                'categories': s.category_set,
+                'str': str(s),
+            }
+            sounds.append(sound)
+        context['sounds'] = sounds
         return context

@@ -12,9 +12,34 @@
 	</div>
 	<div class="mui-row">
 		<div class="mui-col-md-8">
-			<img class="waveform" src="{% static representation %}" />
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-title">
+					Sound
+				</div>
+			</div>
+			<div class="mui-row">
+				<div class="mui-col-md-12">
+					<img class="waveform" src="{% static representation %}" />
+				</div>
+			</div>
+			{% for sound in sounds %}
+			<div class="mui-row">
+				<div class="mui-col-md-12">
+					<div class="meter meter-large">
+						<span style="margin-left:{{sound.left }}%;
+							width:{{sound.width}}%;"></span>
+					</div>
+				</div>
+			</div>
+			<br />
+			{% endfor %}
 		</div>
 		<div class="mui-col-md-4">
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-title">
+					Results
+				</div>
+			</div>
 			<div class="mui-row">
 				<div class="mui-col-md-12 mui--text-subhead">
 					Stressful
