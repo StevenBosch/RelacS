@@ -6,13 +6,29 @@
 {% block content %}
 <div class="mui-container">
 	<div class="mui-row">
-		<div class="mui-col-md-12 mui--text-title">
+		<div class="mui-col-md-12 mui--text-headline">
 			Results for {{ recording.filename }}
 		</div>
 	</div>
 	<div class="mui-row">
-		<div class="mui-col-md-9">
+		<div class="mui-col-md-8">
 			<img class="waveform" src="{% static representation %}" />
+		</div>
+		<div class="mui-col-md-4">
+			<div class="mui-row">
+				<div class="mui-col-md-12 mui--text-subhead">
+					Stressful
+					<div class="meter stress">
+						<span style="width:{{ recording.stressful }}%;"></span>
+					</div>
+				</div>
+				<div class="mui-col-md-12 mui--text-subhead">
+					Relaxing<br />
+					<div class="meter relaxing">
+						<span style="width:{{ recording.relaxing }}%;"></span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
