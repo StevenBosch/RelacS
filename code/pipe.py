@@ -1,7 +1,7 @@
 import sys, pickle
 import numpy as np
 import preprocessing.runPrep as prep
-import CNN.cnn as cnn
+# import CNN.cnn as cnn
 import labeling.windows_to_images
 
 def build_data(hdf5Dir, labelDir, imageType) :
@@ -16,25 +16,25 @@ def build_data(hdf5Dir, labelDir, imageType) :
     return X_train, Y_train, X_test, Y_test
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2 or sys.arg[1] not in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
+    if len(sys.argv) != 2 or sys.argv[1] not in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
         print "Usage: python pipe.py imageType"
         print "imagetype should be in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']"
         sys.exit(1)
-    
+
     hdf5Dir = '../sound_files/hdf5/'
     labelDir = 'labeling/'
     imageType = 'original'
 
     # Preprocess the images
-    prep(hdf5Dir, labelDir)
+    prep.runPrep(hdf5Dir)
 
     # Build the data for the cnn
     # The third argument is the type of images you want to use for the cnn
     # Options are: 'original', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0'
-    X_train, Y_train, X_test, Y_test = build_data(hdf5Dir, labelDir, imageType)
+    # X_train, Y_train, X_test, Y_test = build_data(hdf5Dir, labelDir, imageType)
 
     # Build and fit the cnn
-    network = cnn.build(X_train, Y_train, X_test, Y_test)
+    # network = cnn.build(X_train, Y_train, X_test, Y_test)
 
     # Test the network
-    accuracy = cnn.test(network, X_test, Y_test)
+    # accuracy = cnn.test(network, X_test, Y_test)
