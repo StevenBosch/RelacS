@@ -10,8 +10,7 @@ def classify(soundFile, winsize, winstride): # And the needed trained neural net
     filepointer = h5py.File(filename, 'r')
     signals = files.signalsFromHDF5(filename)
 
-    # Check where the zero/infinity columns end
-    # Remember the number of columns to keep the right sync with the sound file
+    # Check where the zero/infinity columns to only classify the real parts
     zeroColLeft = 0
     zeroColRight = -1
     while max(np.tranpose(signals['energy'])[0]) <= 0:
