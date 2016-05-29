@@ -1,6 +1,6 @@
 import sys, pickle
 import numpy as np
-import preprocessing.runPrep as prep
+from preprocessing.runPrep import prepDir
 # import CNN.cnn as cnn
 import labeling.windows_to_images
 
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     imageType = 'original'
 
     # Preprocess the images
-    prep.runPrep(hdf5Dir)
+    prepDir(hdf5Dir)
 
     # Build the data for the cnn
     # The third argument is the type of images you want to use for the cnn
