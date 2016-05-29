@@ -24,10 +24,15 @@ def classify(soundFile, winsize, winstride): # And the needed trained neural net
     while index + winsize < len(signals['energy']) + zeroColRight + 1:
         for key in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
             window = signals[key][index:index + winsize]
-            # classify
             # cnn.predict(trained neuralNet, window)
-            # Save result of prediction in text file
+            # Save result of prediction
+        # Do voting on the prediction of the different preprocessed images to
+        # classify the window
+
+        # Next window
         index += winstride
+
+    # Now classify the entire image based on the classification of the windows
 
 
 if __name__ == '__main__':
