@@ -1,7 +1,7 @@
 import h5py
 import os
 import random
-
+import scipy
 
 
 import numpy as np
@@ -38,6 +38,7 @@ def to_image_data(wins, filedir, imageType):
 
     counter = 0
     skipcount = 0
+    rescaled = False
 
     for f in wins:
         filename = os.path.join(filedir, f)
@@ -52,11 +53,22 @@ def to_image_data(wins, filedir, imageType):
             scale = filepointer.attrs.get('scale', [0, 60])
 
             fragment = filepointer[imageType][:, beg:end]
-            if frags[0,:,:].shape != fragment.shape :
+
+            if not rescaled and frags[0,:,:].shape[0] == fragment.shape[0] and frags[0,:,:].shape[1] == fragment.shape[1]*2 :
+                rescaled = True
+                temp_frags = frags
+                frags = np.empty([totallen, 109, winlen/2])
+                for it in range(counter) :
+                    frags[it,:,:] =  scipy.misc.imresize(temp_frags[it,:,:], frags[it,:,:].shape)
+                      
+            if frags[0,:,:].shape[0] == fragment.shape[0] and frags[0,:,:].shape[1]*2 == fragment.shape[1] :
+                fragment = scipy.misc.imresize(fragment, (fragment.shape[0], frags[0,:,:].shape[1]))
+                
+            if frags[0,:,:].shape != fragment.shape or not np.all(np.isfinite(fragment)):
                 skipcount += 1
+
                 #Skip fragments with unexpected shape ( not frags[0,:,:].shape )
                 continue;
-
 
             # create array of corresponding output flags
             flagment = np.array([1.0 if window['stressful'] else 0.0,

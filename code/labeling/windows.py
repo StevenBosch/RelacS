@@ -67,7 +67,7 @@ if __name__ == '__main__':
     for f in files:
         files[f]['ranges'].sort(key=lambda k:[START_TIME])
 
-    filedir = '../../hdf5'
+    filedir = '../../sound_files/hdf5/'
 
     print("Processing files...")
     windows = {}
