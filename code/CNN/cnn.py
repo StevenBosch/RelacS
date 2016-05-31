@@ -44,16 +44,16 @@ def build_data(train_split = 0.9) :
 
     print 'Saving data in:'
     print 'X_train...'
-    with open('xtrain.np', 'wb') as f:
+    with open('xtrain2.np', 'wb') as f:
         np.save(f, X_train)
     print 'Y_train...'
-    with open('ytrain.np', 'wb') as f:
+    with open('ytrain2.np', 'wb') as f:
         np.save(f, Y_train)
     print 'X_test...'
-    with open('xtest.np', 'wb') as f:
+    with open('xtest2.np', 'wb') as f:
         np.save(f, X_test)
     print 'Y_test...'
-    with open('ytest.np', 'wb') as f:
+    with open('ytest2.np', 'wb') as f:
         np.save(f, Y_test)
     print 'Data saved.'
     return X_train, Y_train, X_test, Y_test
@@ -142,8 +142,8 @@ def same_number_of_idxs(x, y):
     return x,y
 
 if __name__ == '__main__':
-    # X_train, Y_train, X_test, Y_test = build_data()
-    X_train, Y_train, X_test, Y_test = load_data()
+    X_train, Y_train, X_test, Y_test = build_data()
+    # X_train, Y_train, X_test, Y_test = load_data()
     Y_train = Y_train[:, 0]
     Y_test = Y_test[:, 0]
 

@@ -34,7 +34,7 @@ def to_image_data(wins, filedir, imageType):
     winlen = sample['end'] - sample['start']
 
     frags = np.empty([totallen, 109, winlen])
-    flags = np.empty([totallen, 3])
+    flags = np.empty([totallen, 11])
 
     counter = 0
     skipcount = 0
@@ -73,8 +73,15 @@ def to_image_data(wins, filedir, imageType):
             # create array of corresponding output flags
             flagment = np.array([1.0 if window['stressful'] else 0.0,
                 1.0 if window['relaxing'] else 0.0,
-                1.0 if window['sudden'] else 0.0])
-
+                1.0 if window['sudden'] else 0.0,
+                1.0 if ('Human' in window['category']) else 0.0,
+                1.0 if ('Traffic' in window['category']) else 0.0,
+                1.0 if ('Noise' in window['category']) else 0.0,
+                1.0 if ('Mechanical' in window['category']) else 0.0,
+                1.0 if ('Silence' in window['category']) else 0.0,
+                1.0 if ('Nature' in window['category']) else 0.0,
+                1.0 if ('Music' in window['category']) else 0.0,
+                1.0 if ('Machine' in window['category']) else 0.0])
 
             # add to train or validation set
             frags[counter, :, :] = fragment
@@ -95,7 +102,7 @@ def to_image_data(wins, filedir, imageType):
     l = flags[:totallen-skipcount, :]
     return r, l
 
-
+#Outdated. Can be removed.
 def to_image_data_window_split(wins, percentage, filedir, imageType = 'energy'):
     if percentage > 1 or percentage < 0:
         RuntimeError('Percentage should be between 0 and 1')
