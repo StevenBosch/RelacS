@@ -4,7 +4,7 @@ import os
 label_dir = os.path.join(os.getcwd(), '../labeling')
 sys.path.insert(0, label_dir)
 
-import windows_to_images
+# import windows_to_images
 
 import matplotlib.pyplot as plt
 
@@ -141,49 +141,7 @@ def same_number_of_idxs(x, y):
 
     return x,y
 
-if __name__ == '__main__':
-    # X_train, Y_train, X_test, Y_test = build_data()
-    X_train, Y_train, X_test, Y_test = load_data()
-    Y_train = Y_train[:, 0]
-    Y_test = Y_test[:, 0]
-
-    X_train -= 86
-    X_train /= 255
-    X_test  -= 86
-    X_test  /= 255
-    
-    plt.hist(X_train.flatten(), bins = 200)
-    plt.show()
-
-    plt.hist(X_test.flatten(), bins = 200)
-    plt.show()
-
-    print np.max(X_train)
-    print np.max(X_test)
-    print np.mean(X_train)
-    print np.mean(X_test)
-
-    X_train, Y_train = same_number_of_idxs(X_train, Y_train)
-    X_test,  Y_test  = same_number_of_idxs(X_test,  Y_test)
-
-    print sum(Y_train)/len(Y_train)
-    print sum(Y_test)/len(Y_test)
-
-    model = build_empty_model(X_train.shape, Y_train.shape)
-
-    model.load_weights('weights_3') 
-    
-    model.fit(X_train, Y_train, batch_size = 16, nb_epoch = 10, validation_data= (X_test, Y_test))
-
-
-    # loss_and_metrics = model.evaluate(X_test, Y_test, batch_size=16) 
-    
-    # print loss_and_metrics
-
-    print 'predicting output'
-    output = model.predict(X_test)
-
-    
+def error_rate_for_thresholds(output, Y_test) :
     thrs = [0.2, 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
     for thr in thrs:
@@ -192,27 +150,99 @@ if __name__ == '__main__':
         fp = 0
         fn = 0
 
-        for it in range(len(output)): 
+        for it in range(len(output)):
             if (output[it] >= thr) == Y_test[it]:
                 if output[it] >= thr:
                     cp += 1
-                else :
+                else:
                     cn += 1
-            else :
+            else:
                 if output[it] >= thr:
                     fp += 1
-                else :
+                else:
                     fn += 1
         print 'thr: ' + str(thr),
-        print 'acc: ' + str(round((cp+cn) / float(len(output)),2)),
-        print '  %fn: ' + str(round((fn) / float(len(output)),2)),
-        print '  %fp: ' + str(round((fp) / float(len(output)),2)),
-        print '  %cn: ' + str(round((cn) / float(len(output)),2)),
-        print '  %cp: ' + str(round((cp) / float(len(output)),2))
+        print 'acc: ' + str(round((cp + cn) / float(len(output)), 2)),
+        print '  %fn: ' + str(round((fn) / float(len(output)), 2)),
+        print '  %fp: ' + str(round((fp) / float(len(output)), 2)),
+        print '  %cn: ' + str(round((cn) / float(len(output)), 2)),
+        print '  %cp: ' + str(round((cp) / float(len(output)), 2))
+
+def print_accuracy(out, test, thr) :
+    acc = 0
+    pos = 0
+    for it in range(len(out)) :
+        if (out[it] >= thr) == test[it]:
+            acc += 1
+        if test[it] == 1:
+            pos += 1
+
+    acc = acc/float(len(out))
+    pos = pos/float(len(out))
+    print "%.2f" % round(acc,2),
+    print "%.2f" % round(pos,2),
+
+def print_error_rate_per_category(output, Y_test, thr = 0.5) :
+    print output.shape
+    print Y_test.shape
+    if output.shape[1] == 1:
+        print_accuracy(output, Y_test, thr)
+        print
+
+    else :
+        print '   acc  tot'
+        for it in range(output.shape[1]):
+            print str(it) + ':',
+            out_part = output[:,it]
+            test_part = Y_test[:,it]
+            print_accuracy(out_part, test_part, thr)
+            print
+
+if __name__ == '__main__':
+    # X_train, Y_train, X_test, Y_test = build_data()
+    X_train, Y_train, X_test, Y_test = load_data()
+    #Y_train = Y_train[:, 0]
+    #Y_test = Y_test[:, 0]
+
+    X_train -= 86
+    X_train /= 255
+    X_test  -= 86
+    X_test  /= 255
+
+    print np.max(X_train)
+    print np.max(X_test)
+    print np.mean(X_train)
+    print np.mean(X_test)
+
+    #X_train, Y_train = same_number_of_idxs(X_train, Y_train)
+    #X_test,  Y_test  = same_number_of_idxs(X_test,  Y_test)
+
+    print sum(Y_train)/len(Y_train)
+    print sum(Y_test)/len(Y_test)
+
+    print Y_train.shape
+    model = build_empty_model(X_train.shape, Y_train.shape)
+
+    #model.load_weights('weights_robo')
+    
+    model.fit(X_train, Y_train, batch_size = 64, nb_epoch = 10, validation_data= (X_test, Y_test))
+
+    # loss_and_metrics = model.evaluate(X_test, Y_test, batch_size=16) 
+    
+    # print loss_and_metrics
+
+    print 'predicting output'
+    output = model.predict(X_test)
+
+    print_error_rate_per_category(output, Y_test)
 
     filedir = os.path.join(os.getcwd())
-    filename = os.path.join(filedir, 'weights_4')
-    model.save_weights(filename)
+    filename = os.path.join(filedir, 'weights_robo2')
+    #model.save_weights(filename)
 
 # Die vorige was met / 255 en -mean
+# met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 16, nb_epoch = 50: rond de 75%
+# met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 64, nb_epoch = 50: rond de 76%
+# met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 64, nb_epoch =100: wss moet je stoppen rond de epoch 75. Hij zit rond de 77%
+
 
