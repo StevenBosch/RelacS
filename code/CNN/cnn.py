@@ -61,16 +61,16 @@ def build_data(train_split = 0.9) :
 def load_data() :
     print 'Loading data from:'
     print 'X_train...'
-    with open('xtrain.np', 'rb') as f:
+    with open('xtrain2.np', 'rb') as f:
         X_train= np.load(f)
     print 'Y_train...'
-    with open('ytrain.np', 'rb') as f:
+    with open('ytrain2.np', 'rb') as f:
         Y_train= np.load(f)
     print 'X_test...'
-    with open('xtest.np', 'rb') as f:
+    with open('xtest2.np', 'rb') as f:
         X_test= np.load(f)
     print 'Y_test...'
-    with open('ytest.np', 'rb') as f:
+    with open('ytest2.np', 'rb') as f:
         Y_test= np.load(f)
     print 'Data loaded.'
     return X_train, Y_train, X_test, Y_test
@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     #model.load_weights('weights_robo')
     
-    model.fit(X_train, Y_train, batch_size = 64, nb_epoch = 10, validation_data= (X_test, Y_test))
+    model.fit(X_train, Y_train, batch_size = 32, nb_epoch = 32, validation_data= (X_test, Y_test))
 
     # loss_and_metrics = model.evaluate(X_test, Y_test, batch_size=16) 
     
@@ -238,7 +238,7 @@ if __name__ == '__main__':
     print_error_rate_per_category(output, Y_test)
 
     filedir = os.path.join(os.getcwd())
-    filename = os.path.join(filedir, 'weights_robo2')
+    filename = os.path.join(filedir, 'weights_cats')
     #model.save_weights(filename)
 
 # Die vorige was met / 255 en -mean

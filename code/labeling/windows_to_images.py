@@ -74,6 +74,7 @@ def to_image_data(wins, filedir, imageType):
             flagment = np.array([1.0 if window['stressful'] else 0.0,
                 1.0 if window['relaxing'] else 0.0,
                 1.0 if window['sudden'] else 0.0,
+                1.0 if ('Other' in window['category']) else 0.0,
                 1.0 if ('Human' in window['category']) else 0.0,
                 1.0 if ('Traffic' in window['category']) else 0.0,
                 1.0 if ('Noise' in window['category']) else 0.0,
