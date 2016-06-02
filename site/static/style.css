@@ -22,15 +22,6 @@ header a {
 
 #content-wrapper {
 	min-height: 100%;
-	margin-bottom: -100px;
-	padding-bottom: 100px;
-}
-
-footer {
-	height: 100px;
-	background-color: #eee;
-	border-top: 1px solid #e0e0e0;
-	padding-top: 35px;
 }
 
 img.waveform {
@@ -48,6 +39,10 @@ img.waveform {
 
 .sound-desc {
 	display: none;
+}
+
+.spacer {
+	height: 1ex;
 }
 
 /* STRESS METERS */
