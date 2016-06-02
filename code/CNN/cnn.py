@@ -168,7 +168,7 @@ def error_rate_for_thresholds(output, Y_test) :
         print '  %cn: ' + str(round((cn) / float(len(output)), 2)),
         print '  %cp: ' + str(round((cp) / float(len(output)), 2))
 
-def print_accuracy(out, test, thr) :
+def print_accuracy(out, test, thr = 0.5) :
     acc = 0
     pos = 0
     for it in range(len(out)) :
@@ -178,67 +178,60 @@ def print_accuracy(out, test, thr) :
             pos += 1
 
     acc = acc/float(len(out))
-    pos = pos/float(len(out))
-    print "%.2f" % round(acc,2),
-    print "%.2f" % round(pos,2),
+    pos = 1 - pos/float(len(out))
+    print "%.4f" % round(acc,4),
+    print "%.4f" % round(pos,4),
 
 def print_error_rate_per_category(output, Y_test, thr = 0.5) :
-    print output.shape
-    print Y_test.shape
     if output.shape[1] == 1:
         print_accuracy(output, Y_test, thr)
         print
 
     else :
-        print '   acc  tot'
+        print '    acc    tot'
         for it in range(output.shape[1]):
-            print str(it) + ':',
+            print str(it) + ':' + (' ' if it < 10 else ''),
             out_part = output[:,it]
             test_part = Y_test[:,it]
             print_accuracy(out_part, test_part, thr)
             print
 
+def build(X_train, X_test, weights_filename = 'none') :
+    model = build_empty_model(X_train.shape, Y_train.shape)
+
+    if weights_filename == 'none' :
+        model.fit(X_train, Y_train, 
+        batch_size = 32, nb_epoch = 32, 
+        validation_data= (X_test, Y_test))
+    else :
+        model.load_weights(weights_filename)
+
+    return model
+
+    
+
+
+
+
 if __name__ == '__main__':
-
-    # X_train, Y_train, X_test, Y_test = build_data()
-    X_train, Y_train, X_test, Y_test = load_data()
-    #Y_train = Y_train[:, 0]
-    #Y_test = Y_test[:, 0]
-
     X_train -= 86
     X_train /= 255
     X_test  -= 86
     X_test  /= 255
-
-    print np.max(X_train)
-    print np.max(X_test)
-    print np.mean(X_train)
-    print np.mean(X_test)
-
-    #X_train, Y_train = same_number_of_idxs(X_train, Y_train)
-    #X_test,  Y_test  = same_number_of_idxs(X_test,  Y_test)
-
-    print sum(Y_train)/len(Y_train)
-    print sum(Y_test)/len(Y_test)
-
-    print Y_train.shape
-    model = build_empty_model(X_train.shape, Y_train.shape)
-
-    #model.load_weights('weights_robo')
     
-    model.fit(X_train, Y_train, batch_size = 32, nb_epoch = 32, validation_data= (X_test, Y_test))
-
-    # loss_and_metrics = model.evaluate(X_test, Y_test, batch_size=16) 
+    # X_train, Y_train, X_test, Y_test = build_data()
+    X_train, Y_train, X_test, Y_test = load_data()
     
-    # print loss_and_metrics
-
-    print 'predicting output'
+    #Als de laatste param iets anders is dan 'none' gebruikt hij dat weightsbestand
+    model = build(X_train, X_test, weights_filename = 'none')
+    
     output = model.predict(X_test)
-
     print_error_rate_per_category(output, Y_test)
-
+    
     filedir = os.path.join(os.getcwd())
     filename = os.path.join(filedir, 'weights_cats')
+    
+    # Hiermee kun je weights opslaan 
     #model.save_weights(filename)
 
 # Die vorige was met / 255 en -mean
@@ -247,3 +240,9 @@ if __name__ == '__main__':
 # met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 64, nb_epoch =100: wss moet je stoppen rond de epoch 75. Hij zit rond de 77%
 
 
+# Even makkelijk cnns bruikbaar maken (aanpassen in pipe.py)
+# Netwerken trainen deligeren
+
+# Bayes op prepDir testen.
+# Harmonicity
+# Voorspelbaarheid geluid
