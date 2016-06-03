@@ -23,7 +23,7 @@ from keras.optimizers import SGD
 
 import math
 
-def build_data(train_split = 0.9) :
+def build_data(train_split = 0.9, imageType = 'energy') :
 
     import h5py
     
@@ -35,7 +35,7 @@ def build_data(train_split = 0.9) :
     codedir, dummy= os.path.split(os.getcwd())
     relacsdir, dummy = os.path.split(codedir)
     hdf5_path = os.path.join(relacsdir, 'sound_files/hdf5')
-    X_train, Y_train, X_test, Y_test = windows_to_images.to_image_data_file_split(windows, train_split, hdf5_path)
+    X_train, Y_train, X_test, Y_test = windows_to_images.to_image_data_file_split(windows, train_split, hdf5_path, imageType)
 
     xshape = (X_train.shape[0], 1, X_train.shape[1], X_train.shape[2])
     yshape = (X_test.shape[0], 1, X_test.shape[1], X_test.shape[2])
