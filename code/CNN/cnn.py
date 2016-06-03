@@ -60,7 +60,7 @@ def build_data(imageType = 'energy', key = '_', train_split = 0.9) :
     return X_train, Y_train, X_test, Y_test
 
 def build_normalized_data(imageType = 'energy', key = '_', train_split = 0.9) :
-    X_train, Y_train, X_test, Y_test = build_data(imageType, key, train_split)
+    X_train, Y_train, X_test, Y_test = build_data(imageType, 'norm_' + key, train_split)
     X_train -= 86
     X_train /= 255
     X_test  -= 86
@@ -68,7 +68,7 @@ def build_normalized_data(imageType = 'energy', key = '_', train_split = 0.9) :
     return X_train, Y_train, X_test, Y_test
 
 def load_normalized_data(key = '_') :
-    X_train, Y_train, X_test, Y_test = load_data(key)
+    X_train, Y_train, X_test, Y_test = load_data('norm_' + key)
     X_train -= 86
     X_train /= 255
     X_test  -= 86
