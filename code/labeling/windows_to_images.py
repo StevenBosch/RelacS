@@ -34,7 +34,7 @@ def to_image_data(wins, filedir, imageType):
     winlen = sample['end'] - sample['start']
 
     frags = np.empty([totallen, 109, winlen])
-    flags = np.empty([totallen, 11])
+    flags = np.empty([totallen, 12])
 
     counter = 0
     skipcount = 0

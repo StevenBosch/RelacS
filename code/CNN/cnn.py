@@ -4,7 +4,7 @@ import os
 label_dir = os.path.join(os.getcwd(), '../labeling')
 sys.path.insert(0, label_dir)
 
-# import windows_to_images
+import windows_to_images
 
 import matplotlib.pyplot as plt
 
@@ -23,7 +23,7 @@ from keras.optimizers import SGD
 
 import math
 
-def build_data(train_split = 0.9, imageType = 'energy') :
+def build_data(imageType = 'energy', key = '_', train_split = 0.9) :
 
     import h5py
     
@@ -32,7 +32,7 @@ def build_data(train_split = 0.9, imageType = 'energy') :
 
     #cut out the actual cochleogram fragments 
     # and generate a list of corresponding flags (stressfull, relaxing, sudden)
-    codedir, dummy= os.path.split(os.getcwd())
+    codedir, dummy = os.path.split(os.getcwd())
     relacsdir, dummy = os.path.split(codedir)
     hdf5_path = os.path.join(relacsdir, 'sound_files/hdf5')
     X_train, Y_train, X_test, Y_test = windows_to_images.to_image_data_file_split(windows, train_split, hdf5_path, imageType)
@@ -45,34 +45,50 @@ def build_data(train_split = 0.9, imageType = 'energy') :
     data_dir = os.path.join(os.getcwd(), '../data')
     print 'Saving data of:'
     print 'X_train...'
-    with open(os.path.join(data_dir, 'xtrain2.np'), 'wb') as f:
+    with open(os.path.join(data_dir, 'xtrain' + key + '.np'), 'wb') as f:
         np.save(f, X_train)
     print 'Y_train...'
-    with open(os.path.join(data_dir, 'ytrain2.np'), 'wb') as f:
+    with open(os.path.join(data_dir, 'ytrain' + key + '.np'), 'wb') as f:
         np.save(f, Y_train)
     print 'X_test...'
-    with open(os.path.join(data_dir, 'xtest2.np'), 'wb') as f:
+    with open(os.path.join(data_dir, 'xtest'  + key + '.np'), 'wb') as f:
         np.save(f, X_test)
     print 'Y_test...'
-    with open(os.path.join(data_dir, 'ytest2.np'), 'wb') as f:
+    with open(os.path.join(data_dir, 'ytest'  + key + '.np'), 'wb') as f:
         np.save(f, Y_test)
     print 'Data saved.'
     return X_train, Y_train, X_test, Y_test
 
-def load_data() :
+def build_normalized_data(imageType = 'energy', key = '_', train_split = 0.9) :
+    X_train, Y_train, X_test, Y_test = build_data(imageType, key, train_split)
+    X_train -= 86
+    X_train /= 255
+    X_test  -= 86
+    X_test  /= 255
+    return X_train, Y_train, X_test, Y_test
+
+def load_normalized_data(key = '_') :
+    X_train, Y_train, X_test, Y_test = load_data(key)
+    X_train -= 86
+    X_train /= 255
+    X_test  -= 86
+    X_test  /= 255
+    return X_train, Y_train, X_test, Y_test
+
+def load_data(key = '_') :
     data_dir = os.path.join(os.getcwd(), '../data')
     print 'Loading data for:'
     print 'X_train...'
-    with open(os.path.join(data_dir, 'xtrain2.np'), 'rb') as f:
+    with open(os.path.join(data_dir, 'xtrain' + key + '.np'), 'rb') as f:
         X_train= np.load(f)
     print 'Y_train...'
-    with open(os.path.join(data_dir, 'ytrain2.np'), 'rb') as f:
+    with open(os.path.join(data_dir, 'ytrain' + key + '.np'), 'rb') as f:
         Y_train= np.load(f)
     print 'X_test...'
-    with open(os.path.join(data_dir, 'xtest2.np'), 'rb') as f:
+    with open(os.path.join(data_dir, 'xtest'  + key + '.np'), 'rb') as f:
         X_test= np.load(f)
     print 'Y_test...'
-    with open(os.path.join(data_dir, 'ytest2.np'), 'rb') as f:
+    with open(os.path.join(data_dir, 'ytest'  + key + '.np'), 'rb') as f:
         Y_test= np.load(f)
     print 'Data loaded.'
     return X_train, Y_train, X_test, Y_test
@@ -80,38 +96,18 @@ def load_data() :
 
 def build_empty_model(X_shape, Y_shape) :
     model = Sequential()
-    # input: 100x100 images with 3 channels -> (3, 100, 100) tensors.
-    # this applies 32 convolution filters of size 3x3 each.
 
-    model.add(Convolution2D(32, 3, 3, border_mode ='valid', input_shape= X_shape[1:]))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(32, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.25))
+    model.add(Convolution2D(32, 3, 3, activation='relu', input_shape= X_shape[1:]))
+    model.add(Convolution2D(32, 3, 3, activation='relu'))       
+    model.add(MaxPooling2D((2,2)))
 
-    model.add(Convolution2D(64, 3, 3, border_mode='valid'))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.25))
+    model.add(Convolution2D(64, 3, 3, activation='relu'))      
+    model.add(Convolution2D(64, 3, 3, activation='relu'))      
+    model.add(MaxPooling2D((2,2)))
 
-    # model.add(Convolution2D(64, 3, 3, border_mode='valid'))
-    # model.add(Activation('relu'))
-    # model.add(Convolution2D(64, 3, 3))
-    # model.add(Activation('relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.25))
-
-    model.add(Flatten())
-    # Note: Keras does automatic shape inference.
-    model.add(Dense(128))
-    model.add(Activation('relu'))
-    model.add(Dropout(0.5))
-    model.add(Dense(64))
-    model.add(Activation('relu'))
-    model.add(Dropout(0.5))
+    model.add(Flatten())                                        
+    model.add(Dense(128, activation='relu'))                    
+    model.add(Dropout(0.5))                                     
 
     if len(Y_shape) == 1:
         Y_shape = np.array([Y_shape, 1])
@@ -198,27 +194,39 @@ def print_error_rate_per_category(output, Y_test, thr = 0.5) :
             print_accuracy(out_part, test_part, thr)
             print
 
-def build(X_train, X_test, weights_filename = 'none') :
+def build(X_train, Y_train, X_test = None, Y_test = None, weights_filename = None, epochs = 30) :
     model = build_empty_model(X_train.shape, Y_train.shape)
 
-    if weights_filename == 'none' :
+    if weights_filename == None :
+        if X_test == None or Y_test == None:
+            print 'Hij gaat crashen: Geen validatieset als input van build()'
+
         model.fit(X_train, Y_train, 
-        batch_size = 32, nb_epoch = 32, 
-        validation_data= (X_test, Y_test))
+            batch_size = 32, nb_epoch = epochs, 
+            validation_data= (X_test, Y_test))
     else :
         model.load_weights(weights_filename)
 
     return model
 
+def save_weights(model, weights_filename = 'weights') :
+    filedir = os.path.join(os.getcwd())
+    filename = os.path.join(filedir, 'weights_filename')
+    model.save_weights(weights_filename)
 
 if __name__ == '__main__':
+    
+    # Je kunt bijv build_data(imageType = 'energy', key = 'en') en load_data(key = 'en') 
+    # doen om bij devolgende keer niet je data opnieuw te hoeven bouwen.
+    # Als het goed is werkt dit ook voor andere imageTypes dan energy. Nog niet getest.   
+
+    X_train, Y_train, X_test, Y_test = build_data()
+    X_train, Y_train, X_test, Y_test = load_data()
+    
     X_train -= 86
     X_train /= 255
     X_test  -= 86
     X_test  /= 255
-
-    # X_train, Y_train, X_test, Y_test = build_data()
-    X_train, Y_train, X_test, Y_test = load_data()
 
     #Als de laatste param iets anders is dan 'none' gebruikt hij dat weightsbestand
     model = build(X_train, X_test, weights_filename = 'none')
@@ -230,7 +238,7 @@ if __name__ == '__main__':
     filename = os.path.join(filedir, 'weights_cats')
 
     # Hiermee kun je weights opslaan 
-    #model.save_weights(filename)
+    #
 
 # Die vorige was met / 255 en -mean
 # met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 16, nb_epoch = 50: rond de 75%
