@@ -42,35 +42,37 @@ def build_data(train_split = 0.9) :
     X_train = np.reshape(X_train, xshape)
     X_test = np.reshape(X_test, yshape)
 
-    print 'Saving data in:'
+    data_dir = os.path.join(os.getcwd(), '../data')
+    print 'Saving data of:'
     print 'X_train...'
-    with open('xtrain2.np', 'wb') as f:
+    with open(os.path.join(data_dir, 'xtrain2.np'), 'wb') as f:
         np.save(f, X_train)
     print 'Y_train...'
-    with open('ytrain2.np', 'wb') as f:
+    with open(os.path.join(data_dir, 'ytrain2.np'), 'wb') as f:
         np.save(f, Y_train)
     print 'X_test...'
-    with open('xtest2.np', 'wb') as f:
+    with open(os.path.join(data_dir, 'xtest2.np'), 'wb') as f:
         np.save(f, X_test)
     print 'Y_test...'
-    with open('ytest2.np', 'wb') as f:
+    with open(os.path.join(data_dir, 'ytest2.np'), 'wb') as f:
         np.save(f, Y_test)
     print 'Data saved.'
     return X_train, Y_train, X_test, Y_test
 
 def load_data() :
-    print 'Loading data from:'
+    data_dir = os.path.join(os.getcwd(), '../data')
+    print 'Loading data for:'
     print 'X_train...'
-    with open('xtrain2.np', 'rb') as f:
+    with open(os.path.join(data_dir, 'xtrain2.np'), 'rb') as f:
         X_train= np.load(f)
     print 'Y_train...'
-    with open('ytrain2.np', 'rb') as f:
+    with open(os.path.join(data_dir, 'ytrain2.np'), 'rb') as f:
         Y_train= np.load(f)
     print 'X_test...'
-    with open('xtest2.np', 'rb') as f:
+    with open(os.path.join(data_dir, 'xtest2.np'), 'rb') as f:
         X_test= np.load(f)
     print 'Y_test...'
-    with open('ytest2.np', 'rb') as f:
+    with open(os.path.join(data_dir, 'ytest2.np'), 'rb') as f:
         Y_test= np.load(f)
     print 'Data loaded.'
     return X_train, Y_train, X_test, Y_test
@@ -208,29 +210,25 @@ def build(X_train, X_test, weights_filename = 'none') :
 
     return model
 
-    
-
-
-
 
 if __name__ == '__main__':
     X_train -= 86
     X_train /= 255
     X_test  -= 86
     X_test  /= 255
-    
+
     # X_train, Y_train, X_test, Y_test = build_data()
     X_train, Y_train, X_test, Y_test = load_data()
-    
+
     #Als de laatste param iets anders is dan 'none' gebruikt hij dat weightsbestand
     model = build(X_train, X_test, weights_filename = 'none')
     
     output = model.predict(X_test)
     print_error_rate_per_category(output, Y_test)
-    
+
     filedir = os.path.join(os.getcwd())
     filename = os.path.join(filedir, 'weights_cats')
-    
+
     # Hiermee kun je weights opslaan 
     #model.save_weights(filename)
 
@@ -240,7 +238,6 @@ if __name__ == '__main__':
 # met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 64, nb_epoch =100: wss moet je stoppen rond de epoch 75. Hij zit rond de 77%
 
 
-# Even makkelijk cnns bruikbaar maken (aanpassen in pipe.py)
 # Netwerken trainen deligeren
 
 # Bayes op prepDir testen.
