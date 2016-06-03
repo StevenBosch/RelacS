@@ -21,8 +21,8 @@ if __name__ == '__main__':
 ### 50-50 split ###
     # Dit zorgt ervoor dat je voor een categorie evenveel data hebt voor positief als voor negatief (e.g. stress vs niet stress)
     # Werkt alleen als Y maar 1 categorie bevat.
-    ## Y_train = cnn.same_number_of_idxs(X_train, Y_train)
-    ## Y_test = cnn.same_number_of_idxs(X_train, Y_test)
+    ## X_train, Y_train = cnn.same_number_of_idxs(X_train, Y_train)
+    ## X_test, Y_test = cnn.same_number_of_idxs(X_train, Y_test)
 
 ### CNN bouwen ###
     #Voor het inladen/opslaan/bouwen van een model:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # Train data zijn nodig om het model te initialiseren
     model = cnn.build(X_train, Y_train, weights_filename = 'my_weights.cnn')
 
-    # Voorspelt de output voor de input die je aangeeft. Deze 
+    # Voorspelt de output voor de input die je aangeeft. 
     output = model.predict(X_test)
     
     # Drukt de error voor elke category af waar je model op getrained en getest is.
