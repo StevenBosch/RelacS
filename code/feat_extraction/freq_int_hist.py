@@ -18,7 +18,7 @@ from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 
 
-def compute_ccls(cnn_input, pos_idcs, bins):
+def compute_ccls(cnn_input, pos_idcs, bins, show_images = False):
     pos = np.copy(cnn_input)
     neg = np.copy(cnn_input)
     for idx in range(cnn_input.shape[0]):
@@ -50,10 +50,11 @@ def compute_ccls(cnn_input, pos_idcs, bins):
     ccl_neg[ccl_neg == 0] = 0.0000001
 
     pos_frac = (sum(pos_idcs)/len(pos_idcs))
-    print pos_frac
+    print str(100*round(pos_frac, 4)) + "% positively labeled"
     pos /= pos_frac
     neg /= 1-pos_frac 
-    plot_images(pos, neg, pos-neg)
+    if show_images :
+        plot_images(pos, neg, pos-neg)
 
     return ccl_pos.transpose(1,0), ccl_neg.transpose(1,0)
 
@@ -92,7 +93,7 @@ def plot_images(pos, neg, dif) :
 
     plt.show()
 
-def compute_ccls_per_category(bins, X_train, Y_train) :
+def compute_ccls_per_category(bins, X_train, Y_train, show_images = False) :
     print 'computing class conditional log likelihoods...'
     X_train = np.sum(X_train, axis = 3)
     X_train = X_train/128
@@ -100,10 +101,10 @@ def compute_ccls_per_category(bins, X_train, Y_train) :
     ccls_pos = np.empty((Y_train.shape[1], 109, bins))
     ccls_neg = np.empty((Y_train.shape[1], 109, bins))
 
-    cats = ['stressful', 'relaxing', 'sudden', 'Human', 'Traffic', 'Noise', 'Mechanical', 'Silence', 'Nature', 'Music', 'Machine']
+    cats = ['stressful', 'relaxing', 'sudden', 'Other', 'Human', 'Traffic', 'Noise', 'Mechanical', 'Silence', 'Nature', 'Music', 'Machine']
 
     for idx in range(Y_train.shape[1]):
-        print cats[idx]
+        print cats[idx] + ':'
         ccls_pos[idx], ccls_neg[idx] = compute_ccls(X_train,  Y_train[:,idx], bins) 
 
     return ccls_pos, ccls_neg
@@ -126,7 +127,7 @@ def compute_probabilities(bins, X_test, Y_test, ccls_pos, ccls_neg, a_priory) :
     print
     return prob_pos, prob_neg
 
-def bayes(X_train, Y_train, X_test, Y_test, pyramid_height = 1, max_bins = 256, show_train_acc = True) :
+def bayes(X_train, Y_train, X_test, Y_test, pyramid_height = 1, max_bins = 256, show_train_acc = True, show_images = False) :
     print 'computing a priory log likelihoods...'
     a_priory = np.sum(Y_train, axis = 0)/ Y_train.shape[0]
 
@@ -137,7 +138,7 @@ def bayes(X_train, Y_train, X_test, Y_test, pyramid_height = 1, max_bins = 256, 
         bins = max_bins/ 2**n
         print 'binsize: ' + str(bins)
         
-        ccls_pos, ccls_neg = compute_ccls_per_category(bins, X_train, Y_train)
+        ccls_pos, ccls_neg = compute_ccls_per_category(bins, X_train, Y_train, show_images)
         
         print 'Test:'
         prob_pos, prob_neg = compute_probabilities(bins, X_test, Y_test, ccls_pos, ccls_neg, a_priory)
@@ -204,7 +205,7 @@ def naive(X_train, Y_train, X_test, Y_test) :
 
 if __name__ == '__main__':
     X_train, Y_train, X_test, Y_test = cnn.load_data()
-    
+
     bayes(X_train, Y_train, X_test, Y_test)
 
     # mlp(X_train, Y_train[:,0], X_test, Y_test[:,0])
