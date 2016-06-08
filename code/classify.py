@@ -1,23 +1,27 @@
 import sys, yaml
 import numpy as np
 from preprocessing.runPrep import prepFile
+import CNN.cnn
 
-def classifyWindow(signals, winsize, winstride):
+def classifyWindow(neuralNetPath, signals, winsize, winstride):
     keys = ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']
 
     prediction = 0
     for key in keys:
         window = signals[key][index:index + winsize]
-        # net = cnn.load(neuralNetPath)
-        # cnnPredict = cnn.predict(net, window)
-        # rogier = rogier.load(trained something)
-        # rogierPredict = rogier.predict(rogier, window)
-        # pim = pim.load(trained something)
-        # pimPredict = pim.predict(pim, window)
-        prediction += (cnnPredict + rogierPredcit + pimPredict)/3
+        # Get CNN prediction
+        model = cnn.build(X_train, Y_train, weights_filename = neuralNetPath + key + '.cnn')
+        cnnPredict = model.predict(window)
+        
+        # Get Bayes prediction
+        
+        # Get other method's predictions
+        
+        
+        # prediction += (cnnPredict + rogierPredcit + pimPredict)/3
     return = prediction / len(keys) # Or some voting?
 
-def classifyFile(soundFile, winsize, winstride):
+def classifyFile(neuralNetPath, soundFile, winsize, winstride):
     # Preprocess the file
     prepFile(soundFile)
 
@@ -37,7 +41,7 @@ def classifyFile(soundFile, winsize, winstride):
     # Classify every type of preprocessed image for every slice in the file
     index = zeroColLeft
     while index + winsize < len(signals['energy']) + zeroColRight + 1:
-        prediction = classifyWindow(signals, winsize, winstride)
+        prediction = classifyWindow(neuralNetPath, signals, winsize, winstride)
         windowPredictions.append(prediction)
         
         # Next window
