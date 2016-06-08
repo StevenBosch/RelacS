@@ -17,8 +17,7 @@ def classifyWindow(neuralNetPath, signals, winsize, winstride):
         
         # Get other method's predictions
         
-        
-        # prediction += (cnnPredict + rogierPredcit + pimPredict)/3
+        # prediction += (cnnPredict + bayesPredict + ...)/...
     return = prediction / len(keys) # Or some voting?
 
 def classifyFile(neuralNetPath, soundFile, winsize, winstride):

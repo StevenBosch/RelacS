@@ -4,7 +4,7 @@ import sys
 if __name__ == '__main__':
     if len(sys.argv) != 3 or sys.argv[1] not in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
         print "################# Input argument error #################"
-        print "### Usage: python use_cnn.py imageType 'category1 category2 etc.'"
+        print "### Usage: python use_cnn.py 'imageType' 'category1 category2 etc.'"
         print "### Imagetype should be in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']"
         print "### Category should be in ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']"
         sys.exit(1)
