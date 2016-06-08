@@ -12,6 +12,10 @@ if __name__ == '__main__':
     # Parse user input
     imageType = sys.argv[1]
     cats = sys.argv[2].split(' ')
+    catName = ''
+    for cat in cats:
+        catName += cat
+    name = catName + '_' + imageType + '.cnn'
     
     allCats = ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']
     for index, cat in enumerate(cats):
@@ -49,12 +53,12 @@ if __name__ == '__main__':
     
     # Voor het opslaan van gewichten:
     # Push je gewichten aub niet.
-    cnn.save_weights(model, weights_filename = category + '_' + imageType + '.cnn')
+    cnn.save_weights(model, weights_filename = name)
 
 ### CNN testen ###    
     #Als weights_filename wodt meegegeven gebruikt hij dat weightsbestand ipv een nieuw model te bouwen. 
     # Train data zijn nodig om het model te initialiseren
-    model = cnn.build(X_train, Y_train, weights_filename = category + '_' + imageType + '.cnn')
+    model = cnn.build(X_train, Y_train, weights_filename = name)
 
     # Voorspelt de output voor de input die je aangeeft. 
     output = model.predict(X_test)
