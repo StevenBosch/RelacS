@@ -41,8 +41,11 @@ def build_data(imageType = 'energy', key = '_', train_split = 0.9) :
     yshape = (X_test.shape[0], 1, X_test.shape[1], X_test.shape[2])
     X_train = np.reshape(X_train, xshape)
     X_test = np.reshape(X_test, yshape)
-
+    
     data_dir = os.path.join(os.getcwd(), '../data')
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+    
     print 'Saving data of:'
     print 'X_train...'
     with open(os.path.join(data_dir, 'xtrain' + key + '.np'), 'wb') as f:
