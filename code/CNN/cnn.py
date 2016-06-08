@@ -61,18 +61,18 @@ def build_data(imageType = 'energy', key = '_', train_split = 0.9) :
 
 def build_normalized_data(imageType = 'energy', key = '_', train_split = 0.9) :
     X_train, Y_train, X_test, Y_test = build_data(imageType, 'norm_' + key, train_split)
-    X_train -= 86
-    X_train /= 255
-    X_test  -= 86
-    X_test  /= 255
+    X_train -= 86.
+    X_train /= 255.
+    X_test  -= 86.
+    X_test  /= 255.
     return X_train, Y_train, X_test, Y_test
 
 def load_normalized_data(key = '_') :
     X_train, Y_train, X_test, Y_test = load_data('norm_' + key)
-    X_train -= 86
-    X_train /= 255
-    X_test  -= 86
-    X_test  /= 255
+    X_train -= 86.
+    X_train /= 255.
+    X_test  -= 86.
+    X_test  /= 255.
     return X_train, Y_train, X_test, Y_test
 
 def load_data(key = '_') :
@@ -117,6 +117,33 @@ def build_empty_model(X_shape, Y_shape) :
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(optimizer= sgd,
         loss='binary_crossentropy',
+        metrics=['accuracy'])
+
+    return model
+
+def build_empty_softmax_model(X_shape, Y_shape) :
+    model = Sequential()
+
+    model.add(Convolution2D(32, 3, 3, activation='relu', input_shape= X_shape[1:]))
+    model.add(Convolution2D(32, 3, 3, activation='relu'))       
+    model.add(MaxPooling2D((2,2)))
+
+    model.add(Convolution2D(64, 3, 3, activation='relu'))      
+    model.add(Convolution2D(64, 3, 3, activation='relu'))      
+    model.add(MaxPooling2D((2,2)))
+
+    model.add(Flatten())                                        
+    model.add(Dense(128, activation='relu'))                    
+    model.add(Dropout(0.5))                                     
+
+    if len(Y_shape) == 1:
+        Y_shape = np.array([Y_shape, 1])
+    model.add(Dense(Y_shape[1]))
+    model.add(Activation('softmax'))
+
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+    model.compile(optimizer= sgd,
+        loss='categorical_crossentropy',
         metrics=['accuracy'])
 
     return model
@@ -216,29 +243,28 @@ def save_weights(model, weights_filename = 'weights') :
 
 if __name__ == '__main__':
     
-    # Je kunt bijv build_data(imageType = 'energy', key = 'en') en load_data(key = 'en') 
-    # doen om bij devolgende keer niet je data opnieuw te hoeven bouwen.
-    # Als het goed is werkt dit ook voor andere imageTypes dan energy. Nog niet getest.   
+    X_train, Y_train, X_test, Y_test = load_data('_')
 
-    X_train, Y_train, X_test, Y_test = build_data()
-    X_train, Y_train, X_test, Y_test = load_data()
-    
-    X_train -= 86
-    X_train /= 255
-    X_test  -= 86
-    X_test  /= 255
+    Y_train == Y_train[:, [0,1,2]]
+    for sample in Y_train:
+        sample[1] = 0.0 if sample[1] or sample[2] else 1.0
 
-    #Als de laatste param iets anders is dan 'none' gebruikt hij dat weightsbestand
-    model = build(X_train, X_test, weights_filename = 'none')
+    Y_test == Y_test[:, [0,1,2]]
+    for sample in Y_test:
+        sample[1] = 0.0 if sample[1] or sample[2] else 1.0
+
+    model = build_empty_softmax_model(X_train.shape, Y_train.shape)
+
+    model.fit(X_train, Y_train, 
+        batch_size = 32, nb_epoch = 33, 
+        validation_data= (X_test, Y_test))
     
     output = model.predict(X_test)
     print_error_rate_per_category(output, Y_test)
 
     filedir = os.path.join(os.getcwd())
     filename = os.path.join(filedir, 'weights_cats')
-
-    # Hiermee kun je weights opslaan 
-    #
+#
 
 # Die vorige was met / 255 en -mean
 # met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 16, nb_epoch = 50: rond de 75%
