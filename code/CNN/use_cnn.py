@@ -54,7 +54,7 @@ def runNet_cat(imageType, saveDir):
             batch_size = 32, nb_epoch = 1, #changeback
             validation_data= (X_test, Y_test))
 
-        # cnn.save_weights(model, weights_filename = name)
+        cnn.save_weights(model, weights_filename = name)
         
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
@@ -76,7 +76,7 @@ def runNet_cat(imageType, saveDir):
             batch_size = 32, nb_epoch = 1, #changeback
             validation_data= (X_test, Y_test))
 
-        # cnn.save_weights(model, weights_filename = name)
+        cnn.save_weights(model, weights_filename = name)
         
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
@@ -100,7 +100,7 @@ def runNet(imageType, cats, saveDir):
         Y_test = Y_test_all[:, cats]
 
         model = cnn.build(X_train, Y_train, X_test, Y_test, epochs = 1) #changeback
-        # cnn.save_weights(model, weights_filename = name)
+        cnn.save_weights(model, weights_filename = name)
 
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
