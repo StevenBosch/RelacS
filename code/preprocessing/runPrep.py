@@ -13,7 +13,6 @@ def prepFile(f):
     print "file: " + f
     if os.path.isfile(f):
         # Read information from the hdf5
-        filepointer = h5py.File(f, 'r+')
         signals = files.signalsFromHDF5(f)
 
         # Original signal
@@ -40,12 +39,14 @@ def prepFile(f):
                 morphology = np.column_stack((np.transpose(zeroColLeft), morphology))
             if len(zeroColRight) > 0:
                 morphology = np.column_stack((morphology, np.transpose(zeroColRight)))
-
+        
+        
         # Store the preprocessed signal
         if 'morphology' in signals:
             signals['morphology'] = morphology
         else:
-            filepointer.create_dataset('morphology', data=morphology)
+            with h5py.File(f, 'r+') as filepointer:
+                filepointer.create_dataset('morphology', data=morphology)
 
         # Foreground background
         definitions = [bgconfig.getDefaults(tau) for tau in bgconfig.tau(0.5, 4)]
@@ -62,7 +63,8 @@ def prepFile(f):
             if 'tau {}'.format(model.name) in signals:
                 signals['tau {}'.format(model.name)] = response
             else:
-                filepointer.create_dataset('tau {}'.format(model.name), data=response)
+                with h5py.File(f, 'r+') as filepointer:
+                    filepointer.create_dataset('tau {}'.format(model.name), data=response)
 
 def prepDir(hdf5Dir):
     filelist = glob.glob(hdf5Dir + '*')

@@ -3,15 +3,27 @@ import cnn
 if __name__ == '__main__':
 ### Creating and loading data ###
     # Push je data aub niet:
-    #To build new data. Data is also automatically saved. Key is a file name appendix. You might have to make the map ../data first.
-    X_train, Y_train_all, X_test, Y_test_all = cnn.build_normalized_data(imageType = 'energy', key = 'energy', train_split = 0.9)
+    # To build new data. Data is also automatically saved. Key is a file name appendix. You might have to make the map ../data first.
+    
+    # Use one of the following keys: 'energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0'
+    imageType = 'energy'
+    
+    # Use one of the following categories: 'stressful', 'relaxing', 'sudden', 'other, 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine'
+    category = 'stressful'
+    
+    categories = {}
+    val = 0
+    for cat in ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']:
+        categories.
+    
+    X_train, Y_train_all, X_test, Y_test_all = cnn.build_normalized_data(imageType, imageType, train_split = 0.9)
     
     #To load saved data
-    X_train, Y_train_all, X_test, Y_test_all = cnn.load_normalized_data(key = 'energy')
+    X_train, Y_train_all, X_test, Y_test_all = cnn.load_normalized_data(imageType)
 
 
 ### Categorieen ###
-    #categories is de categorien waarop getraind word. Categirien van 0 tot en met 11 zijn :
+    # categories is de categorien waarop getraind word. Categirien van 0 tot en met 11 zijn :
     # 'stressful', 'relaxing', 'sudden', 'Other, 'Human', 'Traffic', 'Noise', 'Mechanical', 'Silence', 'Nature', 'Music', 'Machine'
     cats = [0, 1, 2]
 
@@ -33,12 +45,12 @@ if __name__ == '__main__':
     
     # Voor het opslaan van gewichten:
     # Push je gewichten aub niet.
-    cnn.save_weights(model, weights_filename = 'my_weights.cnn')
+    cnn.save_weights(model, weights_filename = category + '_' + imageType + '.cnn')
 
 ### CNN testen ###    
     #Als weights_filename wodt meegegeven gebruikt hij dat weightsbestand ipv een nieuw model te bouwen. 
     # Train data zijn nodig om het model te initialiseren
-    model = cnn.build(X_train, Y_train, weights_filename = 'my_weights.cnn')
+    model = cnn.build(X_train, Y_train, weights_filename = category + '_' + imageType + '.cnn')
 
     # Voorspelt de output voor de input die je aangeeft. 
     output = model.predict(X_test)
