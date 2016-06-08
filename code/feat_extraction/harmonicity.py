@@ -34,6 +34,8 @@ def save_fmap() :
     fmap = np.asarray(filepointer.attrs['fMap'], dtype = float)
     ptnsplit = (map(int, filepointer.attrs['ptnsplit'].translate(None, '[]').split(',')))
 
+    print filepointer.attrs.keys()
+
     same = True
     for f in windows:
 
@@ -95,7 +97,7 @@ def all_distances(ordered_list) :
 
     return np.append(return_list, all_distances(tail))
 
-def harmonics(ordered_freqs, precision = 0.05, only_peak_sequences = True) :
+def harmonics(ordered_freqs, precision = 0.1, only_peak_sequences = True) :
     precision /= 2
     #jagged matrix of indices: [[0,1,2,3],[1,2,3],[2,3]]
     peak_locs = [list(range(x, len(ordered_freqs))) for x in xrange(len(ordered_freqs)-1)]
@@ -163,6 +165,9 @@ def gaussian_kernel(length):
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
 if __name__ == '__main__':
+    save_fmap()
+
+    quit()
     fmap = load_fmap()
     
     plt.ion()
