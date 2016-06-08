@@ -4,7 +4,7 @@ import os
 label_dir = os.path.join(os.getcwd(), '../labeling')
 sys.path.insert(0, label_dir)
 
-import windows_to_images
+#import windows_to_images
 
 import matplotlib.pyplot as plt
 

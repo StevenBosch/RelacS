@@ -42,7 +42,7 @@ def runNet_cat(imageType, saveDir):
 
     temp = sys.stdout
 
-    with open(saveDir + catName + '_' +'stressVSrelacs' + imageType + '.txt', 'w') as sys.stdout:
+    with open(saveDir + '_' +'stressVSrelacs' + imageType + '.txt', 'w') as sys.stdout:
         X_train, Y_train_all, X_test, Y_test_all = cnn.load_normalized_data(imageType)
 
         Y_train = cnn.get_categorical_data_stress(Y_train_all)
@@ -51,10 +51,10 @@ def runNet_cat(imageType, saveDir):
         model = cnn.build_empty_softmax_model(X_train.shape, Y_train.shape)
 
         model.fit(X_train, Y_train, 
-            batch_size = 32, nb_epoch = 30, 
+            batch_size = 32, nb_epoch = 1, #changeback
             validation_data= (X_test, Y_test))
 
-        cnn.save_weights(model, weights_filename = name)
+        # cnn.save_weights(model, weights_filename = name)
         
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
@@ -63,7 +63,7 @@ def runNet_cat(imageType, saveDir):
 
 
     name = saveDir + '_' +'categories' + imageType + '.cnn'
-    with open(saveDir + catName + '_' +'categories' + imageType + '.txt', 'w') as sys.stdout:
+    with open(saveDir + '_' +'categories' + imageType + '.txt', 'w') as sys.stdout:
         X_train, Y_train_all, X_test, Y_test_all = cnn.load_normalized_data(imageType)
 
         cat_lists = [[6],[5],[11],[10],[4],[7],[9],[8]]
@@ -73,10 +73,10 @@ def runNet_cat(imageType, saveDir):
         model = cnn.build_empty_softmax_model(X_train.shape, Y_train.shape)
 
         model.fit(X_train, Y_train, 
-            batch_size = 32, nb_epoch = 30, 
+            batch_size = 32, nb_epoch = 1, #changeback
             validation_data= (X_test, Y_test))
 
-        cnn.save_weights(model, weights_filename = name)
+        # cnn.save_weights(model, weights_filename = name)
         
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
@@ -99,8 +99,8 @@ def runNet(imageType, cats, saveDir):
         Y_train = Y_train_all[:, cats]
         Y_test = Y_test_all[:, cats]
 
-        model = cnn.build(X_train, Y_train, X_test, Y_test, epochs = 30)
-        cnn.save_weights(model, weights_filename = name)
+        model = cnn.build(X_train, Y_train, X_test, Y_test, epochs = 1) #changeback
+        # cnn.save_weights(model, weights_filename = name)
 
         output = model.predict(X_test)
         cnn.print_error_rate_per_category(output, Y_test)
