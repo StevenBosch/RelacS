@@ -1,31 +1,35 @@
 import cnn
+import sys
 
 if __name__ == '__main__':
-### Creating and loading data ###
+    if len(sys.argv) != 3 or sys.argv[1] not in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']:
+        print "################# Input argument error #################"
+        print "### Usage: python use_cnn.py imageType 'category1 category2 etc.'"
+        print "### Imagetype should be in ['energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0']"
+        print "### Category should be in ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']"
+        sys.exit(1)
+    
+    # Parse user input
+    imageType = sys.argv[1]
+    cats = sys.argv[2].split(' ')
+    
+    allCats = ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']
+    for index, cat in enumerate(cats):
+        if cat not in allCats:
+            print "################# Input argument error #################"
+            print "### Categories must be space separated and one of the following:"
+            print '### stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine'
+            print "### Use ' at the beginning and end of whole list, e.g.:"
+            print "### 'stressful relaxing sudden'"
+            sys.exit(1)
+        cats[index] = allCats.index(cat)
+        
+    ### Creating and loading data ###
     # Push je data aub niet:
-    # To build new data. Data is also automatically saved. Key is a file name appendix. You might have to make the map ../data first.
-    
-    # Use one of the following keys: 'energy', 'morphology', 'tau 1.0', 'tau 2.0', 'tau 4.0'
-    imageType = 'energy'
-    
-    # Use one of the following categories: 'stressful', 'relaxing', 'sudden', 'other, 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine'
-    category = 'stressful'
-    
-    categories = {}
-    val = 0
-    for cat in ['stressful', 'relaxing', 'sudden', 'other', 'human', 'traffic', 'noise', 'mechanical', 'silence', 'nature', 'music', 'machine']:
-        categories.
-    
     X_train, Y_train_all, X_test, Y_test_all = cnn.build_normalized_data(imageType, imageType, train_split = 0.9)
     
     #To load saved data
     X_train, Y_train_all, X_test, Y_test_all = cnn.load_normalized_data(imageType)
-
-
-### Categorieen ###
-    # categories is de categorien waarop getraind word. Categirien van 0 tot en met 11 zijn :
-    # 'stressful', 'relaxing', 'sudden', 'Other, 'Human', 'Traffic', 'Noise', 'Mechanical', 'Silence', 'Nature', 'Music', 'Machine'
-    cats = [0, 1, 2]
 
     Y_train = Y_train_all[:, cats]
     Y_test = Y_test_all[:, cats]
