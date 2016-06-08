@@ -239,6 +239,33 @@ def build(X_train, Y_train, X_test = None, Y_test = None, weights_filename = Non
 
     return model
 
+def get_categorical_data_stress(Y) :    
+    labels = np.copy(Y[:, [0,1,2]])
+    for sample in labels:
+        sample[2] = 0.0 if sample[0] or sample[1] else 1.0
+
+    return labels
+
+# Catlist is een lijst van lijsten van categorieen die worden samengevoegd als een enkele categorie.
+# In elk datapunt kan slechts categorie 1.0 zijn. De rest is 0.0. Eerdere categorieen in cat_lists hebben voorrang.
+def get_categorical_data_cats(Y, cat_lists) :    
+    labels = np.zeros((Y.shape[0], len(cat_lists) + 1))
+
+    for idx1, sample in enumerate(labels):
+        for idx2, cat_list in enumerate(cat_lists):
+            if any(Y[idx1, cat_list] == 1.) :
+                if all(sample == 0.) :
+                    sample[idx2] = 1.
+
+
+    for sample in labels:
+        if all(sample == 0.):
+            sample[len(cat_list) + 1] = 1. #Other
+
+    return labels
+
+
+
 def save_weights(model, weights_filename = 'weights') :
     filedir = os.path.join(os.getcwd())
     filename = os.path.join(filedir, 'weights_filename')
@@ -248,13 +275,22 @@ if __name__ == '__main__':
     
     X_train, Y_train, X_test, Y_test = load_data('_')
 
-    Y_train == Y_train[:, [0,1,2]]
-    for sample in Y_train:
-        sample[1] = 0.0 if sample[1] or sample[2] else 1.0
+    Y_train_stress = get_categorical_data_stress(Y_train)
+    Y_test_stress  = get_categorical_data_stress(Y_test)
 
-    Y_test == Y_test[:, [0,1,2]]
-    for sample in Y_test:
-        sample[1] = 0.0 if sample[1] or sample[2] else 1.0
+
+
+    #6  Noise
+    #5  Traffic
+    #11 Machine
+    #10 Music
+    #4  Human
+    #7  Mechanical
+    #9  Nature
+    #8  Silence
+    cat_lists = [[6],[5],[11],[10],[4],[7],[9],[8]]
+    Y_train_cats = get_categorical_data_cats(Y_train, cat_lists)
+    Y_test_cats  = get_categorical_data_cats(Y_test, cat_lists)
 
     model = build_empty_softmax_model(X_train.shape, Y_train.shape)
 

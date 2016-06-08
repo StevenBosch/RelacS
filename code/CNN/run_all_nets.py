@@ -10,6 +10,8 @@ if __name__ == '__main__':
     
     for imageType in allImageTypes:
         print "imageType: ", imageType
+        print "categorical crossenthropy nets"
+        use_cnn.runNet_cat(imageType, 'trained_nets/')
         for category in allCats:
             print "category: ", category
             use_cnn.runNet(imageType, category, 'trained_nets/')
