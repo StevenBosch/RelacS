@@ -2,7 +2,8 @@ import use_cnn
 import os
 
 if __name__ == '__main__':
-    allCats = ['stressful', 'relaxing', 'human', 'traffic', 'noise']
+    #allCats = ['stressful', 'relaxing', 'human', 'traffic', 'noise']
+    allCats = [0, 1, 4, 5, 6]
     allImageTypes = ['energy', 'morphology', 'tau 1.0', 'tau 4.0']
     
     if not os.path.exists('trained_nets/'):
