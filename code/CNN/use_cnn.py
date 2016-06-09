@@ -98,6 +98,7 @@ def runNet(imageType, cats, saveDir):
         Y_test = Y_test_all[:, cats]
 
         model = cnn.build(X_train, Y_train, X_test, Y_test, epochs = 50)
+
         cnn.save_weights(model, weights_filename = name)
 
         output = model.predict(X_test)
