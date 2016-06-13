@@ -58,9 +58,10 @@ def makeWindowDic(startEndPairs, signals, winsize):
     return windowDic
         
 def classifyWindows(CNNdir, categories, startEndPairs, signals, windowDic):
-    tempPredictions = {}
+    predictions = {}
     
     for category in labelDictkeys():
+        tmpPredictions = []
         for key in keys:
             if key not in signals:
                 continue
@@ -70,10 +71,17 @@ def classifyWindows(CNNdir, categories, startEndPairs, signals, windowDic):
             if os.path.isfile(weights_filename):
                 model = cnn.build_empty_model([1, 1, 109, winsize], [1, 1])
                 model.load_weights(weights_filename)
-                tmp = model.predict(windowDic[key])
+                tmp1 = model.predict(windowDic[key])
             
-            ## Run thhe other classification methods
+            ## Run the other classification methods
             # classifier = 
+            
+            
+            ## Now combine the classifications
+            for index, window in enumerate(startEndPairs):
+                
+        
+        predictions[category] = tmpPredictions
                 
     
 def classifyFile(categories, CNNdir, soundFile, windowFile):
