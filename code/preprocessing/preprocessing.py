@@ -1,7 +1,7 @@
 import sys
-import cv2, h5py, numpy as np
-import os, matplotlib.pyplot as plt
-
+import h5py, numpy as np
+import cv2, os, matplotlib.pyplot as plt
+import runPrep
 # Change search directory for modules to include pycpsp in parent
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import pycpsp.plot as plot
@@ -35,15 +35,13 @@ if __name__ == '__main__':
         sys.exit(0)
 
     filename = sys.argv[1]
-    filepointer = h5py.File(filename, 'r')
-    signals = files.signalsFromHDF5(filename)
-    metadata = files.metadataFromHDF5(filename)
+    runPrep.prepFile(filename)
 
     # Original image
-    original = signals['energy'][:,44:]
+    # original = signals['energy'][:,44:]
 
-    eroded = erode(original)
-    filepointer.create_dataset('eroded', data=eroded)
+    #eroded = erode(original)
+    #filepointer.create_dataset('eroded', data=eroded)
 
 '''
     # preprocess images

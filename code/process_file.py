@@ -19,14 +19,15 @@ if __name__ == '__main__':
         windows = yaml.load(f)
     
     # Settings
-    neuralNetPath = 'CNN/trained_networks/'
-    categories = ['stress']
+    dirs = {}
+    dirs['networks'] = 'CNN/trained_nets/'
+    dirs['fih'] = 'feat_extraction/fihs/'
     
     soundFile = sys.argv[1]
     filepointer = h5py.File(soundFile, 'r')
     signals = files.signalsFromHDF5(soundFile)    
     
-    windowPredictions, filePrediction = classifyFile(categories, neuralNetPath, soundFile, windows)
+    windowPredictions, filePrediction = classifyFile(dirs, soundFile, windows)
     # wavelet = makeWavelet(signals)
     
     # Store everything to be processed by the site
