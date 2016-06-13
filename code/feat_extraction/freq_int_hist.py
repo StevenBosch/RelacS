@@ -16,37 +16,51 @@ import math
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
+import pickle
 
 class fih(object) :
+    def __init__(self, X_train = None, Y_train = None , bins=256,  show_train_acc=False, show_images=False, file = None):
+        if X_train != None :
+            print 'computing a priory log likelihoods...'
+            self.a_priory = np.sum(Y_train, axis = 0)/ Y_train.shape[0]
 
-    def __init__(self, X_train, Y_train, bins=256,  show_train_acc=False, show_images=False):
-        print 'computing a priory log likelihoods...'
-        self.a_priory = np.sum(Y_train, axis = 0)/ Y_train.shape[0]
+            self.bins = bins
+            self.cat_num = Y_train.shape[1]
 
-        self.bins = bins
-        self.cat_num = Y_train.shape[1]
+            self.ccls_pos, self.ccls_neg = compute_ccls_per_category(self.bins, X_train, Y_train, show_images)
+            
+            if show_train_acc :
+                print 'Train:'
+                prob_pos, prob_neg = compute_probabilities(self.bins, X_train, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
+                train_output = prob_pos > prob_neg
+                cnn.print_error_rate_per_category(train_output, Y_train, thr = 0.5)
+                print
+        elif file != None :
+            with open(file, 'r') as f :
+                other = pickle.load(f)
+                self.a_priory = other.a_priory
+                self.bins = other.bins
+                self.cat_num = other.cat_num
+                self.ccls_pos = other.ccls_pos
+                self.ccls_neg = other.ccls_neg
+        else:
+            print "Tried to init an fih without train data or other fih or a pickle file specified"
 
-        self.ccls_pos, self.ccls_neg = compute_ccls_per_category(self.bins, X_train, Y_train, show_images)
-        
-        if show_train_acc :
-            print 'Train:'
-            prob_pos, prob_neg = compute_probabilities(self.bins, X_train, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
-            train_output = prob_pos > prob_neg
-            cnn.print_error_rate_per_category(train_output, Y_train, thr = 0.5)
-            print
+    def save(self, file) :
+        with open(file, 'w') as f :
+            pickle.dump(self, f)
 
     def predict(self, X_test, show_accuracy = False, Y_test = None) :
         output = np.zeros((X_test.shape[0], self.cat_num))
         prob_pos, prob_neg = compute_probabilities(self.bins, X_test, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
         output = np.exp(prob_pos) / (np.exp(prob_pos) + np.exp(prob_neg))
-        for o in output :
-            print o, prob_pos > prob_neg
         if show_accuracy :
             print 'Test:'
             if Y_test != None :
                 cnn.print_error_rate_per_category(output, Y_test, thr = 0.5)
             else :
                 print 'Error: Could not print accuracy: Y_test not specified'
+        return output
 
 
 
