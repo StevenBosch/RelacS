@@ -165,9 +165,6 @@ def gaussian_kernel(length):
     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
 if __name__ == '__main__':
-    save_fmap()
-
-    quit()
     fmap = load_fmap()
     
     plt.ion()
@@ -176,7 +173,7 @@ if __name__ == '__main__':
     plt.plot(fmap)
     plt.draw()
     
-    X_train, Y_train, X_test, Y_test = cnn.load_data()
+    X_train, Y_train, X_test, Y_test = cnn.build_data()
 
     centers = bin_centers(fmap)
 
