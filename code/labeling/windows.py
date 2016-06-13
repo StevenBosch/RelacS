@@ -96,7 +96,7 @@ if __name__ == '__main__':
         # Find how much to skip at the start
         energy = filepointer['energy']
         start = 0
-        while max(energy[:,start].flatten()) == 0:
+        while max(energy[:,start].flatten()) <= 0:
             start += 1
 
         # Create the labels for each window

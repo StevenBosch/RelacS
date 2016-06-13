@@ -21,8 +21,8 @@ class ResultsView(DetailView):
             left = s.start / float(self.object.length) * 100
             width = s.end / float(self.object.length) * 100 - left
             r = int(s.stressful * 2.55)
-            g = int(s.relaxing * 2.55)
-            b = max(0, 255 - int(s.stressful *2.55 + s.relaxing * 2.55))
+            g = 255 - r
+            b = 0
             sound = {'left': left,
                 'width': width,
                 'stressful': s.stressful,

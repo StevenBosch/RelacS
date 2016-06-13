@@ -3,6 +3,7 @@ code/preprocessing/tmp/
 code/preprocessing/tmp/*
 sound_files/
 sound_files/*
+site/static/*.png
 
 db.sqlite3
 
