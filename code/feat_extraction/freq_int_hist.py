@@ -17,6 +17,38 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 
+class fih(object) :
+
+    def __init__(self, X_train, Y_train, bins=256,  show_train_acc=False, show_images=False):
+        print 'computing a priory log likelihoods...'
+        self.a_priory = np.sum(Y_train, axis = 0)/ Y_train.shape[0]
+
+        self.bins = bins
+        self.cat_num = Y_train.shape[1]
+
+        self.ccls_pos, self.ccls_neg = compute_ccls_per_category(self.bins, X_train, Y_train, show_images)
+        
+        if show_train_acc :
+            print 'Train:'
+            prob_pos, prob_neg = compute_probabilities(self.bins, X_train, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
+            train_output = prob_pos > prob_neg
+            cnn.print_error_rate_per_category(train_output, Y_train, thr = 0.5)
+            print
+
+    def predict(self, X_test, show_accuracy = False, Y_test = None) :
+        output = np.zeros((X_test.shape[0], self.cat_num))
+        prob_pos, prob_neg = compute_probabilities(self.bins, X_test, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
+        output = np.exp(prob_pos) / (np.exp(prob_pos) + np.exp(prob_neg))
+        for o in output :
+            print o, prob_pos > prob_neg
+        if show_accuracy :
+            print 'Test:'
+            if Y_test != None :
+                cnn.print_error_rate_per_category(output, Y_test, thr = 0.5)
+            else :
+                print 'Error: Could not print accuracy: Y_test not specified'
+
+
 
 def compute_ccls(cnn_input, pos_idcs, bins, show_images = False):
     pos = np.copy(cnn_input)
@@ -109,15 +141,15 @@ def compute_ccls_per_category(bins, X_train, Y_train, show_images = False) :
 
     return ccls_pos, ccls_neg
 
-def compute_probabilities(bins, X_test, Y_test, ccls_pos, ccls_neg, a_priory) :
+def compute_probabilities(bins, X_test, num_cats, ccls_pos, ccls_neg, a_priory) :
     X_test = np.sum(X_test, axis = (1,3))
     X_test = X_test/128
 
-    prob_pos = np.zeros((X_test.shape[0], Y_test.shape[1]))
-    prob_neg = np.zeros((X_test.shape[0], Y_test.shape[1]))
+    prob_pos = np.zeros((X_test.shape[0], num_cats))
+    prob_neg = np.zeros((X_test.shape[0], num_cats))
     for idx in range(X_test.shape[0]):
         print '\rcomputing actual probabilities... ' + str(idx+1) + '/' + str(X_test.shape[0]),
-        for cat in range(Y_test.shape[1]) :
+        for cat in range(num_cats) :
             prob_pos[idx, cat] = np.log(a_priory[cat])
             prob_neg[idx, cat] = np.log(1-a_priory[cat])
             for freq in range(X_test.shape[1]) :
@@ -141,13 +173,13 @@ def bayes(X_train, Y_train, X_test, Y_test, pyramid_height = 1, max_bins = 256, 
         ccls_pos, ccls_neg = compute_ccls_per_category(bins, X_train, Y_train, show_images)
         
         print 'Test:'
-        prob_pos, prob_neg = compute_probabilities(bins, X_test, Y_test, ccls_pos, ccls_neg, a_priory)
+        prob_pos, prob_neg = compute_probabilities(bins, X_test, Y_test.shape[1], ccls_pos, ccls_neg, a_priory)
         output[n] = prob_pos > prob_neg
         cnn.print_error_rate_per_category(output[n], Y_test, thr = 0.5)
 
         if show_train_acc :
             print 'Train:'
-            prob_pos, prob_neg = compute_probabilities(bins, X_train, Y_train, ccls_pos, ccls_neg, a_priory)
+            prob_pos, prob_neg = compute_probabilities(bins, X_train, Y_train.shape[1], ccls_pos, ccls_neg, a_priory)
             train_output = prob_pos > prob_neg
             cnn.print_error_rate_per_category(train_output, Y_train, thr = 0.5)
             print
