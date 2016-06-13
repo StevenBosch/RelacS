@@ -273,12 +273,7 @@ def save_weights(model, weights_filename = 'weights') :
 
 if __name__ == '__main__':
     
-    X_train, Y_train, X_test, Y_test = load_data('_')
-
-    Y_train_stress = get_categorical_data_stress(Y_train)
-    Y_test_stress  = get_categorical_data_stress(Y_test)
-
-
+    X_train, Y_train, X_test, Y_test = build_normalized_data()
 
     #6  Noise
     #5  Traffic
@@ -288,22 +283,12 @@ if __name__ == '__main__':
     #7  Mechanical
     #9  Nature
     #8  Silence
-    cat_lists = [[6],[5],[11],[10],[4],[7],[9],[8]]
-    Y_train_cats = get_categorical_data_cats(Y_train, cat_lists)
-    Y_test_cats  = get_categorical_data_cats(Y_test, cat_lists)
+    model = build_empty_model(X_train.shape, (Y_train.shape[0], 1) )
 
-    model = build_empty_softmax_model(X_train.shape, Y_train.shape)
-
-    model.fit(X_train, Y_train, 
-        batch_size = 32, nb_epoch = 33, 
-        validation_data= (X_test, Y_test))
+    model.fit(X_train, Y_train[:,0], batch_size = 32, nb_epoch = 1, shuffle = False)
     
-    output = model.predict(X_test)
-    print_error_rate_per_category(output, Y_test)
+    print 'Done'
 
-    filedir = os.path.join(os.getcwd())
-    filename = os.path.join(filedir, 'weights_cats')
-#
 
 # Die vorige was met / 255 en -mean
 # met /255 en -86, incl same_number_of_idxs voor train & test, batch_size = 16, nb_epoch = 50: rond de 75%
