@@ -1,3 +1,8 @@
+# LaTeX
+*.aux
+*.pdf
+*.synctex.gz
+
 # Directories
 code/preprocessing/tmp/
 code/preprocessing/tmp/*
