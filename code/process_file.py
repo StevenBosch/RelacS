@@ -1,5 +1,7 @@
 import sys
-import classify.classifyFile
+from newClassify import classifyFile
+import yaml, h5py
+import pycpsp.files as files
 
 def makeWavelet(signals):
     energy = signals['energy'][:,:]
@@ -15,15 +17,17 @@ if __name__ == '__main__':
         print "Usage: python processSoundFile.py <filename.hdf5> <windows.yaml>"
     with open(sys.argv[2], 'r') as f:
         windows = yaml.load(f)
-        print windows['windows'][0]
     
+    # Settings
     neuralNetPath = 'CNN/trained_networks/'
+    categories = ['stress']
+    
     soundFile = sys.argv[1]
     filepointer = h5py.File(soundFile, 'r')
     signals = files.signalsFromHDF5(soundFile)    
-
-    windowPredictions, filePrediction = classifyFile(neuralNetPath, soundFile, windows['windows'][0]['size'], windows['windows'][0]['stride'])
-    wavelet = makeWavelet(signals)
+    
+    windowPredictions, filePrediction = classifyFile(categories, neuralNetPath, soundFile, windows)
+    # wavelet = makeWavelet(signals)
     
     # Store everything to be processed by the site
     
