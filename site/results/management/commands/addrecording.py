@@ -22,9 +22,11 @@ class Command(BaseCommand):
         class_file = Path(options['classification'])
         with open(class_file, 'r') as f:
             classification = pickle.load(f)
+        print classification
 
         length = classification[-1][END] # end of the last window
-        rec = models.Recording(filename=wav.stem, length=length, stressful=0,
+        stress = sum([w[STRESS] for w in classification]) / float(len(classification)) * 100
+        rec = models.Recording(filename=wav.stem, length=length, stressful=stress,
             relaxing=0)
         rec.save()
         print "Loaded file", rec, "with length", length
@@ -46,7 +48,32 @@ class Command(BaseCommand):
         print "Minimum:", min_stress
         print "Maximum:", max_stress
         print "Average:", avg_stress
+        print "Threshold:", stress_thres
 
+        sounds = {}
+        curr_sound = 0
+        in_sound = False
+        for lvl in range(len(stress_hist)):
+            if stress_hist[lvl] >= stress_thres:
+                if in_sound == False:
+                    curr_sound += 1
+                    sounds[curr_sound] = {'windows': [], 'stress': []}
+                in_sound = True
+                sounds[curr_sound]['windows'].append(lvl)
+                sounds[curr_sound]['stress'].append(stress_hist[lvl])
+            else:
+                in_sound = False
+        print sounds
+
+        for key, s in sounds.items():
+            start = classification[min(s['windows'])][BEGIN]
+            end   = classification[max(s['windows'])][END]
+            stress = sum(s['stress']) / float(len(s['stress'])) * 100
+            sound = models.Sound(recording=rec, start=start, end=end,
+                stressful=stress, relaxing=0)
+            sound.save()
+
+        print "Creating image file"
         self._wav_to_image(wav)
 
     def _wav_to_image(self, filename):
@@ -66,8 +93,9 @@ class Command(BaseCommand):
         sec_width = (duration * 1000) / width * barwidth
         for i in range(width / barwidth):
             sec = audio[int(i*sec_width):int((i+1)*sec_width)]
-            amp = sec.dBFS * dBpp
+            amp = sec.max_dBFS * dBpp
             draw.rectangle([(i, 0), ((i+1)*barwidth, amp)], fill=(255, 255, 255))
+            draw.rectangle([(i, height), ((i+1)*barwidth, height-amp)], fill=(255, 255, 255))
         del draw
 
         dest_file = Path('static/' + filename.stem + '.png')
