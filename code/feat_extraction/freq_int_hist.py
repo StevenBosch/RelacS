@@ -1,11 +1,18 @@
-
 import sys
 import os
 
 import numpy as np
 
-
 label_dir = os.path.join(os.getcwd(), '../CNN')
+sys.path.insert(0, label_dir)
+
+label_dir = os.path.join(os.getcwd(), 'CNN')
+sys.path.insert(0, label_dir)
+
+label_dir = os.path.join(os.getcwd(), 'labeling')
+sys.path.insert(0, label_dir)
+
+label_dir = os.path.join(os.getcwd(), 'feat_extraction')
 sys.path.insert(0, label_dir)
 
 import cnn

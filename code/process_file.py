@@ -21,13 +21,13 @@ if __name__ == '__main__':
     # Settings
     dirs = {}
     dirs['networks'] = 'CNN/trained_nets/'
-    dirs['fih'] = 'feat_extraction/fihs/'
+    dirs['fihs'] = 'feat_extraction/classifiers/'
     
     soundFile = sys.argv[1]
     filepointer = h5py.File(soundFile, 'r')
     signals = files.signalsFromHDF5(soundFile)    
     
-    windowPredictions, filePrediction = classifyFile(dirs, soundFile, windows)
+    windowPredictions = classifyFile(dirs, soundFile, windows)
     # wavelet = makeWavelet(signals)
     
     # Store everything to be processed by the site
