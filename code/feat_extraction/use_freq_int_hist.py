@@ -11,8 +11,13 @@ if __name__ == '__main__':
     X_train, Y_train, X_test, Y_test = cnn.load_data(key = 'energy')
     
     classifier = freq_int_hist.fih(X_train, Y_train)
+
+    filepath = os.path.join(os.getcwd(), 'classifiers/ding.pickle')
+    classifier.save(filepath )
+
+    classifier2 = freq_int_hist.fih(file = filepath)
     classifier.predict(X_test)
+    
 
-
-    freq_int_hist.bayes(X_train, Y_train, X_test, Y_test, 
-        pyramid_height = 1, max_bins = 256, show_train_acc = False, show_images = False)
+    # freq_int_hist.bayes(X_train, Y_train, X_test, Y_test, 
+    #     pyramid_height = 1, max_bins = 256, show_train_acc = False, show_images = False)
