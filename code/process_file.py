@@ -40,7 +40,7 @@ if __name__ == '__main__':
     dirs['fihs'] = 'feat_extraction/classifiers/'
     
     soundFile = sys.argv[1]
-    filepointer = h5py.File(soundFile, 'r')
+    filepointer = h5py.File(soundFile, 'r+')
     signals = files.signalsFromHDF5(soundFile)    
     
     # Get the window and file classifications
