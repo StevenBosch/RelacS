@@ -21,7 +21,12 @@ class Command(BaseCommand):
         wav = Path(options['wav'])
         class_file = Path(options['classification'])
         with open(class_file, 'r') as f:
-            classification = pickle.load(f)
+            results = pickle.load(f)
+            print results['stressful']
+            classification = []
+            for i in range(len(results['windows'])):
+                classification.append((results['windows'][i][0],
+                    results['windows'][i][1], results['stressful'][i]))
         print classification
 
         length = classification[-1][END] # end of the last window
@@ -42,9 +47,9 @@ class Command(BaseCommand):
                 min_stress = w[STRESS]
             stress_hist.append(w[STRESS])
 
-        stress_thres = min(0.2, (max_stress - min_stress) / 2.0)
+        stress_thres = (max_stress - min_stress) / 2.0 + min_stress
 
-        avg_stress = sum(stress_hist) / float(len(classification))
+        avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
         print "Maximum:", max_stress
         print "Average:", avg_stress
