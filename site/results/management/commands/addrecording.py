@@ -4,6 +4,7 @@ from unipath import Path
 import pickle
 from pydub import AudioSegment
 from PIL import Image, ImageDraw
+import re
 
 BEGIN  = 0
 END    = 1
@@ -30,9 +31,20 @@ class Command(BaseCommand):
                     results['windows'][i][1], results['stressful'][i]))
         print classification
 
+        # Make the name a bit nicer
+        p = re.compile(r'([^_]+)_(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)')
+        m = p.match(wav.stem)
+        if m:
+            filename = '{} {}-{}-{} {}:{}:{}'.format(m.group(1), m.group(2),
+                m.group(3), m.group(4), m.group(5), m.group(6), m.group(7))
+            print filename
+        else:
+            filename = wav.stem
+        print p.match(wav.stem).group()
+
         length = classification[-1][END] # end of the last window
         stress = sum([w[STRESS] for w in classification]) / float(len(classification)) * 100
-        rec = models.Recording(filename=wav.stem, length=length, stressful=stress,
+        rec = models.Recording(filename=filename, length=length, stressful=stress,
             relaxing=0)
         rec.save()
         print "Loaded file", rec, "with length", length
