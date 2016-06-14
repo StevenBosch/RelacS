@@ -15,11 +15,19 @@ def makeWavelet(signals):
 
 #def addOriginalLabels(predictions):
 #    with open("labeling/labeling.csv", 'r') as f:
+        
+
 
 def plotResults(predictions):
+    time = []
+    for moment in predictions['time']:
+        time.append((moment[0] + moment[1])/2.0)
+    print time
+    
     for key in predictions.keys():
         if not key == 'windows':
-            plt.plot(predictions[key])
+            plt.plot(time, predictions[key])
+            plt.title(key)
             plt.show()        
 
 if __name__ == '__main__':
@@ -34,24 +42,25 @@ if __name__ == '__main__':
     dirs['fihs'] = 'feat_extraction/classifiers/'
     
     soundFile = sys.argv[1]
-    filepointer = h5py.File(soundFile, 'rw')
+    filepointer = h5py.File(soundFile, 'r')
     signals = files.signalsFromHDF5(soundFile)    
-    
-    attrs = filepointer.attrs
-    fs = filepointer['energy'].shape[1] / attrs['duration']
     
     windowPredictions, filePredictions = classifyFile(dirs, soundFile, windows)
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
     
-    # Turn frames back to time
-    # for frame in windowPredictions['windows']:
-                
-    plotResults(windowPredictions)
-
+    attrs = filepointer.attrs
+    fs = filepointer['energy'].shape[1] / attrs['duration']
     
+    # turn windows back to time
+    windowPredictions['time'] = []
+    for window in windowPredictions['windows']:
+        windowPredictions['time'].append([window[0]/fs, window[1]/fs])
+    
+    # plotResults(windowPredictions)
+
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
         pickle.dump(windowPredictions, f)
 
-    #with open('filePredictions.pickle', 'w') as f :
-    #    pickle.dump(filePredictions, f)
+    with open('filePredictions.pickle', 'w') as f :
+        pickle.dump(filePredictions, f)

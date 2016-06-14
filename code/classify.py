@@ -1,7 +1,7 @@
 import sys, os
 import yaml, h5py
 import numpy as np
-### from preprocessing.runPrep import prepFile
+from preprocessing.runPrep import prepFile
 import pycpsp.files as files
 import matplotlib.pyplot as plt
 import feat_extraction.freq_int_hist as fih
@@ -112,7 +112,7 @@ def classifyFile(dirs, soundFile, windowFile):
     winstride = windowFile['windows'][0]['stride']
     
     # Preprocess the file
-    ### prepFile(soundFile)
+    prepFile(soundFile)
 
     # Read the file
     filepointer = h5py.File(soundFile, 'r')
