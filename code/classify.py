@@ -1,7 +1,7 @@
 import sys, os
 import yaml, h5py
 import numpy as np
-# from preprocessing.runPrep import prepFile
+from preprocessing.runPrep import prepFile
 import pycpsp.files as files
 import matplotlib.pyplot as plt
 import feat_extraction.freq_int_hist as fih
@@ -66,42 +66,39 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
     for category in labelDict.keys():
         tempPredictions[category] = []
     
+    # Get all the single predictions
     for key in keys:
         print "processing", key, "files"
         if key not in signals:
             continue
         
-        ### Run the other classification methods
-        classifier2 = False
-        tmp2 = []
+        ### FIH classifier
         classifier_filename = os.path.join(dirs['fihs'], key + '.pickle')
         if os.path.isfile(classifier_filename):
             classifier = fih.fih(file = classifier_filename)
-            classifier2 = True
-    
-        for category in labelDict.keys():
-            if classifier2:
+            for category in labelDict.keys():
                 result = classifier.predict(np.asarray(windowDic[key]))[:, category]
                 tempPredictions[category].append(result)
-            
-            ## Run the relevant neural net, if it exists
+        
+        ### CNN classifier
+        for category in labelDict.keys():
             weights_filename = os.path.join(dirs['networks'], str(category) + '_' + key + '.cnn')
             if os.path.isfile(weights_filename):
                 model = cnn.build_empty_model([1, 1, 109, winsize], [1, 1])
                 model.load_weights(weights_filename)
                 result = model.predict(np.asarray(windowDic[key]))[:,0]
                 tempPredictions[category].append(result)
-            
-    
+
+    # Now store the average of all the predictions
     for category in tempPredictions.keys():
-        predictions[category] = np.zeros(len(startEndPairs))
+        predictions[labelDict[category]] = np.zeros(len(startEndPairs))
         for index in range(len(startEndPairs)):
             count = 0
             for results in tempPredictions[category]:
-                predictions[category][index] += results[index]
+                predictions[labelDict[category]][index] += results[index]
                 count += 1
             if count > 0:
-                predictions[category][index] /= count
+                predictions[labelDict[category]][index] /= count
 
     return predictions
     
@@ -111,7 +108,7 @@ def classifyFile(dirs, soundFile, windowFile):
     winstride = windowFile['windows'][0]['stride']
     
     # Preprocess the file
-    # prepFile(soundFile)
+    prepFile(soundFile)
 
     # Read the file
     filepointer = h5py.File(soundFile, 'r')
@@ -123,7 +120,7 @@ def classifyFile(dirs, soundFile, windowFile):
     
     filePredictions = {}
     for key in windowPredictions.keys():
-        filePredictions[key] = sum(windowPredictions[key])/len(windowPredictions[key])
+        filePredictions[labelDict[key]] = sum(windowPredictions[labelDict[key]])/len(windowPredictions[labelDict[key]])
     
     windowPredictions['windows'] = startEndPairs
     
