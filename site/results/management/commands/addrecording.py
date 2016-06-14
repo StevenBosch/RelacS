@@ -22,6 +22,7 @@ class Command(BaseCommand):
         class_file = Path(options['classification'])
         with open(class_file, 'r') as f:
             results = pickle.load(f)
+            print results.keys()
             print results['stressful']
             classification = []
             for i in range(len(results['windows'])):
@@ -85,7 +86,7 @@ class Command(BaseCommand):
         width = 1000
         height = 100
         barwidth = 1
-        img = Image.new('RGB', (width, height), "#2196F3")
+        img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
 
         audio = AudioSegment.from_file(filename)
@@ -99,8 +100,7 @@ class Command(BaseCommand):
         for i in range(width / barwidth):
             sec = audio[int(i*sec_width):int((i+1)*sec_width)]
             amp = sec.max_dBFS * dBpp
-            draw.rectangle([(i, 0), ((i+1)*barwidth, amp)], fill=(255, 255, 255))
-            draw.rectangle([(i, height), ((i+1)*barwidth, height-amp)], fill=(255, 255, 255))
+            draw.rectangle([(i, height-amp), ((i+1)*barwidth, amp)], fill="#2196F3")
         del draw
 
         dest_file = Path('static/' + filename.stem + '.png')

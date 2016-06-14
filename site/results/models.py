@@ -8,6 +8,9 @@ class Recording(models.Model):
     stressful = models.IntegerField()
     relaxing = models.IntegerField()
 
+    def image(self):
+        return self.filename + '.png'
+
     def __str__(self):
         return self.filename
 
