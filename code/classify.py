@@ -63,6 +63,7 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
     predictions = {}
     
     for key in keys:
+        print "processing", key, "files"
         if key not in signals:
             continue
         
@@ -120,10 +121,6 @@ def classifyFile(dirs, soundFile, windowFile):
     startEndPairs = makeStartEndPairs(winsize, winstride, signals)
     windowDic = makeWindowDic(startEndPairs, signals, winsize)
     windowPredictions = classifyWindows(dirs, startEndPairs, signals, windowDic, winsize)
-    
-    for key in windowPredictions.keys():
-        windowPredictions[key] = [startEndPairs, windowPredictions[key]]
-    
-    print windowPredictions
+    windowPredictions['windows'] = startEndPairs
     
     return windowPredictions

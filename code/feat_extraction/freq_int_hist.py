@@ -172,7 +172,7 @@ def compute_probabilities(bins, X_test, num_cats, ccls_pos, ccls_neg, a_priory) 
     prob_pos = np.zeros((X_test.shape[0], num_cats))
     prob_neg = np.zeros((X_test.shape[0], num_cats))
     for idx in range(X_test.shape[0]):
-        print '\rcomputing actual probabilities... ' + str(idx+1) + '/' + str(X_test.shape[0]),
+        # print '\rcomputing actual probabilities... ' + str(idx+1) + '/' + str(X_test.shape[0]),
         for cat in range(num_cats) :
             prob_pos[idx, cat] = np.log(a_priory[cat])
             prob_neg[idx, cat] = np.log(1-a_priory[cat])
@@ -180,7 +180,7 @@ def compute_probabilities(bins, X_test, num_cats, ccls_pos, ccls_neg, a_priory) 
                 intensity_idx = int( X_test[idx, freq] * bins/256.0)
                 prob_pos[idx, cat] += np.log(ccls_pos[cat, freq, intensity_idx])
                 prob_neg[idx, cat] += np.log(ccls_neg[cat, freq, intensity_idx])
-    print
+    # print
     return prob_pos, prob_neg
 
 def bayes(X_train, Y_train, X_test, Y_test, pyramid_height = 1, max_bins = 256, show_train_acc = True, show_images = False) :

@@ -1,6 +1,6 @@
 import sys
 from classify import classifyFile
-import yaml, h5py
+import yaml, h5py, pickle
 import pycpsp.files as files
 
 def makeWavelet(signals):
@@ -11,6 +11,9 @@ def makeWavelet(signals):
     # Smoothing
     # hist = savgol_filter(hist, 15, 3)
     return hist
+
+def plotResults(predictions):
+    pass
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
@@ -28,7 +31,7 @@ if __name__ == '__main__':
     signals = files.signalsFromHDF5(soundFile)    
     
     windowPredictions = classifyFile(dirs, soundFile, windows)
-    # wavelet = makeWavelet(signals)
     
     # Store everything to be processed by the site
-    
+    with open('windowPredictions.pickle', 'w') as f :
+        pickle.dump(windowPredictions, f)
