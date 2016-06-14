@@ -120,10 +120,9 @@ def classifyFile(dirs, soundFile, windowFile):
     
     filePredictions = {}
     for key in windowPredictions.keys():
-        filePredictions[labelDict[key]] = sum(windowPredictions[labelDict[key]])/len(windowPredictions[labelDict[key]])
+        filePredictions[key] = sum(windowPredictions[key])/len(windowPredictions[key])
     
     windowPredictions['windows'] = startEndPairs
-    
     print filePredictions
     
     return windowPredictions, filePredictions
