@@ -22,7 +22,6 @@ def plotResults(predictions):
     time = []
     for moment in predictions['time']:
         time.append((moment[0] + moment[1])/2.0)
-    print time
     
     for key in predictions.keys():
         if not key == 'windows':
@@ -45,13 +44,13 @@ if __name__ == '__main__':
     filepointer = h5py.File(soundFile, 'r')
     signals = files.signalsFromHDF5(soundFile)    
     
+    # Get the window and file classifications
     windowPredictions, filePredictions = classifyFile(dirs, soundFile, windows)
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
     
+    # Add window times
     attrs = filepointer.attrs
     fs = filepointer['energy'].shape[1] / attrs['duration']
-    
-    # turn windows back to time
     windowPredictions['time'] = []
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
