@@ -80,12 +80,11 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
             tmp1 = []
             if classifier2:
                 tmp2 = classifier.predict(np.asarray(windowDic[key]))[:, category]
-            network = False
             
             ## Run the relevant neural net, if it exists
+            network = False
             weights_filename = os.path.join(dirs['networks'], str(category) + '_' + key + '.cnn')
             if os.path.isfile(weights_filename):
-                #print windowDic[key]
                 model = cnn.build_empty_model([1, 1, 109, winsize], [1, 1])
                 model.load_weights(weights_filename)
                 tmp1 = model.predict(np.asarray(windowDic[key]))[:,0]
@@ -101,7 +100,7 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
             
             if labelDict[category] in predictions:
                 predictions[labelDict[category]] = [(x + y)/2 for x, y in zip(tmp, predictions[labelDict[category]])]
-            else:
+            elif network or classifier2:
                 predictions[labelDict[category]] = tmp
 
     return predictions

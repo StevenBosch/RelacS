@@ -16,8 +16,6 @@ def makeWavelet(signals):
 #def addOriginalLabels(predictions):
 #    with open("labeling/labeling.csv", 'r') as f:
         
-
-
 def plotResults(predictions):
     time = []
     for moment in predictions['time']:
@@ -55,7 +53,7 @@ if __name__ == '__main__':
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
     
-    # plotResults(windowPredictions)
+    plotResults(windowPredictions)
 
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
