@@ -1,5 +1,5 @@
 import sys
-from newClassify import classifyFile
+from classify import classifyFile
 import yaml, h5py
 import pycpsp.files as files
 

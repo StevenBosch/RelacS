@@ -62,19 +62,24 @@ def makeWindowDic(startEndPairs, signals, winsize):
 def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
     predictions = {}
     
-    for category in labelDict.keys():
-        tempPredictions = np.zeros(np.asarray(startEndPairs).shape[0])
-        divider = 0
-        tmp1 = []
-        tmp2 = []
+    for key in keys:
+        if key not in signals:
+            continue
         
-        for key in keys:
+        ### Run the other classification methods
+        classifier2 = False
+        tmp2 = []
+        classifier_filename = os.path.join(dirs['fihs'], key + '.pickle')
+        if os.path.isfile(classifier_filename):
+            classifier = fih.fih(file = classifier_filename)
+            classifier2 = True
+    
+        for category in labelDict.keys():
             tmp = np.zeros(np.asarray(startEndPairs).shape[0])
-            if key not in signals:
-                continue
-            
-            network = 0
-            classifier = 0
+            tmp1 = []
+            if classifier2:
+                tmp2 = classifier.predict(np.asarray(windowDic[key]))[:, category]
+            network = False
             
             ## Run the relevant neural net, if it exists
             weights_filename = os.path.join(dirs['networks'], str(category) + '_' + key + '.cnn')
@@ -84,29 +89,19 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
                 model.load_weights(weights_filename)
                 tmp1 = model.predict(np.asarray(windowDic[key]))[:,0]
                 network = True
-                divider += 1
-            
-            ### Run the other classification methods
-            classifier_filename = os.path.join(dirs['fihs'], key + '.pickle')
-            print classifier_filename
-            if os.path.isfile(classifier_filename):
-                classifier = fih.fih(file = classifier_filename)
-                tmp2 = classifier.predict(np.asarray(windowDic[key]))[:, category]
-                classifier = True
-                divider += 1
             
             ### Now combine the classifications
-            if network and fih:
-                tmp = [x + y for x, y in zip(tmp1, tmp2)]
+            if network and classifier2:
+                tmp = [(x + y)/2 for x, y in zip(tmp1, tmp2)]
             elif network:
                 tmp = tmp1
-            elif classifier:
+            elif classifier2:
                 tmp = tmp2
             
-            tempPredictions = [x + y for x, y in zip(tmp, tempPredictions)]
-        
-        if divider > 0:
-            predictions[category] = [x / divider for x in tempPredictions]
+            if labelDict[category] in predictions:
+                predictions[labelDict[category]] = [(x + y)/2 for x, y in zip(tmp, predictions[labelDict[category]])]
+            else:
+                predictions[labelDict[category]] = tmp
 
     return predictions
     
@@ -128,5 +123,7 @@ def classifyFile(dirs, soundFile, windowFile):
     
     for key in windowPredictions.keys():
         windowPredictions[key] = [startEndPairs, windowPredictions[key]]
+    
+    print windowPredictions
     
     return windowPredictions
