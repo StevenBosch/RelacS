@@ -23,6 +23,7 @@ def plotResults(predictions):
     
     for key in predictions.keys():
         if not key == 'windows':
+            plt.figure(1)
             plt.plot(time, predictions[key])
             plt.title(key)
             plt.show()        

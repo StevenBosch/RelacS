@@ -8,8 +8,8 @@ import freq_int_hist
 import numpy as np
 
 if __name__ == '__main__':
-    X_train, Y_train, X_test, Y_test = cnn.build_data(imageType = 'energy', key = 'energy', train_split = 0.9)
-    X_train, Y_train, X_test, Y_test = cnn.load_data(key = 'energy')
+    X_train, Y_train, X_test, Y_test = cnn.build_data(imageType = 'morphology', key = 'morphology', train_split = 0.9)
+    X_train, Y_train, X_test, Y_test = cnn.load_data(key = 'morphology')
     
     classifier = freq_int_hist.fih(X_train, Y_train)
 

@@ -62,6 +62,10 @@ def makeWindowDic(startEndPairs, signals, winsize):
 def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
     predictions = {}
     
+    tempPredictions = {}
+    for category in labelDict.keys():
+        tempPredictions[category] = []
+    
     for key in keys:
         print "processing", key, "files"
         if key not in signals:
@@ -76,32 +80,28 @@ def classifyWindows(dirs, startEndPairs, signals, windowDic, winsize):
             classifier2 = True
     
         for category in labelDict.keys():
-            tmp = np.zeros(np.asarray(startEndPairs).shape[0])
-            tmp1 = []
             if classifier2:
-                tmp2 = classifier.predict(np.asarray(windowDic[key]))[:, category]
+                result = classifier.predict(np.asarray(windowDic[key]))[:, category]
+                tempPredictions[category].append(result)
             
             ## Run the relevant neural net, if it exists
-            network = False
             weights_filename = os.path.join(dirs['networks'], str(category) + '_' + key + '.cnn')
             if os.path.isfile(weights_filename):
                 model = cnn.build_empty_model([1, 1, 109, winsize], [1, 1])
                 model.load_weights(weights_filename)
-                tmp1 = model.predict(np.asarray(windowDic[key]))[:,0]
-                network = True
+                result = model.predict(np.asarray(windowDic[key]))[:,0]
+                tempPredictions[category].append(result)
             
-            ### Now combine the classifications
-            if network and classifier2:
-                tmp = [(x + y)/2 for x, y in zip(tmp1, tmp2)]
-            elif network:
-                tmp = tmp1
-            elif classifier2:
-                tmp = tmp2
-            
-            if labelDict[category] in predictions:
-                predictions[labelDict[category]] = [(x + y)/2 for x, y in zip(tmp, predictions[labelDict[category]])]
-            elif network or classifier2:
-                predictions[labelDict[category]] = tmp
+    
+    for category in tempPredictions.keys():
+        predictions[category] = np.zeros(len(startEndPairs))
+        for index in range(len(startEndPairs)):
+            count = 0
+            for results in tempPredictions[category]:
+                predictions[category][index] += results[index]
+                count += 1
+            if count > 0:
+                predictions[category][index] /= count
 
     return predictions
     
@@ -126,5 +126,7 @@ def classifyFile(dirs, soundFile, windowFile):
         filePredictions[key] = sum(windowPredictions[key])/len(windowPredictions[key])
     
     windowPredictions['windows'] = startEndPairs
+    
+    print filePredictions
     
     return windowPredictions, filePredictions
