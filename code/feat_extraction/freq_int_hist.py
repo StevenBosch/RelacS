@@ -61,6 +61,9 @@ class fih(object) :
         output = np.zeros((X_test.shape[0], self.cat_num))
         prob_pos, prob_neg = compute_probabilities(self.bins, X_test, self.cat_num, self.ccls_pos, self.ccls_neg, self.a_priory)
         output = np.exp(prob_pos) / (np.exp(prob_pos) + np.exp(prob_neg))
+        
+        output[np.isnan(output)] = 0 #This has been fixed by taking low probabilities instead of 0 probabilities, but this works better.
+        
         if show_accuracy :
             print 'Test:'
             if Y_test != None :

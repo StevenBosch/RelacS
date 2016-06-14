@@ -273,7 +273,7 @@ def save_weights(model, weights_filename = 'weights') :
 
 if __name__ == '__main__':
     
-    X_train, Y_train, X_test, Y_test = build_normalized_data()
+    X_train, Y_train, X_test, Y_test = load_normalized_data()
 
     #6  Noise
     #5  Traffic
@@ -283,10 +283,13 @@ if __name__ == '__main__':
     #7  Mechanical
     #9  Nature
     #8  Silence
-    model = build_empty_model(X_train.shape, (Y_train.shape[0], 1) )
+   
+    for X in X_train:
+        if np.all(np.asarray(X) == 0) :
+            print 'Found one!'
+            print X
+            
 
-    model.fit(X_train, Y_train[:,0], batch_size = 32, nb_epoch = 1, shuffle = False)
-    
     print 'Done'
 
 
