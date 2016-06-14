@@ -133,19 +133,25 @@ def plot_intensities(pos, neg) :
     plt.show()
 
 def plot_images(pos, neg, dif) :    
+    import harmonicity
+    fmap = harmonicity.load_fmap()
     plt.figure(1)
 
-    plt1 = plt.subplot(311)
-    plt.imshow(pos[1:].transpose(1,0))
-    plt.colorbar()
+    # plt1 = plt.subplot(311)
+    # plt.imshow(pos[1:].transpose(1,0))
 
-    plt2 = plt.subplot(312)
-    plt.imshow(neg[1:].transpose(1,0))
-    plt.colorbar()
+    # plt2 = plt.subplot(312)
+    # plt.imshow(neg[1:].transpose(1,0))
+    # plt.colorbar()
 
-    plt3 = plt.subplot(313)
+    # plt3 = plt.subplot(313)
     plt.imshow(dif[1:].transpose(1,0))
-    plt.colorbar()
+    cbar = plt.colorbar(ticks=[-600, 0, 600], orientation='horizontal')
+    cbar.ax.set_xticklabels(['Not stressful', 'Not indicative', 'Stressful']) 
+    plt.ylabel('Frequency band')
+    plt.xlabel('Intensity')
+
+    plt.tight_layout() 
 
     plt.show()
 
@@ -161,7 +167,7 @@ def compute_ccls_per_category(bins, X_train, Y_train, show_images = False) :
 
     for idx in range(Y_train.shape[1]):
         print cats[idx] + ':'
-        ccls_pos[idx], ccls_neg[idx] = compute_ccls(X_train,  Y_train[:,idx], bins) 
+        ccls_pos[idx], ccls_neg[idx] = compute_ccls(X_train,  Y_train[:,idx], bins, show_images) 
 
     return ccls_pos, ccls_neg
 
@@ -262,7 +268,7 @@ def naive(X_train, Y_train, X_test, Y_test) :
 if __name__ == '__main__':
     X_train, Y_train, X_test, Y_test = cnn.load_data()
 
-    bayes(X_train, Y_train, X_test, Y_test)
+    bayes(X_train, Y_train, X_test, Y_test,  show_images = True)
 
     # mlp(X_train, Y_train[:,0], X_test, Y_test[:,0])
 
