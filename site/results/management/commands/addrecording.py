@@ -40,7 +40,6 @@ class Command(BaseCommand):
             print filename
         else:
             filename = wav.stem
-        print p.match(wav.stem).group()
 
         length = classification[-1][END] # end of the last window
         stress = sum([w[STRESS] for w in classification]) / float(len(classification)) * 100
@@ -60,7 +59,7 @@ class Command(BaseCommand):
                 min_stress = w[STRESS]
             stress_hist.append(w[STRESS])
 
-        stress_thres = (max_stress - min_stress) / 2.0 + min_stress
+        stress_thres = min(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
 
         avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
@@ -92,9 +91,9 @@ class Command(BaseCommand):
             sound.save()
 
         print "Creating image file"
-        self._wav_to_image(wav)
+        self._wav_to_image(wav, filename)
 
-    def _wav_to_image(self, filename):
+    def _wav_to_image(self, filename, outname):
         width = 1000
         height = 100
         barwidth = 1
@@ -115,5 +114,5 @@ class Command(BaseCommand):
             draw.rectangle([(i, height-amp), ((i+1)*barwidth, amp)], fill="#2196F3")
         del draw
 
-        dest_file = Path('static/' + filename.stem + '.png')
+        dest_file = Path('static/' + outname + '.png')
         img.save(dest_file)
