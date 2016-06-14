@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 min_stress = w[STRESS]
             stress_hist.append(w[STRESS])
 
-        stress_thres = min(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
+        stress_thres = max(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
 
         avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
