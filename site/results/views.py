@@ -20,8 +20,8 @@ class ResultsView(DetailView):
         for s in self.object.sound_set.all():
             left = s.start / float(self.object.length) * 100
             width = s.end / float(self.object.length) * 100 - left
-            r = int(s.stressful * 2.55)
-            g = 255 - r
+            r = min(255, int(s.stressful * 2.55 * 2))
+            g = min(255, int((100-s.stressful) * 2.55 * 2))
             b = 0
             sound = {'left': left,
                 'width': width,

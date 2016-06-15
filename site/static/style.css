@@ -29,6 +29,11 @@ img.waveform {
 	height: 100px;
 }
 
+img.mini-waveform {
+	width: 100px;
+	height: 20px;
+}
+
 .vertical-align {
 	margin: auto;
 }
@@ -43,6 +48,10 @@ img.waveform {
 
 .spacer {
 	height: 1ex;
+}
+
+tr.highlight:hover {
+	background-color: #bbdefb;
 }
 
 /* STRESS METERS */

@@ -1,30 +1,55 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}RelacS{% endblock %}
 
 {% block content %}
 <div class="mui-container">
-<table class="mui-table">
-	<thead>
-		<tr>
-			<th>File</th>
-			<th>Stressful</th>
-			<th>Relaxing</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for recording in recordings %}
-			<tr>
-				<td>
-					<a href="{% url 'result' recording.pk %}">
-						{{ recording.filename }}
-					</a>
-				</td>
-				<td>{{ recording.stressful }}%</td>
-				<td>{{ recording.relaxing }}%</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+	<div class="mui-row">
+		<div class="mui-col-md-12 mui--text-display1">
+			Welcome to RELACS
+		</div>
+	</div>
+	<div class="mui-row">
+		<div class="mui-col-md-3">
+			<button class="mui-btn mui-btn--primary">New recording</button>
+		</div>
+	</div>
+	<div class="mui-row">
+		<div class="mui-col-md-12 mui--text-title">
+			Previous recordings
+		</div>
+	</div>
+	<div class="mui-row">
+		<div class="mui-col-md-12">
+			<table class="mui-table">
+				<thead>
+					<tr>
+						<th width="1px;"></th>
+						<th>Recording</th>
+						<th>Stressful</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for recording in recordings %}
+						<tr class="highlight">
+							<td>
+								<a href="{% url 'result' recording.pk %}">
+									<img class="mini-waveform"
+										src="{% static recording.image %}" />
+								</a>
+							</td>
+							<td>
+								<a href="{% url 'result' recording.pk %}">
+									{{ recording.filename }}
+								</a>
+							</td>
+							<td>{{ recording.stressful }}%</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock content %}

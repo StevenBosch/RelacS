@@ -4,6 +4,7 @@ from unipath import Path
 import pickle
 from pydub import AudioSegment
 from PIL import Image, ImageDraw
+import re
 
 BEGIN  = 0
 END    = 1
@@ -22,6 +23,7 @@ class Command(BaseCommand):
         class_file = Path(options['classification'])
         with open(class_file, 'r') as f:
             results = pickle.load(f)
+            print results.keys()
             print results['stressful']
             classification = []
             for i in range(len(results['windows'])):
@@ -29,9 +31,19 @@ class Command(BaseCommand):
                     results['windows'][i][1], results['stressful'][i]))
         print classification
 
+        # Make the name a bit nicer
+        p = re.compile(r'([^_]+)_(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+)')
+        m = p.match(wav.stem)
+        if m:
+            filename = '{} {}-{}-{} {}:{}:{}'.format(m.group(1), m.group(2),
+                m.group(3), m.group(4), m.group(5), m.group(6), m.group(7))
+            print filename
+        else:
+            filename = wav.stem
+
         length = classification[-1][END] # end of the last window
         stress = sum([w[STRESS] for w in classification]) / float(len(classification)) * 100
-        rec = models.Recording(filename=wav.stem, length=length, stressful=stress,
+        rec = models.Recording(filename=filename, length=length, stressful=stress,
             relaxing=0)
         rec.save()
         print "Loaded file", rec, "with length", length
@@ -47,7 +59,7 @@ class Command(BaseCommand):
                 min_stress = w[STRESS]
             stress_hist.append(w[STRESS])
 
-        stress_thres = (max_stress - min_stress) / 2.0 + min_stress
+        stress_thres = max(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
 
         avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
@@ -79,13 +91,13 @@ class Command(BaseCommand):
             sound.save()
 
         print "Creating image file"
-        self._wav_to_image(wav)
+        self._wav_to_image(wav, filename)
 
-    def _wav_to_image(self, filename):
+    def _wav_to_image(self, filename, outname):
         width = 1000
         height = 100
         barwidth = 1
-        img = Image.new('RGB', (width, height), "#2196F3")
+        img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
 
         audio = AudioSegment.from_file(filename)
@@ -99,9 +111,8 @@ class Command(BaseCommand):
         for i in range(width / barwidth):
             sec = audio[int(i*sec_width):int((i+1)*sec_width)]
             amp = sec.max_dBFS * dBpp
-            draw.rectangle([(i, 0), ((i+1)*barwidth, amp)], fill=(255, 255, 255))
-            draw.rectangle([(i, height), ((i+1)*barwidth, height-amp)], fill=(255, 255, 255))
+            draw.rectangle([(i, height-amp), ((i+1)*barwidth, amp)], fill="#2196F3")
         del draw
 
-        dest_file = Path('static/' + filename.stem + '.png')
+        dest_file = Path('static/' + outname + '.png')
         img.save(dest_file)
