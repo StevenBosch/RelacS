@@ -73,7 +73,14 @@ class Command(BaseCommand):
         curr_sound = 0
         in_sound = False
         for lvl in range(len(stress_hist)):
-            if stress_hist[lvl] > stress_thres or stress_hist[lvl] > high_stress_thres :
+            if stress_hist[lvl] > stress_thres:
+                if in_sound == False:
+                    curr_sound += 1
+                    sounds[curr_sound] = {'windows': [], 'stress': []}
+                in_sound = True
+                sounds[curr_sound]['windows'].append(lvl)
+                sounds[curr_sound]['stress'].append(stress_hist[lvl])
+            elif stress_hist[lvl] > high_stress_thres  :
                 if in_sound == False:
                     curr_sound += 1
                     sounds[curr_sound] = {'windows': [], 'stress': []}
