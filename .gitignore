@@ -2,6 +2,8 @@
 *.aux
 *.pdf
 *.synctex.gz
+*.bbl
+*.blg
 
 # Directories
 code/preprocessing/tmp/

@@ -35,10 +35,30 @@ But first a simple representation of the working of RELACS is given. RELACS is a
 When a processed recording of 30 seconds is presented to the tool, it calculates the overall percentage of stressfulness of the sample and shows where in the sample the stressful sounds are located. 
 Basically what RELACS does is: sound in, stress analysis out.
 
-A processed recording means that a recording (.wav-file) should first be processed to a cochleogram (as in a .hdf5 file) before it can be presented to RELACS. The system then cuts the sample in windows of each 128
+A processed recording means that a recording (.wav-file) should first be processed to a cochleogram (as in a .hdf5 file) before it can be presented to RELACS. The system then cuts the sample in windows of each 128 samples.
 
 \section{Technical specifications}
+The web-app uses a Django front-end to display the results and allow the user
+to make new recordings. When the user makes a recording it is send to the
+back-end for processing. The back-end will first convert the input to a HDF5
+file and do all the related processing. After this is done it will apply several
+machine learning methods. The results of all the machine learning methods are
+combined and a histogram of the stress levels in the file will be created based
+on the stress levels of each window in the input file.
 
+After the machine learning is combined into a histogram a threshold level is
+calculated for the histogram. All continuous parts in the histogram that are
+above this threshold are identified as a stress event or "sound". These sounds
+are given an individual stress level based on the windows that make up the
+sound. The front-end will display these sounds as coloured bars under a waveform
+representation, a coloured bar can be clicked to give more details about the
+sound.
+
+A file will also be given a global stress level by taking the average stress
+for each window, this also includes the windows that are not part of any of the
+sounds. This is displayed separately from the sounds that have been found in
+the audio file. At the same time a waveform representation is also generated so
+that the user can relate the sounds that are found to the audio.
 
 \section{Performance analysis}
 
