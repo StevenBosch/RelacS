@@ -11,6 +11,7 @@ sound_files/*
 site/static/*.png
 code/data/
 code/tmp/
+code/tmpPlots/
 
 db.sqlite3
 

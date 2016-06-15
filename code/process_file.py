@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
     differenceFactors, loudnessFactors = getSuddenSounds(signals)
     
-    ######### Loudness and sudden factors #########
+    ######### Loudness and sudden features #########
     for index, window in enumerate(windowPredictions['windows']):
         diffFactor = float(sum(differenceFactors[window[0]:window[1]])) / float(window[1]-window[0])
         loudFactor = float(sum(loudnessFactors[window[0]:window[1]])) / float(window[1]-window[0])
