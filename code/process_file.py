@@ -198,10 +198,10 @@ if __name__ == '__main__':
     plotResults(windowPredictions, 'pred_', plotting = 'stressful')
     
     # Get the labeling from labeling.yaml and plot the comparisons to our predictions
-    #original = getOriginal(windowPredictions, soundFile)
-    #if original['stressful']:
-    #    plotResults(original, 'labeled_')
-    #    plotStressfullBoth(windowPredictions, original)
+    original = getOriginal(windowPredictions, soundFile)
+    if original['stressful']:
+        plotResults(original, 'labeled_')
+        plotStressfullBoth(windowPredictions, original)
     
     ######### STORAGE #########
     # Store everything to be processed by the site
