@@ -60,19 +60,20 @@ class Command(BaseCommand):
             stress_hist.append(w[STRESS])
 
         #stress_thres = max(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
-        stress_thres = (max_stress - min_stress) / 2.0 + min_stress + 0.000001
+        stress_thres =      (max_stress - min_stress)*0.50 + min_stress
+        high_stress_thres = (max_stress - min_stress)*0.75 + min_stress
 
         avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
         print "Maximum:", max_stress
         print "Average:", avg_stress
-        print "Threshold:", stress_thres
+        print "Thresholds:", stress_thres ', ', high_stress_thres
 
         sounds = {}
         curr_sound = 0
         in_sound = False
         for lvl in range(len(stress_hist)):
-            if stress_hist[lvl] >= stress_thres:
+            if stress_hist[lvl] > stress_thres or stress_hist[lvl] > high_stress_thres :
                 if in_sound == False:
                     curr_sound += 1
                     sounds[curr_sound] = {'windows': [], 'stress': []}
