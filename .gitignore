@@ -10,6 +10,7 @@ sound_files/
 sound_files/*
 site/static/*.png
 code/data/
+code/tmp/
 
 db.sqlite3
 
