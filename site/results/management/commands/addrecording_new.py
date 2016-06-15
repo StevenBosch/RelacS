@@ -75,7 +75,8 @@ class Command(BaseCommand):
         curr_loud_sound = 0
         in_sound = False
         in_loud_sound = False
-        same_start = False
+        same_started = False
+        same_ended = False
         for lvl in range(len(stress_hist)):
             low_started = False
             low_ended = False
@@ -89,30 +90,40 @@ class Command(BaseCommand):
                 sounds[curr_sound]['windows'].append(lvl)
                 sounds[curr_sound]['stress'].append(stress_hist[lvl])
             else:
-                low_ended = True
+                if in_sound:
+                    low_ended = True
                 in_sound = False
 
-
+            high_started = False
+            high_ended = False
             if stress_hist[lvl] > high_stress_thres :
-                if low_ended == True :
-                    same_end = False
                 if in_loud_sound == False:
-                    if low_started :
-                        same_start = True
-                    else : 
-                        same_start = False
-
+                    high_started = True
                     tot_sounds += 1
                     curr_loud_sound = tot_sounds
                     sounds[curr_loud_sound] = {'windows': [], 'stress': []}
-                elif low_started :
-                    same_start = False
-
                 in_loud_sound = True
                 sounds[curr_loud_sound]['windows'].append(lvl)
                 sounds[curr_loud_sound]['stress'].append(stress_hist[lvl])
             else:
+                if in_loud_sound :
+                    high_ended = True
                 in_loud_sound = False
+
+            if low_started and high_started :
+                same_started = True
+            elif low_started or high_started :
+                same_started = False
+
+            if low_ended and high_ended :
+                same_ended = True
+            elif low_ended or high_ended :
+                same_ended = False
+
+            if same_started and same_ended;
+                same_started = False
+                same_ended = False
+                del sounds[curr_loud_sound]
 
         print sounds
 
