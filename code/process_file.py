@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from classify import classifyFile
 import yaml, h5py, pickle
 import pycpsp.files as files
@@ -13,31 +13,110 @@ def makeWavelet(signals):
     # hist = savgol_filter(hist, 15, 3)
     return hist
 
-#def addOriginalLabels(predictions):
-#    with open("labeling/labeling.csv", 'r') as f:
+def replace_last_two(source_string, replace_what, replace_with):
+    first_part, sep, tail = source_string.rpartition(replace_what)
+    head, sep, middle = first_part.rpartition(replace_what)
+
+    return head + replace_with + middle + replace_with + tail
+
+def getOriginal(predictions, soundFile):
+    ID         = 0
+    FILENAME   = 1
+    LABELER    = 2
+    START_TIME = 3
+    END_TIME   = 4
+    STRESSFUL  = 5
+    RELAXING   = 6
+    SUDDEN     = 7
+    CATEGORY   = 8
+    OTHER      = 9
+    
+    soundFile = os.path.basename(soundFile)
+    for i in range(3):
+        soundFile = os.path.splitext(soundFile)[0]
+    
+    original = {}
+#    for key in predictions.keys():
+#        original[key] = []
+    for key in ['time', 'stressful', 'relaxing', 'sudden']:
+        original[key] = []
         
-def plotResults(predictions):
+    with open("labeling/labeling.csv", 'r') as f:
+        soundFile2 = replace_last_two(soundFile, ':', '-')
+        for line in f.readlines():
+            line = line.strip()
+            row = line.split(',')
+            if row[FILENAME] == soundFile or row[FILENAME] == soundFile2:
+                original['time'].append([float(row[START_TIME][-6:]), float(row[END_TIME][-6:])])
+                original['stressful'].append(1) if row[STRESSFUL].lower() == 'yes' else original['stressful'].append(0)
+                original['relaxing'].append(1) if row[RELAXING].lower() == 'yes' else original['relaxing'].append(0)
+                original['sudden'].append(1) if row[SUDDEN].lower() == 'yes' else original['sudden'].append(0)
+    return original
+        
+def plotResults(predictions, name):
     time = []
     for moment in predictions['time']:
         time.append((moment[0] + moment[1])/2.0)
     
     for key in predictions.keys():
         if not key == 'windows':
-            plt.figure(1)
+            # plt.figure(1)
             plt.plot(time, predictions[key])
             plt.title(key)
-            plt.show()        
+            plt.savefig('tmp/' + name + key + '.png')
+            plt.close()
+
+def plotStressfullBoth(predictions, original):
+    time = []
+    originalStress = []
+    originalRelax = []
+    originalSudden = []
+    for index, moment in enumerate(predictions['time']):
+        mom = (moment[0] + moment[1])/2.0
+        time.append(mom)
+        for index2, window in enumerate(original['time']):
+            if mom >= window[0] and mom <= window[1]:
+                originalStress.append(original['stressful'][index2])
+                originalRelax.append(original['relaxing'][index2])
+                originalSudden.append(original['sudden'][index2])
+                break
+            if index2 == len(original['time']) - 1:
+                originalStress.append(0)
+                originalRelax.append(0)
+                originalSudden.append(0)
+    
+    plt.figure(1)
+    plt.plot(time, predictions['stressful'])
+    plt.plot(time, originalStress)
+    plt.title('Stressfulness')
+    plt.savefig('tmp/stressfullBoth.png')
+    plt.close()
+
+    plt.figure(1)
+    plt.plot(time, predictions['relaxing'])
+    plt.plot(time, originalRelax)
+    plt.title('Relaxing')
+    plt.savefig('tmp/relaxBoth.png')
+    plt.close()    
+    
+    plt.figure(1)
+    plt.plot(time, predictions['sudden'])
+    plt.plot(time, originalSudden)
+    plt.title('Sudden')
+    plt.savefig('tmp/suddenBoth.png')
+    plt.close()    
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print "Usage: python processSoundFile.py <filename.hdf5> <windows.yaml>"
-    with open(sys.argv[2], 'r') as f:
+    if len(sys.argv) != 2:
+        print "Usage: python processSoundFile.py <filename.hdf5>"
+
+    with open('labeling/windows.yaml', 'r') as f:
         windows = yaml.load(f)
     
     # Settings
     dirs = {}
-    dirs['networks'] = 'CNN/trained_nets/'
-    dirs['fihs'] = 'feat_extraction/classifiers/'
+    dirs['networks'] = 'classifiers/trained_nets/'
+    dirs['fihs'] = 'classifiers/fih'
     
     soundFile = sys.argv[1]
     filepointer = h5py.File(soundFile, 'r+')
@@ -54,7 +133,13 @@ if __name__ == '__main__':
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
     
-    plotResults(windowPredictions)
+    original = getOriginal(windowPredictions, soundFile)
+    
+    plotResults(windowPredictions, 'pred_')
+    
+    # These only work when the file is in labeling.yaml
+    # plotResults(original, 'label_')
+    # plotStressfullBoth(windowPredictions, original)
 
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
