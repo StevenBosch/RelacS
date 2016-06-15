@@ -61,6 +61,10 @@ def plotResults(predictions, name, plotting = 'stressful'):
     if plotting == 'stressful':
         plt.plot(time, predictions['stressful'])
         plt.title('stressful')
+        try:
+            os.remove('tmp/' + name + 'stressful' + '.png')
+        except OSError:
+            pass
         plt.savefig('tmp/' + name + 'stressful' + '.png')
         plt.close()        
     else:
@@ -69,6 +73,10 @@ def plotResults(predictions, name, plotting = 'stressful'):
                 # plt.figure(1)
                 plt.plot(time, predictions[key])
                 plt.title(key)
+                try:
+                    os.remove('tmp/' + name + key + '.png')
+                except OSError:
+                    pass
                 plt.savefig('tmp/' + name + key + '.png')
                 plt.close()
 
@@ -78,7 +86,7 @@ def plotStressfullBoth(predictions, original):
     tmp = {}
     for cat in cats:
         tmp[cat] = []
-        
+    
     for index, moment in enumerate(predictions['time']):
         mom = (moment[0] + moment[1])/2.0
         time.append(mom)
@@ -95,8 +103,12 @@ def plotStressfullBoth(predictions, original):
         plt.figure(1)
         plt.plot(time, predictions[cat])
         plt.plot(time, tmp[cat])
-        plt.title(cat)
-        plt.savefig('tmp/' + cat + '.png')
+        plt.title(cat + ' both')
+        try:
+            os.remove('tmp/' + cat + '_both.png')
+        except OSError:
+            pass
+        plt.savefig('tmp/' + cat + '_both.png')
         plt.close()
 
 if __name__ == '__main__':
@@ -132,8 +144,9 @@ if __name__ == '__main__':
     
     # Get the labeling from labeling.yaml and plot the comparisons to our predictions
     original = getOriginal(windowPredictions, soundFile)
-    plotResults(original, 'label_')
-    plotStressfullBoth(windowPredictions, original)
+    if original['stressful']:
+        plotResults(original, 'labeled_')
+        plotStressfullBoth(windowPredictions, original)
 
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
