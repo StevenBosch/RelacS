@@ -54,6 +54,10 @@ tr.highlight:hover {
 	background-color: #bbdefb;
 }
 
+img.logo {
+	height: 2em;
+}
+
 /* STRESS METERS */
 .meter {
 	height: 1em;
