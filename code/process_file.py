@@ -167,21 +167,20 @@ if __name__ == '__main__':
     ######### CLASSIFICATION  #########
     windowPredictions, filePredictions = classifyFile(dirs, soundFile, windows)
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
+    sudden = True
+    loudness = True
     
     ######### Loudness and sudden features #########
     hist = makeWavelet(signals)
     
-    sudden = True
     if sudden:
         differenceFactors, loudnessFactors = getSuddenSounds(hist, signals)
         for index, window in enumerate(windowPredictions['windows']):
             diffFactor = float(sum(differenceFactors[window[0]:window[1]])) / float(window[1]-window[0])
             loudFactor = float(sum(loudnessFactors[window[0]:window[1]])) / float(window[1]-window[0])
             windowPredictions['stressful'][index] *= diffFactor * loudFactor
-            if windowPredictions['stressful'][index] > 1:
-                windowPredictions['stressful'][index] = 1
+            windowPredictions['stressful'][index] = min(windowPredictions['stressful'][index], 1)
     
-    loudness = False
     if loudness:
         windowPredictions = loudness_feature(hist, windowPredictions)
     
