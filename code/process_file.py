@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, shutil
 from classify import classifyFile
 import yaml, h5py, pickle
 import pycpsp.files as files
@@ -61,11 +61,7 @@ def plotResults(predictions, name, plotting = 'stressful'):
     if plotting == 'stressful':
         plt.plot(time, predictions['stressful'])
         plt.title('stressful')
-        try:
-            os.remove('tmp/' + name + 'stressful' + '.png')
-        except OSError:
-            pass
-        plt.savefig('tmp/' + name + 'stressful' + '.png')
+        plt.savefig('tmpPlots/' + name + 'stressful' + '.png')
         plt.close()        
     else:
         for key in predictions.keys():
@@ -73,11 +69,7 @@ def plotResults(predictions, name, plotting = 'stressful'):
                 # plt.figure(1)
                 plt.plot(time, predictions[key])
                 plt.title(key)
-                try:
-                    os.remove('tmp/' + name + key + '.png')
-                except OSError:
-                    pass
-                plt.savefig('tmp/' + name + key + '.png')
+                plt.savefig('tmpPlots/' + name + key + '.png')
                 plt.close()
 
 def plotStressfullBoth(predictions, original):
@@ -104,11 +96,7 @@ def plotStressfullBoth(predictions, original):
         plt.plot(time, predictions[cat])
         plt.plot(time, tmp[cat])
         plt.title(cat + ' both')
-        try:
-            os.remove('tmp/' + cat + '_both.png')
-        except OSError:
-            pass
-        plt.savefig('tmp/' + cat + '_both.png')
+        plt.savefig('tmpPlots/' + cat + '_both.png')
         plt.close()
 
 if __name__ == '__main__':
@@ -138,8 +126,9 @@ if __name__ == '__main__':
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
     
-    if not os.path.exists('tmp/'):
-        os.makedirs('tmp/')
+    if os.path.exists('tmpPlots/'):
+        shutil.rmtree('tmpPlots')
+    os.makedirs('tmpPlots/')
     plotResults(windowPredictions, 'pred_', plotting = 'stressful')
     
     # Get the labeling from labeling.yaml and plot the comparisons to our predictions
