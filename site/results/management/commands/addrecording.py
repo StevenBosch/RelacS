@@ -67,28 +67,37 @@ class Command(BaseCommand):
         print "Minimum:", min_stress
         print "Maximum:", max_stress
         print "Average:", avg_stress
-        print "Thresholds:", stress_thres ', ', high_stress_thres
+        print "Threshold:", stress_thres
 
         sounds = {}
+        tot_sounds = 0
         curr_sound = 0
+        curr_loud_sound = 0
         in_sound = False
+        in_loud_sound = False
         for lvl in range(len(stress_hist)):
-            if stress_hist[lvl] > stress_thres:
+            if stress_hist[lvl] > stress_thres :
                 if in_sound == False:
-                    curr_sound += 1
-                    sounds[curr_sound] = {'windows': [], 'stress': []}
-                in_sound = True
-                sounds[curr_sound]['windows'].append(lvl)
-                sounds[curr_sound]['stress'].append(stress_hist[lvl])
-            elif stress_hist[lvl] > high_stress_thres  :
-                if in_sound == False:
-                    curr_sound += 1
+                    tot_sounds += 1
+                    curr_sound = tot_sounds
                     sounds[curr_sound] = {'windows': [], 'stress': []}
                 in_sound = True
                 sounds[curr_sound]['windows'].append(lvl)
                 sounds[curr_sound]['stress'].append(stress_hist[lvl])
             else:
                 in_sound = False
+
+            if stress_hist[lvl] > high_stress_thres :
+                if in_loud_sound == False:
+                    tot_sounds += 1
+                    curr_loud_sound = tot_sounds
+                    sounds[curr_loud_sound] = {'windows': [], 'stress': []}
+                in_sound = True
+                sounds[curr_loud_sound]['windows'].append(lvl)
+                sounds[curr_loud_sound]['stress'].append(stress_hist[lvl])
+            else:
+                in_sound = False
+
         print sounds
 
         for key, s in sounds.items():
