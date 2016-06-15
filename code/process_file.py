@@ -73,44 +73,31 @@ def plotResults(predictions, name, plotting = 'stressful'):
                 plt.close()
 
 def plotStressfullBoth(predictions, original):
+    cats = ['stressful', 'relaxing', 'sudden']
     time = []
-    originalStress = []
-    originalRelax = []
-    originalSudden = []
+    tmp = {}
+    for cat in cats:
+        tmp[cat] = []
+        
     for index, moment in enumerate(predictions['time']):
         mom = (moment[0] + moment[1])/2.0
         time.append(mom)
         for index2, window in enumerate(original['time']):
             if mom >= window[0] and mom <= window[1]:
-                originalStress.append(original['stressful'][index2])
-                originalRelax.append(original['relaxing'][index2])
-                originalSudden.append(original['sudden'][index2])
+                for cat in cats:
+                    tmp[cat].append(original[cat][index2])
                 break
             if index2 == len(original['time']) - 1:
-                originalStress.append(0)
-                originalRelax.append(0)
-                originalSudden.append(0)
+                for cat in cats:
+                    tmp[cat].append(0)
     
-    plt.figure(1)
-    plt.plot(time, predictions['stressful'])
-    plt.plot(time, originalStress)
-    plt.title('Stressfulness')
-    plt.savefig('tmp/stressfullBoth.png')
-    plt.close()
-
-    plt.figure(1)
-    plt.plot(time, predictions['relaxing'])
-    plt.plot(time, originalRelax)
-    plt.title('Relaxing')
-    plt.savefig('tmp/relaxBoth.png')
-    plt.close()    
-    
-    plt.figure(1)
-    plt.plot(time, predictions['sudden'])
-    plt.plot(time, originalSudden)
-    plt.title('Sudden')
-    plt.savefig('tmp/suddenBoth.png')
-    plt.close()    
+    for cat in cats:  
+        plt.figure(1)
+        plt.plot(time, predictions[cat])
+        plt.plot(time, tmp[cat])
+        plt.title(cat)
+        plt.savefig('tmp/' + cat + '.png')
+        plt.close()
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -139,13 +126,14 @@ if __name__ == '__main__':
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
     
-    original = getOriginal(windowPredictions, soundFile)
-    
+    if not os.path.exists('tmp/'):
+        os.makedirs('tmp/')
     plotResults(windowPredictions, 'pred_', plotting = 'stressful')
     
-    # These only work when the file is in labeling.yaml
-    # plotResults(original, 'label_')
-    # plotStressfullBoth(windowPredictions, original)
+    # Get the labeling from labeling.yaml and plot the comparisons to our predictions
+    original = getOriginal(windowPredictions, soundFile)
+    plotResults(original, 'label_')
+    plotStressfullBoth(windowPredictions, original)
 
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
