@@ -9,15 +9,17 @@ def makeWavelet(signals):
     energy = signals['energy'][:,:]
     hist = []
     for row in np.transpose(energy):
-        hist.append(sum(row))
+        if np.any(np.asarray(row) < 0):
+            hist.append(0)
+        else:
+            hist.append(sum(row))
     # hist = savgol_filter(hist, 15, 3)
     return hist
 
-def getSuddenSounds(signals):
+def getSuddenSounds(hist, signals):
     loudnessFactors = []
     differenceFactors = []
     difference = 0
-    hist = makeWavelet(signals)
     for index, value in enumerate(hist):
         if index + 1 == len(hist):
             break
@@ -36,11 +38,27 @@ def getSuddenSounds(signals):
                 differenceFactors.append(1)
                 
     avgEnergy = sum(hist)/len(hist)
+    
     for value in hist:
         loudnessFactors.append(value/avgEnergy)
     
     return differenceFactors, loudnessFactors
 
+def loudness_feature(hist, windowPredictions, split = 0.9, std_mult = 3) :
+    big_part = sorted(hist)[:int(len(hist)*split)]
+    threshold = np.mean(big_part) + std_mult*np.std(big_part)
+    
+    for index, window in enumerate(windowPredictions['windows']):
+        beg, end = windowPredictions['windows'][index]
+        is_loud_list = hist[beg:end] > threshold
+        avg_is_loud = np.sum(is_loud_list)/float(end-beg)
+        avg_is_loud *= 2
+        loud_prediction = min(avg_is_loud, 1.)
+        prediction = windowPredictions['stressful'][index] 
+        windowPredictions['stressful'][index] = max(loud_prediction, prediction)
+    
+    return windowPredictions
+    
 def replace_last_two(source_string, replace_what, replace_with):
     first_part, sep, tail = source_string.rpartition(replace_what)
     head, sep, middle = first_part.rpartition(replace_what)
@@ -149,15 +167,23 @@ if __name__ == '__main__':
     ######### CLASSIFICATION  #########
     windowPredictions, filePredictions = classifyFile(dirs, soundFile, windows)
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
-    differenceFactors, loudnessFactors = getSuddenSounds(signals)
     
     ######### Loudness and sudden features #########
-    for index, window in enumerate(windowPredictions['windows']):
-        diffFactor = float(sum(differenceFactors[window[0]:window[1]])) / float(window[1]-window[0])
-        loudFactor = float(sum(loudnessFactors[window[0]:window[1]])) / float(window[1]-window[0])
-        windowPredictions['stressful'][index] *= diffFactor * loudFactor
-        if windowPredictions['stressful'][index] > 1:
-            windowPredictions['stressful'][index] = 1
+    hist = makeWavelet(signals)
+    
+    sudden = True
+    if sudden:
+        differenceFactors, loudnessFactors = getSuddenSounds(hist, signals)
+        for index, window in enumerate(windowPredictions['windows']):
+            diffFactor = float(sum(differenceFactors[window[0]:window[1]])) / float(window[1]-window[0])
+            loudFactor = float(sum(loudnessFactors[window[0]:window[1]])) / float(window[1]-window[0])
+            windowPredictions['stressful'][index] *= diffFactor * loudFactor
+            if windowPredictions['stressful'][index] > 1:
+                windowPredictions['stressful'][index] = 1
+    
+    loudness = False
+    if loudness:
+        windowPredictions = loudness_feature(hist, windowPredictions)
     
     ######### WINDOWS TO TIMES #########
     attrs = filepointer.attrs
