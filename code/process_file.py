@@ -53,18 +53,24 @@ def getOriginal(predictions, soundFile):
                 original['sudden'].append(1) if row[SUDDEN].lower() == 'yes' else original['sudden'].append(0)
     return original
         
-def plotResults(predictions, name):
+def plotResults(predictions, name, plotting = 'stressful'):
     time = []
     for moment in predictions['time']:
         time.append((moment[0] + moment[1])/2.0)
     
-    for key in predictions.keys():
-        if not key == 'windows':
-            # plt.figure(1)
-            plt.plot(time, predictions[key])
-            plt.title(key)
-            plt.savefig('tmp/' + name + key + '.png')
-            plt.close()
+    if plotting == 'stressful':
+        plt.plot(time, predictions['stressful'])
+        plt.title('stressful')
+        plt.savefig('tmp/' + name + 'stressful' + '.png')
+        plt.close()        
+    else:
+        for key in predictions.keys():
+            if not key == 'windows':
+                # plt.figure(1)
+                plt.plot(time, predictions[key])
+                plt.title(key)
+                plt.savefig('tmp/' + name + key + '.png')
+                plt.close()
 
 def plotStressfullBoth(predictions, original):
     time = []
@@ -135,7 +141,7 @@ if __name__ == '__main__':
     
     original = getOriginal(windowPredictions, soundFile)
     
-    plotResults(windowPredictions, 'pred_')
+    plotResults(windowPredictions, 'pred_', plotting = 'stressful')
     
     # These only work when the file is in labeling.yaml
     # plotResults(original, 'label_')
