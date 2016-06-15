@@ -95,7 +95,7 @@ class Command(BaseCommand):
 
             if stress_hist[lvl] > high_stress_thres :
                 if low_ended == True :
-                    
+                    same_end = False
                 if in_loud_sound == False:
                     if low_started :
                         same_start = True
@@ -108,11 +108,11 @@ class Command(BaseCommand):
                 elif low_started :
                     same_start = False
 
-                in_sound = True
+                in_loud_sound = True
                 sounds[curr_loud_sound]['windows'].append(lvl)
                 sounds[curr_loud_sound]['stress'].append(stress_hist[lvl])
             else:
-                in_sound = False
+                in_loud_sound = False
 
         print sounds
 
