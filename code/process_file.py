@@ -3,16 +3,62 @@ from classify import classifyFile
 import yaml, h5py, pickle
 import pycpsp.files as files
 import matplotlib.pyplot as plt
+import numpy as np
 
 def makeWavelet(signals):
     energy = signals['energy'][:,:]
-    hist = np.zeros(len(energy[0]))
-    for row in energy:
-        hist = [x + y for x, y in zip(energy, row)]
-    # Smoothing
+    hist = []
+    for row in np.transpose(energy):
+        if np.any(np.asarray(row) < 0):
+            hist.append(0)
+        else:
+            hist.append(sum(row))
     # hist = savgol_filter(hist, 15, 3)
     return hist
 
+def getSuddenSounds(hist, signals):
+    loudnessFactors = []
+    differenceFactors = []
+    difference = 0
+    for index, value in enumerate(hist):
+        if index + 1 == len(hist):
+            break
+        else:
+            difference += abs(value - hist[index + 1])
+    avgDiff = float(difference) / float(len(hist) - 1)
+    
+    differenceFactors.append(1)
+    for index, value in enumerate(hist):
+        if index + 1 == len(hist):
+            break
+        else:
+            if float(hist[index + 1] - value) > avgDiff:
+                differenceFactors.append(float(hist[index + 1] - value) / avgDiff)
+            else:
+                differenceFactors.append(1)
+                
+    avgEnergy = sum(hist)/len(hist)
+    
+    for value in hist:
+        loudnessFactors.append(value/avgEnergy)
+    
+    return differenceFactors, loudnessFactors
+
+def loudness_feature(hist, windowPredictions, split = 0.9, std_mult = 3) :
+    big_part = sorted(hist)[:int(len(hist)*split)]
+    threshold = np.mean(big_part) + std_mult*np.std(big_part)
+    
+    for index, window in enumerate(windowPredictions['windows']):
+        beg, end = windowPredictions['windows'][index]
+        is_loud_list = hist[beg:end] > threshold
+        avg_is_loud = np.sum(is_loud_list)/float(end-beg)
+        avg_is_loud *= 2
+        loud_prediction = min(avg_is_loud, 1.)
+        prediction = windowPredictions['stressful'][index] 
+        windowPredictions['stressful'][index] = max(loud_prediction, prediction)
+    
+    return windowPredictions
+    
 def replace_last_two(source_string, replace_what, replace_with):
     first_part, sep, tail = source_string.rpartition(replace_what)
     head, sep, middle = first_part.rpartition(replace_what)
@@ -66,7 +112,7 @@ def plotResults(predictions, name, plotting = 'stressful'):
     else:
         for key in predictions.keys():
             if not key == 'windows':
-                # plt.figure(1)
+                plt.figure(1)
                 plt.plot(time, predictions[key])
                 plt.title(key)
                 plt.savefig('tmpPlots/' + name + key + '.png')
@@ -106,26 +152,46 @@ if __name__ == '__main__':
     with open('labeling/windows.yaml', 'r') as f:
         windows = yaml.load(f)
     
-    # Settings
+    ######### DIRECTORIES #########
     dirs = {}
     dirs['networks'] = 'classifiers/trained_nets/'
     dirs['fihs'] = 'classifiers/fih'
     
+    
+    ######### READING FILE #########
     soundFile = sys.argv[1]
     filepointer = h5py.File(soundFile, 'r+')
     signals = files.signalsFromHDF5(soundFile)    
     
-    # Get the window and file classifications
+    
+    ######### CLASSIFICATION  #########
     windowPredictions, filePredictions = classifyFile(dirs, soundFile, windows)
     # windowPredictions = pickle.load( open( "windowPredictions.pickle", "rb" ) )
+    sudden = True
+    loudness = True
     
-    # Add window times
+    ######### Loudness and sudden features #########
+    hist = makeWavelet(signals)
+    
+    if sudden:
+        differenceFactors, loudnessFactors = getSuddenSounds(hist, signals)
+        for index, window in enumerate(windowPredictions['windows']):
+            diffFactor = float(sum(differenceFactors[window[0]:window[1]])) / float(window[1]-window[0])
+            loudFactor = float(sum(loudnessFactors[window[0]:window[1]])) / float(window[1]-window[0])
+            windowPredictions['stressful'][index] *= diffFactor * loudFactor
+            windowPredictions['stressful'][index] = min(windowPredictions['stressful'][index], 1)
+    
+    if loudness:
+        windowPredictions = loudness_feature(hist, windowPredictions)
+    
+    ######### WINDOWS TO TIMES #########
     attrs = filepointer.attrs
     fs = filepointer['energy'].shape[1] / attrs['duration']
     windowPredictions['time'] = []
     for window in windowPredictions['windows']:
         windowPredictions['time'].append([window[0]/fs, window[1]/fs])
     
+    ######### PLOTTING #########
     if os.path.exists('tmpPlots/'):
         shutil.rmtree('tmpPlots')
     os.makedirs('tmpPlots/')
@@ -136,7 +202,8 @@ if __name__ == '__main__':
     if original['stressful']:
         plotResults(original, 'labeled_')
         plotStressfullBoth(windowPredictions, original)
-
+    
+    ######### STORAGE #########
     # Store everything to be processed by the site
     with open('windowPredictions.pickle', 'w') as f :
         pickle.dump(windowPredictions, f)

@@ -60,7 +60,8 @@ class Command(BaseCommand):
             stress_hist.append(w[STRESS])
 
         #stress_thres = max(0.5000001, (max_stress - min_stress) / 2.0 + min_stress)
-        stress_thres = (max_stress - min_stress) / 2.0 + min_stress + 0.000001
+        stress_thres =      (max_stress - min_stress)*0.50 + min_stress
+        high_stress_thres = (max_stress - min_stress)*0.75 + min_stress
 
         avg_stress = sum(stress_hist) / float(len(stress_hist))
         print "Minimum:", min_stress
@@ -69,18 +70,50 @@ class Command(BaseCommand):
         print "Threshold:", stress_thres
 
         sounds = {}
+        tot_sounds = 0
         curr_sound = 0
+        curr_loud_sound = 0
         in_sound = False
+        in_loud_sound = False
+        same_start = False
         for lvl in range(len(stress_hist)):
-            if stress_hist[lvl] >= stress_thres:
+            low_started = False
+            low_ended = False
+            if stress_hist[lvl] > stress_thres :
                 if in_sound == False:
-                    curr_sound += 1
+                    low_started = True
+                    tot_sounds += 1
+                    curr_sound = tot_sounds
                     sounds[curr_sound] = {'windows': [], 'stress': []}
                 in_sound = True
                 sounds[curr_sound]['windows'].append(lvl)
                 sounds[curr_sound]['stress'].append(stress_hist[lvl])
             else:
+                low_ended = True
                 in_sound = False
+
+
+            if stress_hist[lvl] > high_stress_thres :
+                if low_ended == True :
+                    
+                if in_loud_sound == False:
+                    if low_started :
+                        same_start = True
+                    else : 
+                        same_start = False
+
+                    tot_sounds += 1
+                    curr_loud_sound = tot_sounds
+                    sounds[curr_loud_sound] = {'windows': [], 'stress': []}
+                elif low_started :
+                    same_start = False
+
+                in_sound = True
+                sounds[curr_loud_sound]['windows'].append(lvl)
+                sounds[curr_loud_sound]['stress'].append(stress_hist[lvl])
+            else:
+                in_sound = False
+
         print sounds
 
         for key, s in sounds.items():
