@@ -37,16 +37,18 @@ Basically what RELACS does is: sound in, stress analysis out.
 
 
 \section{Technical specifications}
-The web-app uses a Django front-end to display the results and allow the user
-to make new recordings. When the user makes a recording it is send to the
-back-end for processing. The back-end will first convert the input to a HDF5
-file and do all the related processing. After this is done it will apply several
-machine learning methods. The results of all the machine learning methods are
-combined and a histogram of the stress levels in the file will be created based
-on the stress levels of each window in the input file.
 
-After the machine learning is combined into a histogram a threshold level is
-calculated for the histogram. All continuous parts in the histogram that are
+The web-app uses a Django front-end to display the results and allow the user
+to make new recordings. When the user makes a recording it is send to the back-end for processing. 
+
+\subsection{Back-end}
+
+\input{magic_box.tex}
+
+\subsection{Front-end}
+
+After the machine learning is combined into an array of stress levels a threshold 
+level is calculated for the array. All continuous parts in the array that are
 above this threshold are identified as a stress event or "sound". These sounds
 are given an individual stress level based on the windows that make up the
 sound. The front-end will display these sounds as coloured bars under a waveform
@@ -102,7 +104,6 @@ Its flexibility and user customization possibilities are not without consequence
 Training our classifier, for example, is something that could never happen client side, since it takes an average pc or laptop about twelve to fourteen hours of time (we dare not say what would happen on a phone).
 This means that we would have no other choice than doing this server-side.
 We would thus need a lot of processing power and storage space if every user would require a customized classifier, and of course users do not like waiting for their customized app for half a day.
-So implementing user customization would require more thinking.
 
 A major weakness of the existing application (without user customization) is its recognition rate.
 While we reach a reasonable rate (around 80\%), it is still far from human level.
@@ -117,6 +118,7 @@ With more training data the system might improve on these cases, but this requir
 Of course it is also the question whether the system should even pick up on those cases, since for humans it is apparently not always a clear case either.
 Again we see that the option of user customization is one that would probably alleviate this problem.
 
+
 \subsection{External factors}
 It is interesting to discuss the performance of the application on itself, but of course eventually the market decides whether it is worth anything.
 Let us discuss possible opportunities the market could offer us and threats that RELACS would have to face.
@@ -128,6 +130,9 @@ We could then customize the application for the specific company and train our s
 In that same line we could launch different options in our software, specified to various environments.
 People tend to react differently to sounds and tolerate sounds on different levels in different environments.
 In a home, for example, a drilling sounds is usually experienced as stress-inducing, while a construction worker would not be bothered by it at the workplace. 
+
+Another opportunity involves a possible extension of our product. Implementing source recognition would make it easier to implement user costumization by allowing users to enter which sources they find stressful. Our system could tweak its results accordingly by giving different weights to different sources. This could lessen the current weaknesses our product has.
+
 
 \subsection{Threats}
 Probably the biggest threat RELACS would face if brought to market, is that its uses would not get recognized by the majority of users.

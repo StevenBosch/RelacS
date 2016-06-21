@@ -1,0 +1,16 @@
+The back-end will first convert the input to a cochleogram. This has not yet been implemented in the final product.
+
+To extract stressful sounds from the cochleograms, two approaches are used. For the first approach the cochleogram is sliced into windows of about $\frac{2}{3}$ seconds that overlap for $50\%$. The probability that such a window contains a stressful sound is determined by looking solely at the mean intensity values per frequency band using a naive Bayes classifier.  
+
+The second approach consist mainly of a convolutional neural network (CNN). For this approach, first, the cochleogram is preprocessed so that sounds that have a shorter duration than 1 second are surpressed. Windows are extracted similarly. From these windows, features are extracted by the CNN. These are used as input for a multilayer perceptron, that outputs a the probability that the window is stressful. 
+
+These methods are combined into an array of stress level probabilities. Parts of sounds that have a very large amplitude with respect to the rest of a window are also marked stressful. The output of the back-end is thus an array of stress levels per window.
+
+
+
+%When the user makes a recording it is send to the back-end for processing. 
+%The back-end will first convert the input to a HDF5
+%file and do all the related processing. After this is done it will apply several
+%machine learning methods. The results of all the machine learning methods are
+%combined and a histogram of the stress levels in the file will be created based
+%on the stress levels of each window in the input file.
