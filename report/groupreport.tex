@@ -150,24 +150,35 @@ It is therefore imperative that the software contains some form of user input to
 Of course an average user would not use it until it works, but perhaps reinstall it after a while to see whether it has improved.
 
 \section{User manual}
-
-\begin{figure*}[h]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{./Website}
+\includegraphics[width=0.7\linewidth]{./Website}
 \caption{Screenshot of the overview page of the website, which contains previous recordings with previews of their respective .wav file, as well as the file name and the overall stress-level. At the current state of the project the `NEW RECORDING' button only acts as a place holder.}
 \label{fig:Website}
 \end{figure*}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.7\linewidth]{./Audio1Results}
+\caption{Screenshot of the results page of the website for one of the previous recordings. The results page consists of the file name, visual representation of the file, stress clusters bars, average stress level and a return button to the overview page, located at the top.}
+\label{fig:Audio1}
+\end{figure*}
+
+Currently, RELACS only works web-based and with .hdf5 files as input. At the homepage a list of previous analyses can be found, with their respective stressful-percentages. This can be used to compare samples taken at a specific place, but at different times. As can be seen in figure \ref{fig:Website}, the overview page contains the previous added recordings with their average stress scores.
+
+Processed files can be further inspected by clicking on them, which brings the user to the results page (see figure \ref{fig:Audio1}). The results page contains the name of the recording as well as a visual representation of the .wav file to help place the stress clusters into context. Underneath, a series of highlights are presented, which signify the clusters of sounds with a particular stress level. Red, yellow and colours in between are used to depict the stress level of a particular cluster, from high to low respectively. Figure \ref{fig:Audio2} shows a variety of stress levels in the clusters. Each cluster bar can be expanded by clicking on the respective bar, revealing its stress level through a stress ratio-bar and a percentage as is visible in figure \ref{fig:Audio1Expand}. On the right of the page the overall stressfulness of the audio file can be found, which is the average of the entire sound fragment and not that of only the clusters.
+
 \begin{figure*}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{./Audio1Results}
-\caption{Screenshot of the results page of the website for one of the previous recordings. The results page contains the name of the recording as well as a visual representation of the .wav file. Underneath,  }
-\label{fig:Audio1}
+\includegraphics[width=0.9\linewidth]{./Audio1ResultsExpand}
+\caption{Screenshot of the results page with expanded stress cluster bars, revealing a visual representation of their respective stress level, as well as a percentage.}
+\label{fig:Audio1Expand}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{./Audio2Results}
+\includegraphics[width=0.65\linewidth]{./Audio2Results}
+\caption{Additional screenshot of the results of another audio file, showing a larger number of stress cluster bars with a greater range of stress levels.}
 \label{fig:Audio2}
 \end{figure*}
 
