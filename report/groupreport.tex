@@ -1,6 +1,9 @@
 \documentclass[a4paper]{article}
 \usepackage{graphicx}
 \usepackage{fullpage}
+\usepackage{xfrac}
+\usepackage{hyperref}
+\usepackage{caption}
 
 \title{{RELACS: Reliable Estimator of Local Antagonizing and Counterproductive Sounds}}
 \author{Steven Bosch \and Luuk Boulogne \and Pim van der Meulen \and Xeryus Stokkel  \and Rogier de Weert}
@@ -21,17 +24,17 @@ When the user is more aware of stressful sounds in its sound environment (also c
 
 \subsection{Target group}
 Since stress can be experienced by anyone, we did not feel like limiting our product to a specific target audience.
-We could say that our user group consists of students, people working in an office, construction workers, and the elderly. 
+We could say that our user group consists of students, people working in an office, home owners or tenants, and the elderly. 
 The current version of our product is aimed at an English-speaking audience, although in future versions we hope to increase our user-count with a wider selection of languages. 
 
 \subsection{Improvements}
 We aim to improve the user awareness of the stress level in their surroundings.
-By showing users that some of the sounds present in their environment are stress-inducing, we want to improve the awareness of the importance of sound in order to create or find a relaxed environment. 
-We think that a relaxed environment would benefit a person, as productivity is higher when stress is lower.
+By showing users that some of the sounds present in their environment are stress inducing, we want to improve the awareness of the importance of sound in order to create or find a relaxing environment. 
+We think that a such an environment would benefit a person, as productivity increases and health improves when stress is lower.
 
 \section{Product description}
-In the next chapter the complete technical specifications can be found, followed by a performance analysis and a user manual. 
-But first a simple representation of the working of RELACS is given. RELACS is a simple tool to see how stressful a sound-sample is. 
+In the next section the complete technical specifications can be found, followed by a performance analysis and a user manual. 
+But first a simple representation of the working of RELACS is given. RELACS is a simple tool to see how stressful a sound recording is. 
 When a processed recording of 30 seconds is presented to the tool, it calculates the overall percentage of stressfulness of the sample and shows where in the sample the stressful sounds are located. 
 Basically what RELACS does is: sound in, stress analysis out.
 
@@ -59,7 +62,9 @@ A file will also be given a global stress level by taking the average stress
 for each window, this also includes the windows that are not part of any of the
 sounds. This is displayed separately from the sounds that have been found in
 the audio file. At the same time a waveform representation is also generated so
-that the user can relate the sounds that are found to the audio.
+that the user can relate the sounds that are found to the audio. Currently it is
+not possible to listen to the recording from the front end, but we do want to
+include this in the future.
 
 \section{Performance analysis}
 This section gives an overview of the performance analysis, discussing the strengths, weaknesses, opportunities and threats of our application.
@@ -68,20 +73,20 @@ This section gives an overview of the performance analysis, discussing the stren
 \subsubsection{Strengths}
 Perhaps the main strength of RELACS is that it tries to address a highly significant and common problem in society.
 Stress is one of the most dire problems in the modern western world.
-Not only does it effect the happiness of many, it also has significant consequences for public health and with it for state and private finances.
-It is therefore imperative that causes of stress are identified and prevented.
+Not only does it affect the happiness of many, it also has significant consequences for public health, which in turn have large consequences for state and private finances.
+It is therefore imperative that causes of stress are identified and prevented or removed.
 Sound may be a relatively `small' cause for stress, but the contribution of RELACS extends beyond just making people aware of stress-inducing sounds in their environment.
 It also makes them aware of the fact that they can actively work to decrease their stress level.
-If the cause is not in their sound environment, the application might have triggered them to remove or reduce other stress-inducing aspects in their live.
+If the cause is not in their sound environment, the application might have triggered them to remove or reduce other stress inducing aspects in their live.
 
 Aside from this last aspect, RELACS itself of course only focuses on sound.
 Its main strength in that respect is its innovative property.
 There is no other application (of which we are aware) that does anything on stress-inducing sound recognition.
 There are applications that try to counter stress by producing `relaxing' or `anti-stress' sounds.
-But, while these application may help reduce stress in certain situation, it is often not the absence of relaxing sounds that causes stress, but the presence of stress-inducing sounds.
+But, while these application may help reduce stress in certain situations, it is often not the absence of relaxing sounds that causes stress, but the presence of stress inducing sounds.
 This is where our application comes in, making it potentially more effective than the other available stress and sound related applications.
 
-Another strength of RELACS is that it provides a more or less objective assessment of the stressfulness of the sounds in the environment.
+Another strength of RELACS is that it provides a more or less objective assessment of the stressfulness of the soundscape.
 The application bases its assessment on the input of multiple users (we could add user feedback to make this \textit{all} of the users).
 As a result, the sounds it classifies as stressful are likely to be found stressful by a majority of the people.
 It could therefore be used in objective stressfulness measurements, which could be useful,
@@ -101,7 +106,7 @@ Although RELACS has several strengths, unfortunately the application poses a num
 
 The first weakness starts where the last strength left of.
 Its flexibility and user customization possibilities are not without consequence.
-Training our classifier, for example, is something that could never happen client side, since it takes an average pc or laptop about twelve to fourteen hours of time (we dare not say what would happen on a phone).
+Training our classifier, for example, is something that could never happen client side, since it takes an average PC or laptop about twelve to fourteen hours of time (we dare not say what would happen on a phone).
 This means that we would have no other choice than doing this server-side.
 We would thus need a lot of processing power and storage space if every user would require a customized classifier, and of course users do not like waiting for their customized app for half a day.
 
@@ -113,7 +118,7 @@ Some stress-inducing sounds are very much dependent on both the character traits
 One person might get very stressed by someone clicking his pen frequently, while the person doing it has no problem with it whatsoever.
 Our classifier can have trouble with such sounds, based on the data it is trained on.
 It picks up most of the clear cases now,
-but the cases in which just the timbre or frequency of the sound is potentially stress-inducing, and not the intensity or onset (so if the sound is not necessarily loud or sudden), the system struggles.
+but the cases in which just the timbre or frequency of the sound is potentially stress inducing, and not the intensity or onset (so if the sound is not necessarily loud or sudden), the system struggles.
 With more training data the system might improve on these cases, but this requires more research and testing.
 Of course it is also the question whether the system should even pick up on those cases, since for humans it is apparently not always a clear case either.
 Again we see that the option of user customization is one that would probably alleviate this problem.
@@ -163,15 +168,15 @@ Of course an average user would not use it until it works, but perhaps reinstall
 \end{figure*}
 
 \begin{figure*}[t]
-\centering
-\includegraphics[width=0.7\linewidth]{./Audio1Results}
-\caption{Screenshot of the results page of the website for one of the previous recordings. The results page consists of the file name, visual representation of the file, stress clusters bars, average stress level and a return button to the overview page, located at the top.}
-\label{fig:Audio1}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./Audio1Results}
+	\caption{Screenshot of the results page of the website for one of the previous recordings. The results page consists of the file name, visual representation of the file, stress clusters bars, average stress level and a return button to the overview page, located at the top.}
+	\label{fig:Audio1}
 \end{figure*}
 
-Currently, RELACS only works web-based and with .hdf5 files as input. At the homepage a list of previous analyses can be found, with their respective stressful-percentages. This can be used to compare samples taken at a specific place, but at different times. As can be seen in figure \ref{fig:Website}, the overview page contains the previous added recordings with their average stress scores.
+Currently, RELACS only works web-based and with .hdf5 files as input. At the homepage a list of previous analyses can be found, with their respective stressful-percentages. This can be used to compare samples taken at a specific place, but at different times. As can be seen in \autoref{fig:Website}, the overview page contains the previous added recordings with their average stress scores.
 
-Processed files can be further inspected by clicking on them, which brings the user to the results page (see figure \ref{fig:Audio1}). The results page contains the name of the recording as well as a visual representation of the .wav file to help place the stress clusters into context. Underneath, a series of highlights are presented, which signify the clusters of sounds with a particular stress level. Red, yellow and colours in between are used to depict the stress level of a particular cluster, from high to low respectively. Figure \ref{fig:Audio2} shows a variety of stress levels in the clusters. Each cluster bar can be expanded by clicking on the respective bar, revealing its stress level through a stress ratio-bar and a percentage as is visible in figure \ref{fig:Audio1Expand}. On the right of the page the overall stressfulness of the audio file can be found, which is the average of the entire sound fragment and not that of only the clusters.
+Processed files can be further inspected by clicking on them, which brings the user to the results page (see \autoref{fig:Audio1}). The results page contains the name of the recording as well as a visual representation of the .wav file to help place the stress clusters into context. Underneath, a series of highlights are presented, which signify the clusters of sounds with a particular stress level. Red, yellow and colours in between are used to depict the stress level of a particular cluster, from high to low respectively. \autoref{fig:Audio2} shows a variety of stress levels in the clusters. Each cluster bar can be expanded by clicking on the respective bar, revealing its stress level through a stress ratio-bar and a percentage as is visible in figure \autoref{fig:Audio1Expand}. On the right of the page the overall stressfulness of the audio file can be found, which is the average of the entire sound fragment and not that of only the clusters.
 
 \begin{figure*}[h]
 \centering
@@ -187,13 +192,13 @@ Processed files can be further inspected by clicking on them, which brings the u
 \label{fig:Audio2}
 \end{figure*}
 
-\newpage
-\newpage
+\clearpage
 \section{Pitch sheets}
-
+\captionsetup[figure]{labelformat=empty}
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide1}
+\caption{}
 \label{fig:Slide1}
 \end{figure*}
 
@@ -201,47 +206,55 @@ Processed files can be further inspected by clicking on them, which brings the u
 \centering
 \includegraphics[width=\linewidth]{./Slide2}
 \label{fig:Slide2}
+\caption{}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide3}
+\caption{}
 \label{fig:Slide3}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide4}
+\caption{}
 \label{fig:Slide4}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide5}
+\caption{}
 \label{fig:Slide5}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide6}
+\caption{}
 \label{fig:Slide6}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide7}
+\caption{}
 \label{fig:Slide7}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide8}
+\caption{}
 \label{fig:Slide8}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
 \includegraphics[width=\linewidth]{./Slide9}
+\caption{}
 \label{fig:Slide9}
 \end{figure*}
 
