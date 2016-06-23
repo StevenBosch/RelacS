@@ -4,6 +4,7 @@
 *.synctex.gz
 *.bbl
 *.blg
+*.out
 
 # Directories
 code/preprocessing/tmp/
